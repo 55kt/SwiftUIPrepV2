@@ -1,7 +1,18 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Add Item" : {
 
+    },
+    "Hello, World!" : {
+
+    },
+    "Item at %@" : {
+
+    },
+    "Select an item" : {
+
+    }
   },
   "version" : "1.0"
 }

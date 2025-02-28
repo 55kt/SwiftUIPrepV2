@@ -93,6 +93,7 @@
 		4B1E44E62D7102B000AD2B84 /* MainTabViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44E52D7102B000AD2B84 /* MainTabViewUITests.swift */; };
 		4B1E44E72D7102B000AD2B84 /* MainTabViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44E52D7102B000AD2B84 /* MainTabViewUITests.swift */; };
 		4B1E44E82D7102B000AD2B84 /* MainTabViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44E52D7102B000AD2B84 /* MainTabViewUITests.swift */; };
+		4B1E44F02D72068300AD2B84 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B1E44EF2D72068300AD2B84 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +153,7 @@
 		4B1E44DD2D71027B00AD2B84 /* QuestionModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModelTests.swift; sourceTree = "<group>"; };
 		4B1E44E12D71029900AD2B84 /* HomeViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewUITests.swift; sourceTree = "<group>"; };
 		4B1E44E52D7102B000AD2B84 /* MainTabViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewUITests.swift; sourceTree = "<group>"; };
+		4B1E44EF2D72068300AD2B84 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -216,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				4B1E444C2D70F92100AD2B84 /* Preview Assets.xcassets */,
+				4B1E44EF2D72068300AD2B84 /* Launch Screen.storyboard */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B1E44F02D72068300AD2B84 /* Launch Screen.storyboard in Resources */,
 				4B1E44592D70F92100AD2B84 /* Preview Assets.xcassets in Resources */,
 				4B1E445A2D70F92100AD2B84 /* Assets.xcassets in Resources */,
 				4B1E44C02D70FFC400AD2B84 /* questions_en.json in Resources */,
@@ -786,8 +790,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -795,6 +800,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.volosllc.SwiftUIPrep.v2.SwiftUIPrepV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -815,8 +823,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -824,6 +833,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.volosllc.SwiftUIPrep.v2.SwiftUIPrepV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
