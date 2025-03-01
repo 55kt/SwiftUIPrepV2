@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_9" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -14,11 +14,11 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SwiftUIPrep" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="obG-Y5-kRd">
-                                <rect key="frame" x="106.66666666666669" y="490.66666666666674" width="227" height="55"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SwiftUIPrep" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="obG-Y5-kRd">
+                                <rect key="frame" x="46.5" y="291.5" width="227" height="55"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
@@ -26,23 +26,23 @@
                                 <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your guide to mastering SwiftUI interviews." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uI6-3n-Ed4">
-                                <rect key="frame" x="57" y="542.66666666666663" width="326" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your guide to mastering SwiftUI interviews." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uI6-3n-Ed4">
+                                <rect key="frame" x="13" y="342" width="294" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2025 Volos Software LLC. All rights reserved" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BE0-ZK-JdX">
-                                <rect key="frame" x="57" y="770.66666666666663" width="326" height="15"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2025 Volos Software LLC. All rights reserved" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BE0-ZK-JdX">
+                                <rect key="frame" x="21" y="423" width="278" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LSLogo" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m6A-U1-pst">
-                                <rect key="frame" x="65" y="203" width="310" height="310"/>
+                                <rect key="frame" x="85" y="159" width="150" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="310" id="1NC-1C-ulj"/>
-                                    <constraint firstAttribute="height" constant="310" id="GAZ-7I-BuR"/>
+                                    <constraint firstAttribute="height" constant="150" id="ZpQ-h8-bwR"/>
+                                    <constraint firstAttribute="width" constant="150" id="ePf-Kb-OXK"/>
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
@@ -52,24 +52,24 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="tintColor" name="AccentColor"/>
                         <constraints>
+                            <constraint firstItem="m6A-U1-pst" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-50" id="2fC-es-oSN"/>
                             <constraint firstItem="obG-Y5-kRd" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="JRv-Gq-vMY"/>
-                            <constraint firstItem="m6A-U1-pst" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="LsP-ZU-420"/>
                             <constraint firstItem="uI6-3n-Ed4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="MIh-YJ-ry5"/>
                             <constraint firstItem="BE0-ZK-JdX" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="OA9-M3-92O"/>
-                            <constraint firstItem="BE0-ZK-JdX" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="300" id="VOL-fc-GjT"/>
-                            <constraint firstItem="uI6-3n-Ed4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="75" id="Xte-bN-bbh"/>
-                            <constraint firstItem="obG-Y5-kRd" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="40" id="jzf-9U-Nk6"/>
-                            <constraint firstItem="m6A-U1-pst" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-120" id="r67-lb-OxZ"/>
+                            <constraint firstItem="BE0-ZK-JdX" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="145" id="VOL-fc-GjT"/>
+                            <constraint firstItem="m6A-U1-pst" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="W8r-wU-1Rk"/>
+                            <constraint firstItem="uI6-3n-Ed4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="67" id="Xte-bN-bbh"/>
+                            <constraint firstItem="obG-Y5-kRd" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="35" id="jzf-9U-Nk6"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-417.27272727272731" y="355.23012552301259"/>
+            <point key="canvasLocation" x="-418.125" y="354.92957746478874"/>
         </scene>
     </scenes>
     <resources>
-        <image name="LSLogo" width="1024" height="1024"/>
+        <image name="LSLogo" width="512" height="512"/>
         <namedColor name="AccentColor">
             <color red="0.94117647058823528" green="0.31764705882352939" blue="0.21568627450980393" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

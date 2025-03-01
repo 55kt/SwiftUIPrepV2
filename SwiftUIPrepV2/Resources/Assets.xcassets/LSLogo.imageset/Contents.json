@@ -1,15 +1,50 @@
 {
   "images" : [
     {
+      "filename" : "launch-screen-image-light.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
       "filename" : "launch-screen-image 1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "launch-screen-image-light 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "launch-screen-image 2.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "launch-screen-image-light 2.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "launch-screen-image 3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
