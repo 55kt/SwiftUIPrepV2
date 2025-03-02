@@ -1,0 +1,42 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "BE0-ZK-JdX.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Авторские права\"; ObjectID = \"BE0-ZK-JdX\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Авторские права"
+          }
+        }
+      }
+    },
+    "obG-Y5-kRd.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"SwiftUIPrep\"; ObjectID = \"obG-Y5-kRd\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "SwiftUIPrep"
+          }
+        }
+      }
+    },
+    "uI6-3n-Ed4.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Ваш гид мастерства по собеседованиям\"; ObjectID = \"uI6-3n-Ed4\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Ваш гид мастерства по собеседованиям"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
