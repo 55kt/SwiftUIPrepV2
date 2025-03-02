@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct StartTestView: View {
+    // MARK: - Properties
+    
+    // MARK: - Body
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+        NavigationStack {
+            List {
+                ForEach(0 ..< 10) { index in
+                    Text("Item \(index)")
+                }// ForEach
+            }// List
+            .navigationTitle("Tests")
+        }// NavigationStack
+    }// Body
+}// View
 
+// MARK: - Preview
 #Preview {
     StartTestView()
 }
