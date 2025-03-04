@@ -4,6 +4,18 @@
     "Add Item" : {
 
     },
+    "Answer" : {
+
+    },
+    "API" : {
+
+    },
+    "Data" : {
+
+    },
+    "Description" : {
+
+    },
     "Favorites" : {
       "localizations" : {
         "ru" : {
@@ -27,7 +39,19 @@
         }
       }
     },
+    "Item %lld" : {
+
+    },
     "Item at %@" : {
+
+    },
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sagittis lacus interdum quam interdum, eget cursus justo luctus. Ut vitae mi malesuada, sollicitudin felis a, dictum odio. Integer dui arcu, accumsan id tellus eget, dictum rhoncus orci. In nec facilisis mauris. Donec egestas, nisi sed finibus elementum, nisi enim volutpat lectus, sed pretium orci nulla quis ex. Duis convallis venenatis tortor, id laoreet ante pellentesque blandit." : {
+
+    },
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus." : {
+
+    },
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus.?" : {
 
     },
     "Progress" : {
@@ -39,6 +63,9 @@
           }
         }
       }
+    },
+    "Question" : {
+
     },
     "Select an item" : {
 
