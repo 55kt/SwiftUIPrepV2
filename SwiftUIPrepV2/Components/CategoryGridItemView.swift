@@ -13,12 +13,12 @@ struct CategoryGridItemView: View {
     // MARK: - Body
     var body: some View {
         VStack {
-            Image("api-icon")
+            Image("data-icon")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 150, height: 150)
+                .frame(width: 100, height: 100)
             
-            Text("API")
+            Text("DATA")
                 .font(.subheadline)
                 .fontWeight(.bold)
         }// VStack

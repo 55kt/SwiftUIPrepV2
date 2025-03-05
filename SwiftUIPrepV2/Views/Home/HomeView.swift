@@ -12,22 +12,27 @@ struct HomeView: View {
     @State private var searchText = ""
     @State private var isShowingCategories = false
     @State private var shuffleTrigger = false
-    @State private var isActive = false
     @State private var isAnimating = false
     
     // MARK: - Body
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(0...10, id: \.self) { question in
-                    NavigationLink(destination: QuestionDetailView()) {
-                        QuestionListItemView(iconName: "loading-icon")
-                    }// NavigationLink
-                }// ForEach
-            }// List
-            .listStyle(.plain)
-            .navigationTitle("Home")
-            
+            Group {
+                if isShowingCategories {
+                    CategoryGridView()
+                        .navigationTitle("Categories")
+                } else {
+                    List {
+                        ForEach(0...10, id: \.self) { question in
+                            NavigationLink(destination: QuestionDetailView()) {
+                                QuestionListItemView(iconName: "loading-icon")
+                            }// NavigationLink
+                        }// ForEach
+                    }// List
+                    .listStyle(.plain)
+                    .navigationTitle("Home")
+                }// if - else
+            }
             
             // MARK: - Toolbar Buttons
             .toolbar {
@@ -36,6 +41,8 @@ struct HomeView: View {
                     // MARK: Question list button
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
+                            let haptics = UIImpactFeedbackGenerator(style: .medium)
+                            haptics.impactOccurred()
                             withAnimation(.easeInOut(duration: 0.2)) {
                                 isShowingCategories = false
                                 isAnimating = true
@@ -54,6 +61,8 @@ struct HomeView: View {
                     // MARK: Categories grid button
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
+                            let haptics = UIImpactFeedbackGenerator(style: .medium)
+                            haptics.impactOccurred()
                             withAnimation(.easeInOut(duration: 0.2)) {
                                 isShowingCategories = true
                                 isAnimating = true
@@ -71,28 +80,46 @@ struct HomeView: View {
                 }// categories grid buttons
                 
                 // MARK: Shuffle button
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            shuffleTrigger.toggle()
-                            isAnimating = true
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                isAnimating = false
+                if !isShowingCategories {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            let haptics = UIImpactFeedbackGenerator(style: .medium)
+                            haptics.impactOccurred()
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                shuffleTrigger.toggle()
+                                isAnimating = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                    isAnimating = false
+                                }
                             }
+                        } label: {
+                            Image(systemName: "shuffle")
+                                .font(.title2)
+                                .rotationEffect(shuffleTrigger ? .degrees(360) : .degrees(0))
                         }
-                    } label: {
-                        Image(systemName: "shuffle")
-                            .font(.title2)
-                            .rotationEffect(shuffleTrigger ? .degrees(360) : .degrees(0))
-                    }
-                }// shuffle button
+                    }// shuffle button
+                }// hiding shuffle button
             }// toolbar
         }// NavigationStack
-        .searchable(text: $searchText)
+        .if(!isShowingCategories) { view in
+            view.searchable(text: $searchText)
+        }// .if
     }// Body
 }// View
 
 // MARK: - Preview
 #Preview {
     HomeView()
+}
+
+// Extension for search
+extension View {
+    @ViewBuilder
+    func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
 }
