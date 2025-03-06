@@ -21,6 +21,7 @@ struct CategoryGridItemView: View {
             Text("DATA")
                 .font(.subheadline)
                 .fontWeight(.bold)
+                .foregroundStyle(.primary)
         }// VStack
     }// Body
 }// View

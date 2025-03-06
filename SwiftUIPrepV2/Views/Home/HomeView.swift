@@ -14,25 +14,26 @@ struct HomeView: View {
     @State private var shuffleTrigger = false
     @State private var isAnimating = false
     
+    private let homeQuestions = [
+            "Lorem ipsum dolor sit amet?",
+            "Sed venenatis pretium dapibus?",
+            "Integer sagittis lacus interdum?"
+        ]
+    
     // MARK: - Body
     var body: some View {
         NavigationStack {
+            
+            // MARK: - List of questions
             Group {
                 if isShowingCategories {
                     CategoryGridView()
                         .navigationTitle("Categories")
                 } else {
-                    List {
-                        ForEach(0...10, id: \.self) { question in
-                            NavigationLink(destination: QuestionDetailView()) {
-                                QuestionListItemView(iconName: "loading-icon")
-                            }// NavigationLink
-                        }// ForEach
-                    }// List
-                    .listStyle(.plain)
-                    .navigationTitle("Home")
+                    QuestionsListView(questions: homeQuestions)
+                        .navigationTitle("Home")
                 }// if - else
-            }
+            }// Group list of questions
             
             // MARK: - Toolbar Buttons
             .toolbar {

@@ -11,13 +11,30 @@ struct CategoryGridView: View {
     // MARK: - Properties
     let gridLayout: [GridItem] = Array(repeating: GridItem(.flexible()), count: 2)
     
+    @Environment(\.dismiss) var dismiss
+    
     // MARK: - Body
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVGrid(columns: gridLayout, alignment: .center, spacing: 15) {
                     ForEach(0 ..< 15) { category in
-                        NavigationLink(destination: QuestionDetailView()) {
+                        NavigationLink(destination: QuestionsListView(questions: ["Question 1"])
+                            .navigationTitle("Data")
+                            .navigationBarTitleDisplayMode(.inline)
+                            .navigationBarBackButtonHidden()
+                            .toolbar {
+                                ToolbarItem(placement: .navigationBarLeading) {
+                                    Button {
+                                        dismiss()
+                                    } label: {
+                                        Image(systemName: "chevron.left")
+                                            .font(.title2)
+                                            .foregroundStyle(.accent)
+                                    }
+                                }
+                            }// .toolbar
+                        ) {
                             CategoryGridItemView()
                         }// NavigationLink
                     }// ForEach
@@ -25,6 +42,7 @@ struct CategoryGridView: View {
                 .padding()
             }// ScrollView
         }// NavigationStack
+        .foregroundStyle(.primary)
     }// Body
 }// View
 
