@@ -1,13 +1,34 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "1.0" : {
+
+    },
+    "About the application" : {
+
+    },
     "Add Item" : {
 
     },
     "Answer" : {
 
     },
+    "Application" : {
+
+    },
     "Categories" : {
+
+    },
+    "Close" : {
+
+    },
+    "Compatibility" : {
+
+    },
+    "Copyright © %@ Volos Software LLC. All rights reserved" : {
+
+    },
+    "Dark Mode" : {
 
     },
     "Data" : {
@@ -19,6 +40,15 @@
     "Description" : {
 
     },
+    "Designer" : {
+
+    },
+    "Developer" : {
+
+    },
+    "English" : {
+
+    },
     "Favorites" : {
       "localizations" : {
         "ru" : {
@@ -28,6 +58,9 @@
           }
         }
       }
+    },
+    "Header" : {
+
     },
     "Hello, World!" : {
 
@@ -42,10 +75,25 @@
         }
       }
     },
+    "INTERFACE LANGUAGE" : {
+
+    },
+    "iPhone" : {
+
+    },
     "Item %lld" : {
 
     },
     "Item at %@" : {
+
+    },
+    "Ivanno Ruddio" : {
+
+    },
+    "Language" : {
+
+    },
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id blandit neque. Praesent porta, metus a feugiat mollis, nulla ligula tincidunt risus, ac pretium dolor est eu dolor. Mauris placerat tortor eget justo lacinia, et dapibus nisl dignissim. Proin eu accumsan ex. Nulla suscipit neque id gravida iaculis. Fusce interdum a nisl eu auctor. Maecenas non tristique velit, id vulputate ante. Vivamus sit amet ipsum neque." : {
 
     },
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sagittis lacus interdum quam interdum, eget cursus justo luctus. Ut vitae mi malesuada, sollicitudin felis a, dictum odio. Integer dui arcu, accumsan id tellus eget, dictum rhoncus orci. In nec facilisis mauris. Donec egestas, nisi sed finibus elementum, nisi enim volutpat lectus, sed pretium orci nulla quis ex. Duis convallis venenatis tortor, id laoreet ante pellentesque blandit." : {
@@ -55,6 +103,12 @@
 
     },
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus.?" : {
+
+    },
+    "Privacy & Policy" : {
+
+    },
+    "Privacy and Policy" : {
 
     },
     "Progress" : {
@@ -83,6 +137,9 @@
         }
       }
     },
+    "SwiftUIPrep" : {
+
+    },
     "Tests" : {
       "localizations" : {
         "ru" : {
@@ -92,6 +149,12 @@
           }
         }
       }
+    },
+    "Version" : {
+
+    },
+    "Volos Software LLC" : {
+
     }
   },
   "version" : "1.0"
