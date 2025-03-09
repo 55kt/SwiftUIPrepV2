@@ -14,22 +14,24 @@ struct QuestionsListView: View {
     
     // MARK: - Body
     var body: some View {
-        List {
-            ForEach(questions, id: \.self) { questions in
-                NavigationLink(destination: QuestionDetailView()) {
-                    QuestionListItemView(iconName: "loading-icon")
-                }// NavigationLink
-                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                    Button {
-                        print("Added to favorites: \(questions)")
-                    } label: {
-                        Image(systemName: "star.fill")
-                    }
-                    .tint(.yellow)
-                }// swipe
-            }// ForEach
-        }// List
-        .listStyle(.plain)
+        NavigationStack {
+            List {
+                ForEach(questions, id: \.self) { questions in
+                    NavigationLink(destination: QuestionDetailView()) {
+                        QuestionListItemView(iconName: "loading-icon")
+                    }// NavigationLink
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button {
+                            print("Added to favorites: \(questions)")
+                        } label: {
+                            Image(systemName: "star.fill")
+                        }
+                        .tint(.yellow)
+                    }// swipe
+                }// ForEach
+            }// List
+            .listStyle(.plain)
+        }
     }// Body
 }// View
 

@@ -11,7 +11,7 @@ struct CategoryGridView: View {
     // MARK: - Properties
     let gridLayout: [GridItem] = Array(repeating: GridItem(.flexible()), count: 2)
     
-    @Environment(\.dismiss) var dismiss
+    @State private var isShowingQuestions = false
     
     // MARK: - Body
     var body: some View {
@@ -26,19 +26,21 @@ struct CategoryGridView: View {
                             .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
                                     Button {
-                                        dismiss()
+                                        isShowingQuestions.toggle()
                                     } label: {
                                         Image(systemName: "chevron.left")
                                             .font(.title2)
                                             .foregroundStyle(.accent)
                                     }
                                 }
-                            }// .toolbar
+                            },// .toolbar,
+                                       isActive: $isShowingQuestions
                         ) {
                             CategoryGridItemView()
                         }// NavigationLink
                     }// ForEach
                 }// LazyVGrid
+                
                 .padding()
             }// ScrollView
         }// NavigationStack
