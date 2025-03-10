@@ -18,6 +18,7 @@ struct SettingsView: View {
             VStack(alignment: .center, spacing: 6) {
                 Form {
                     
+                    // MARK: - Language
                     Section(header: Text("Language Selection")) {
                         NavigationLink(destination: LanguageSelectionView()) {
                             SelectRowView( color: .pink, icon: "globe", text: "Language") {}
@@ -25,6 +26,7 @@ struct SettingsView: View {
                     }// Language select section
                     .padding(2)
                     
+                    // MARK: - Appearance
                     Section(header: Text("Appearance")) {
                         Toggle(isOn: $isDarkMode) {
                             HStack {
@@ -35,11 +37,12 @@ struct SettingsView: View {
                                     .font(.title)
                                     .foregroundStyle(!isDarkMode ? .gray : .blue)
                                     .animation(.easeInOut(duration: 0.3), value: isDarkMode)
-                            }
+                            }// HStack
                             .padding(5)
-                        }
-                    }
+                        }// Toggle
+                    }// Appearance section
                     
+                    // MARK: - About
                     Section(header: Text("About the application")) {
                         FormRowStaticView(icon: "gear", firstText: "Application", secondText: "SwiftUIPrep", rectangleFillColor: .purple)
                         FormRowStaticView(icon: "checkmark.seal", firstText: "Compatibility", secondText: "iPhone", rectangleFillColor: .green)

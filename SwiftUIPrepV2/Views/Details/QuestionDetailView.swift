@@ -76,10 +76,12 @@ struct QuestionDetailView: View {
                         } label: {
                             Image(systemName: "chevron.left")
                                 .font(.title2)
+                                .bold()
 
                         }
                     }
-                    
+//                    .enableNavigationGesture()
+
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
                             // action

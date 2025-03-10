@@ -22,7 +22,7 @@ struct CategoryGridView: View {
                         NavigationLink(destination: QuestionsListView(questions: ["Question 1"])
                             .navigationTitle("Data")
                             .navigationBarTitleDisplayMode(.inline)
-                            .navigationBarBackButtonHidden()
+                            .navigationBarBackButtonHidden(true)
                             .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
                                     Button {
@@ -30,7 +30,7 @@ struct CategoryGridView: View {
                                     } label: {
                                         Image(systemName: "chevron.left")
                                             .font(.title2)
-                                            .foregroundStyle(.accent)
+                                            .bold()
                                     }
                                 }
                             },// .toolbar,

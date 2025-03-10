@@ -44,7 +44,8 @@ struct LanguageSelectionView: View {
                         dismiss()
                     }) {
                         Image(systemName: "chevron.backward")
-                            .foregroundColor(.accentColor)
+                            .font(.title2)
+                            .bold()
                     }
                 }// ToolbarItem
             }// .toolbar

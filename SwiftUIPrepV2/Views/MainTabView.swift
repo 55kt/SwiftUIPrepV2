@@ -26,7 +26,7 @@ struct MainTabView: View {
             }// Favorites
             
             Tab("Progress", systemImage: "chart.bar.fill") {
-                ProgressView()
+                ProgressTabView()
             }// Progress
             
             Tab("Settings", systemImage: "gearshape.fill") {
@@ -39,5 +39,4 @@ struct MainTabView: View {
 // MARK: - Preview
 #Preview {
     MainTabView()
-//        .environment(\.locale, .init(identifier: "ru"))
 }

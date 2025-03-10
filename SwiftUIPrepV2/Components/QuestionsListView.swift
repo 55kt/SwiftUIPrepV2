@@ -31,7 +31,7 @@ struct QuestionsListView: View {
                 }// ForEach
             }// List
             .listStyle(.plain)
-        }
+        }// NavigationStack
     }// Body
 }// View
 
