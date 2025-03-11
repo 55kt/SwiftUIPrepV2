@@ -37,7 +37,6 @@ struct ProgressItemView: View {
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }// VStack
-            .frame(maxWidth: .infinity, alignment: .center)
         }// HStack
     }// Body
 }// View

@@ -12,37 +12,36 @@ struct CategoryGridView: View {
     let gridLayout: [GridItem] = Array(repeating: GridItem(.flexible()), count: 2)
     
     @State private var isShowingQuestions = false
+    @Environment(\.dismiss) private var dismiss
     
     // MARK: - Body
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: gridLayout, alignment: .center, spacing: 15) {
-                    ForEach(0 ..< 15) { category in
-                        NavigationLink(destination: QuestionsListView(questions: ["Question 1"])
-                            .navigationTitle("Data")
-                            .navigationBarTitleDisplayMode(.inline)
-                            .navigationBarBackButtonHidden(true)
-                            .toolbar {
-                                ToolbarItem(placement: .navigationBarLeading) {
-                                    Button {
-                                        isShowingQuestions.toggle()
-                                    } label: {
-                                        Image(systemName: "chevron.left")
-                                            .font(.title2)
-                                            .bold()
+                        LazyVGrid(columns: gridLayout, alignment: .center, spacing: 15) {
+                            ForEach(0 ..< 15) { category in
+                                NavigationLink(destination: QuestionsListView(questions: ["Question 1"])
+                                    .navigationTitle("Data")
+                                    .navigationBarTitleDisplayMode(.inline)
+                                    .navigationBarBackButtonHidden(true)
+                                    .toolbar {
+                                        ToolbarItem(placement: .navigationBarLeading) {
+                                            Button {
+                                                dismiss()
+                                            } label: {
+                                                Image(systemName: "chevron.left")
+                                                    .font(.title2)
+                                                    .bold()
+                                            }
+                                        }
                                     }
+                                ) {
+                                    CategoryGridItemView()
                                 }
-                            },// .toolbar,
-                                       isActive: $isShowingQuestions
-                        ) {
-                            CategoryGridItemView()
-                        }// NavigationLink
-                    }// ForEach
-                }// LazyVGrid
-                
-                .padding()
-            }// ScrollView
+                            }
+                        }
+                        .padding()
+                    }
         }// NavigationStack
         .foregroundStyle(.primary)
     }// Body

@@ -49,6 +49,7 @@ struct LanguageSelectionView: View {
                     }
                 }// ToolbarItem
             }// .toolbar
+            .enableNavigationGesture()
             .listStyle(InsetGroupedListStyle())
             .navigationBarTitleDisplayMode(.inline)
             .disabled(isLoading)

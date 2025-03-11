@@ -14,12 +14,10 @@ struct ProgressTabView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(0 ..< 10) { index in
-                    NavigationLink(destination: AnsweredQuestionsListView(questions: ["1"])) {
-                        ProgressItemView(answeredQText: "You answered 10 out of 10 questions", time: "Your time is 12:32", date: Date(), medalColor: .yellow)
-                    }
-                    .listRowBackground(Color.clear)
-                }// ForEach
+                NavigationLink(destination: AnsweredQuestionsListView(questions: ["1"])) {
+                    ProgressItemView(answeredQText: "You answered 10 out of 10 questions", time: "Your time is 12:32", date: Date(), medalColor: .yellow)
+                }
+                .listRowBackground(Color.clear)
             }// List
             .listStyle(.plain)
             .navigationTitle("Progress")
