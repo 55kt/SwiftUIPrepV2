@@ -74,6 +74,7 @@ struct QuestionDetailView: View {
                         dismiss()
                     } label: {
                         Image(systemName: "chevron.left")
+                            .foregroundStyle(.accent)
                             .font(.title2)
                             .bold()
 
@@ -86,6 +87,7 @@ struct QuestionDetailView: View {
                         // action
                     } label: {
                         Image(systemName: "star.circle.fill")
+                            .foregroundStyle(.accent)
                             .font(.title2)
                     }
                 }

@@ -13,8 +13,8 @@ struct MainTabView: View {
     // MARK: - Body
     var body: some View {
         TabView {
-            Tab("Home", systemImage: "house.fill") {
-                HomeView()
+            Tab("Explore", systemImage: "house.fill") {
+                ExploreView()
             }// Home
             
             Tab("Tests", systemImage: "pencil.circle.fill") {

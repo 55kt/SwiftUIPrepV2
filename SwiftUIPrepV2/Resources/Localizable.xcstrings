@@ -22,9 +22,6 @@
     "Application" : {
 
     },
-    "Categories" : {
-
-    },
     "Close" : {
 
     },
@@ -40,9 +37,6 @@
     "Data" : {
 
     },
-    "DATA" : {
-
-    },
     "Description" : {
 
     },
@@ -53,6 +47,9 @@
 
     },
     "English" : {
+
+    },
+    "Explore" : {
 
     },
     "Favorites" : {
@@ -72,6 +69,7 @@
 
     },
     "Home" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -100,6 +98,9 @@
 
     },
     "Language Selection" : {
+
+    },
+    "Loading & Somethingname ..." : {
 
     },
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id blandit neque. Praesent porta, metus a feugiat mollis, nulla ligula tincidunt risus, ac pretium dolor est eu dolor. Mauris placerat tortor eget justo lacinia, et dapibus nisl dignissim. Proin eu accumsan ex. Nulla suscipit neque id gravida iaculis. Fusce interdum a nisl eu auctor. Maecenas non tristique velit, id vulputate ante. Vivamus sit amet ipsum neque." : {

@@ -30,6 +30,34 @@ struct QuestionsListView: View {
             }// ForEach
         }// List
         .listStyle(.plain)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundStyle(.accent)
+                        .font(.title2)
+                        .bold()
+                }
+            }
+            
+            // MARK: - Navigation title
+            ToolbarItem(placement: .principal) {
+                HStack {
+                    Image("loading-icon")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30, height: 30)
+                    
+                    Text("Loading & Somethingname ...")
+                        .font(.caption)
+                        .foregroundStyle(.primary)
+                }// HStack
+            }
+        }// toolbar
         .enableNavigationGesture()
     }// Body
 }// View

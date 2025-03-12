@@ -68,22 +68,12 @@ struct AnsweredQuestionsListView: View {
             }// HStack
             .listRowBackground(Color.clear)
         }// List
-        .navigationBarBackButtonHidden(true)
         .listStyle(.plain)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
         .background(MotionAnimationView())
         .toolbar {
-            
             // MARK: - Navigation title
-            ToolbarItem(placement: .principal) {
-                VStack {
-                    Text("Answered Questions")
-                        .font(.caption)
-                        .foregroundStyle(.primary)
-                    Text(formattedDate)
-                        .font(.caption2)
-                        .foregroundStyle(.gray)
-                }
-            }
             ToolbarItem(placement: .topBarLeading) {
                 Button {
                     dismiss()
@@ -92,6 +82,16 @@ struct AnsweredQuestionsListView: View {
                         .font(.title2)
                         .bold()
                 }
+            }
+            ToolbarItem(placement: .principal) {
+                VStack {
+                    Text("Answered Questions")
+                        .font(.caption)
+                        .foregroundStyle(.primary)
+                    Text(formattedDate)
+                        .font(.caption2)
+                        .foregroundStyle(.gray)
+                }// VStack
             }
         }// toolbar
         .enableNavigationGesture()

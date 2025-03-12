@@ -13,20 +13,18 @@ struct QuestionListItemView: View {
     
     // MARK: - Body
     var body: some View {
-        NavigationStack {
-            HStack {
-                Image(iconName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 80, height: 80)
-                
-                Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus.?")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(3)
-            }// HStack
-        }// NavigationStack
+        HStack {
+            Image(iconName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 80, height: 80)
+            
+            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus.?")
+                .font(.headline)
+                .fontWeight(.semibold)
+                .multilineTextAlignment(.leading)
+                .lineLimit(3)
+        }// HStack
     }// Body
 }// View
 
