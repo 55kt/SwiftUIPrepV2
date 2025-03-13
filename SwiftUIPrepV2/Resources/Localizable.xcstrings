@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%lld" : {
+
+    },
     "1.0" : {
 
     },
@@ -29,6 +32,9 @@
 
     },
     "Copyright © %@ Volos Software LLC. All rights reserved" : {
+
+    },
+    "Count of questions:" : {
 
     },
     "Dark Mode" : {
@@ -115,6 +121,9 @@
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus.?" : {
 
     },
+    "Number of questions" : {
+
+    },
     "Privacy & Policy" : {
 
     },
@@ -150,7 +159,13 @@
         }
       }
     },
+    "START" : {
+
+    },
     "SwiftUIPrep" : {
+
+    },
+    "Test" : {
 
     },
     "Tests" : {
