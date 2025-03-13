@@ -22,6 +22,7 @@ struct ProgressItemView: View {
                 .scaledToFit()
                 .frame(width: 90, height: 90)
                 .foregroundStyle(medalColor)
+                .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(answeredQText)

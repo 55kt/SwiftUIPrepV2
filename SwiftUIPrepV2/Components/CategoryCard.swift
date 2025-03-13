@@ -17,7 +17,8 @@ struct CategoryCard: View {
         VStack {
             Image(iconName)
                 .resizable()
-                .frame(width: 80, height: 80)
+                .frame(width: 120, height: 120)
+                .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
             Text(category)
                 .font(.headline)
                 .lineLimit(1)
@@ -27,7 +28,7 @@ struct CategoryCard: View {
         .padding()
         .background(Material.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 12))
-        .shadow(radius: 2)
+        .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
     }// Body
 }// View
 

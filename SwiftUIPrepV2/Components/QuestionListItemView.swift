@@ -18,6 +18,7 @@ struct QuestionListItemView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 80, height: 80)
+                .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
             
             Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus.?")
                 .font(.headline)

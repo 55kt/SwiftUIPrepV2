@@ -23,7 +23,7 @@ struct ExploreView: View {
                             .navigationTitle("Data")
                             .navigationBarTitleDisplayMode(.inline)
                         ) {
-                            CategoryCard(category: category, iconName: "api-icon")
+                            CategoryCard(category: category, iconName: "ui-icon")
                         }// NavigationLink
                     }// ForEach
                 }// LazyVGrid
@@ -31,6 +31,7 @@ struct ExploreView: View {
             }// ScrollView
             .navigationTitle("Explore")
         }// NavigationStack
+        .searchable(text: .constant(""), prompt: "Search for some question")
         .foregroundStyle(.primary)
     }// Body
 }// View
