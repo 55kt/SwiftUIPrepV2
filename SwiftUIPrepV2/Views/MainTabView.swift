@@ -18,7 +18,7 @@ struct MainTabView: View {
             }// Home
             
             Tab("Tests", systemImage: "pencil.circle.fill") {
-                TestSettingsView()
+                StartTestView()
             }// Tests
             
             Tab("Favorites", systemImage: "star.fill") {

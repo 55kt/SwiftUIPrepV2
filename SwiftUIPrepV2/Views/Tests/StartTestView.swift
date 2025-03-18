@@ -1,5 +1,5 @@
 //
-//  TestSettingsView.swift
+//  StartTestView.swift
 //  SwiftUIPrepV2
 //
 //  Created by Vlad on 27/2/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TestSettingsView: View {
+struct StartTestView: View {
     // MARK: - Properties
     @State private var numberOfQuestions = 10
     let questionOptions = Array(1...150)
@@ -50,7 +50,7 @@ struct TestSettingsView: View {
                                     }// ForEach
                                 }// Picker
                                 .pickerStyle(.wheel)
-                                .frame(height: 245)
+                                .frame(height: 235)
                                 .padding()
                                 .clipShape(Circle())
                                 .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
@@ -58,7 +58,7 @@ struct TestSettingsView: View {
                             .padding(.horizontal)
                             
                             // MARK: - Start test button
-                            NavigationLink(destination: QuestionTestView()
+                            NavigationLink(destination: TestView()
                                 .navigationBarBackButtonHidden(true)
                             ) {
                                 Circle()
@@ -88,5 +88,5 @@ struct TestSettingsView: View {
 
 // MARK: - Preview
 #Preview {
-    TestSettingsView()
+    StartTestView()
 }

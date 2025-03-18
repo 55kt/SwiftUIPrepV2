@@ -15,7 +15,7 @@ struct ProgressTabView: View {
         NavigationStack {
             List {
                 NavigationLink(destination: AnsweredQuestionsListView(questions: ["1"])) {
-                    ProgressItemView(answeredQText: "You answered 10 out of 10 questions", time: "Your time is 12:32", date: Date(), medalColor: .yellow)
+                    ProgressItemView(answeredQText: "You answered 10 out of 10 questions", time: "Your time is 12:32:11", date: Date(), medalColor: .yellow)
                 }
                 .listRowBackground(Color.clear)
             }// List
@@ -29,6 +29,7 @@ struct ProgressTabView: View {
                     } label: {
                         Image(systemName: "trash")
                             .font(.title2)
+                            .bold()
                     }
                 }
             }// .toolbar

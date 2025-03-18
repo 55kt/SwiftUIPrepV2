@@ -7,10 +7,10 @@
     "1.0" : {
 
     },
-    "About the application" : {
+    "23 : 45 : 32" : {
 
     },
-    "Add Item" : {
+    "About the application" : {
 
     },
     "Answer" : {
@@ -25,6 +25,15 @@
     "Application" : {
 
     },
+    "Are you sure you want to delete all favorites questions ? All questions will be lost. !" : {
+
+    },
+    "Are you sure you want to stop the test? All progress will be lost. !" : {
+
+    },
+    "Cancel" : {
+
+    },
     "Close" : {
 
     },
@@ -37,10 +46,19 @@
     "Count of questions:" : {
 
     },
+    "Current Test" : {
+
+    },
     "Dark Mode" : {
 
     },
     "Data" : {
+
+    },
+    "Delete" : {
+
+    },
+    "Delete all favorites ?" : {
 
     },
     "Description" : {
@@ -91,12 +109,6 @@
     "iPhone" : {
 
     },
-    "Item %lld" : {
-
-    },
-    "Item at %@" : {
-
-    },
     "Ivanno Ruddio" : {
 
     },
@@ -143,10 +155,13 @@
     "Question" : {
 
     },
-    "Search for some question" : {
+    "Question 12 of 30" : {
 
     },
-    "Select an item" : {
+    "Results" : {
+
+    },
+    "Search for some question" : {
 
     },
     "Settings" : {
@@ -160,6 +175,12 @@
       }
     },
     "START" : {
+
+    },
+    "Stop" : {
+
+    },
+    "Stop Test?" : {
 
     },
     "SwiftUIPrep" : {
@@ -178,16 +199,43 @@
         }
       }
     },
+    "Time remaining:" : {
+
+    },
+    "Try Again" : {
+
+    },
+    "Variable in Swift is a data type that can hold any value of a certain type." : {
+
+    },
     "Version" : {
+
+    },
+    "View completed questions" : {
 
     },
     "Volos Software LLC" : {
 
     },
+    "What is a variable in Swift?" : {
+
+    },
     "You answered 10 out of 10 questions" : {
 
     },
-    "Your time is 12:32" : {
+    "You answered 12 out of 30 questions correctly." : {
+
+    },
+    "You earned a %@ !" : {
+
+    },
+    "Your score was 80%" : {
+
+    },
+    "Your time is 12:32:11" : {
+
+    },
+    "Your time remaining was 14:21:22" : {
 
     }
   },

@@ -90,6 +90,7 @@ struct QuestionDetailView: View {
                         Image(systemName: "star.circle.fill")
                             .foregroundStyle(.accent)
                             .font(.title2)
+                            .bold()
                     }
                 }
             }// toolbar

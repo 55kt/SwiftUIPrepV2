@@ -8,16 +8,30 @@
 import SwiftUI
 
 struct FavoritesView: View {
+    // MARK: - Properties
+    @State private var favoriteQuestions: [String] = [
+        "What is a variable in Swift?",
+        "How to create a struct in Swift?",
+        "What is an enum in Swift?"
+    ] // Заглушка для избранных вопросов
+    @Environment(\.dismiss) var dismiss
+    
+    // MARK: - Body
     var body: some View {
-        // MARK: - Properties
-        
-        // MARK: - Body
         NavigationStack {
-            List {
-                ForEach(0 ..< 10) { index in
-                    Text("Item \(index)")
-                }// ForEach
-            }// List
+            ZStack {
+                // MARK: - Background Icon (как в TestSettingsView)
+                Image("ui-icon")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 300, height: 300)
+                    .opacity(0.15)
+                    .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
+                
+                FavoritesQuestionsListView(questions: ["1", "2"])
+                
+                
+            }// ZStack
             .navigationTitle("Favorites")
         }// NavigationStack
     }// Body
