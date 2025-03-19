@@ -17,7 +17,7 @@ struct QuestionsListView: View {
         List {
             ForEach(questions, id: \.self) { questions in
                 NavigationLink(destination: QuestionDetailView()) {
-                    QuestionListItemView(iconName: "ui-icon")
+                    QuestionListItemView(iconName: "data-icon")
                 }// NavigationLink
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button {
@@ -47,7 +47,7 @@ struct QuestionsListView: View {
             // MARK: - Navigation title
             ToolbarItem(placement: .principal) {
                 HStack {
-                    Image("ui-icon")
+                    Image("data-icon")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 30, height: 30)

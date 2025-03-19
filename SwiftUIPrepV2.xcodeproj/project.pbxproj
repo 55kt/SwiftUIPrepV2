@@ -143,6 +143,9 @@
 		4BC881DB2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC881DA2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift */; };
 		4BC881DC2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC881DA2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift */; };
 		4BC881DD2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC881DA2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift */; };
+		4BD482352D8B59A7004C4DA5 /* PickerWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD482342D8B59A7004C4DA5 /* PickerWheelView.swift */; };
+		4BD482362D8B59A7004C4DA5 /* PickerWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD482342D8B59A7004C4DA5 /* PickerWheelView.swift */; };
+		4BD482372D8B59A7004C4DA5 /* PickerWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD482342D8B59A7004C4DA5 /* PickerWheelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,6 +222,7 @@
 		4B89C9332D7DF54500FB07C6 /* FormRowLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRowLink.swift; sourceTree = "<group>"; };
 		4B89C9372D7DF5D900FB07C6 /* FormRowStaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRowStaticView.swift; sourceTree = "<group>"; };
 		4BC881DA2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesQuestionsListView.swift; sourceTree = "<group>"; };
+		4BD482342D8B59A7004C4DA5 /* PickerWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerWheelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -360,6 +364,7 @@
 				4B5FB6762D849EF9003FF080 /* ProgressBarLine.swift */,
 				4B5FB67A2D84A2AC003FF080 /* AnswerCellButton.swift */,
 				4B5FB67E2D84A3ED003FF080 /* ButtonGradients.swift */,
+				4BD482342D8B59A7004C4DA5 /* PickerWheelView.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -683,6 +688,7 @@
 				4B1E44992D70FEC900AD2B84 /* ProgressTabView.swift in Sources */,
 				4B1E44582D70F92100AD2B84 /* SwiftUIPrepV2App.swift in Sources */,
 				4B1E44AD2D70FF3200AD2B84 /* ProgressBar.swift in Sources */,
+				4BD482362D8B59A7004C4DA5 /* PickerWheelView.swift in Sources */,
 				4B1E447F2D70FD0D00AD2B84 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -709,6 +715,7 @@
 				4B1E44972D70FEB600AD2B84 /* FavoritesView.swift in Sources */,
 				4B1E44852D70FE7900AD2B84 /* ExploreView.swift in Sources */,
 				4B1E448F2D70FE9300AD2B84 /* TestView.swift in Sources */,
+				4BD482372D8B59A7004C4DA5 /* PickerWheelView.swift in Sources */,
 				4B1E44A12D70FEF400AD2B84 /* LanguageSelectionView.swift in Sources */,
 				4B1E44932D70FE9E00AD2B84 /* StartTestView.swift in Sources */,
 				4B5FB66C2D7F70E8003FF080 /* NavigationGestureFix.swift in Sources */,
@@ -764,6 +771,7 @@
 				4B1E44E62D7102B000AD2B84 /* MainTabViewUITests.swift in Sources */,
 				4B1E449F2D70FEE700AD2B84 /* SettingsView.swift in Sources */,
 				4BC881DB2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift in Sources */,
+				4BD482352D8B59A7004C4DA5 /* PickerWheelView.swift in Sources */,
 				4B5FB6812D84A3ED003FF080 /* ButtonGradients.swift in Sources */,
 				4B1E44B92D70FF7600AD2B84 /* ColorExtension.swift in Sources */,
 				4B5FB66F2D81E256003FF080 /* CategoryCard.swift in Sources */,

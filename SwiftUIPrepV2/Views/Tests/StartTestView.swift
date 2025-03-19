@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StartTestView: View {
     // MARK: - Properties
-    @State private var numberOfQuestions = 10
+    @State private var numberOfQuestions = 5
     let questionOptions = Array(1...150)
     @State private var isButtonPulsating = false
     @Environment(\.dismiss) var dismiss
@@ -17,7 +17,14 @@ struct StartTestView: View {
     // MARK: - Body
     var body: some View {
         NavigationStack {
-            GeometryReader { geometry in
+            ZStack {
+                Image("test-icon")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 350, height: 350)
+                    .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
+                    .opacity(0.2)
+                
                 ScrollView {
                     VStack(spacing: 20) {
                         // MARK: - Header
@@ -26,36 +33,20 @@ struct StartTestView: View {
                                 .font(.largeTitle)
                                 .bold()
                         }// VStack
-                        .frame(maxWidth: .infinity, alignment: .center)
                         
                         // MARK: - Central content
-                        VStack(spacing: 30) {
+                        VStack {
                             Text("Count of questions:")
                                 .font(.title2)
-                            
                             // MARK: - Wheel Picker
-                            ZStack {
-                                Image("ui-icon")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 300, height: 300)
-                                    .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
-                                    .opacity(0.2)
-                                
-                                Picker("Number of questions", selection: $numberOfQuestions) {
-                                    ForEach(questionOptions, id: \.self) { num in
-                                        Text("\(num)")
-                                            .tag(num)
-                                            .font(.title)
-                                    }// ForEach
-                                }// Picker
-                                .pickerStyle(.wheel)
-                                .frame(height: 235)
-                                .padding()
-                                .clipShape(Circle())
-                                .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
-                            }// ZStack
-                            .padding(.horizontal)
+                            Picker("Number of questions", selection: $numberOfQuestions) {
+                                ForEach(questionOptions, id: \.self) { num in
+                                    Text("\(num)")
+                                        .tag(num)
+                                        .font(.title)
+                                }// ForEach
+                            }// Picker
+                            .pickerStyle(.inline)
                             
                             // MARK: - Start test button
                             NavigationLink(destination: TestView()
@@ -81,7 +72,7 @@ struct StartTestView: View {
                     }// VStack
                     .padding()
                 }// ScrollView
-            }// GeometryReader
+            }// ZStack
         }// NavigationStack
     }// Body
 }// View

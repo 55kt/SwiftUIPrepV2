@@ -31,7 +31,7 @@ struct FavoritesQuestionsListView: View {
                     .foregroundColor(.yellow)
                 
                 NavigationLink(destination: QuestionDetailView()) {
-                    QuestionListItemView(iconName: "ui-icon")
+                    QuestionListItemView(iconName: "loading-icon")
                 }// NavigationLink
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button(role: .destructive) {
@@ -51,7 +51,7 @@ struct FavoritesQuestionsListView: View {
                     .foregroundColor(.yellow)
                 
                 NavigationLink(destination: QuestionDetailView()) {
-                    QuestionListItemView(iconName: "ui-icon")
+                    QuestionListItemView(iconName: "swift-icon")
                 }// NavigationLink
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button(role: .destructive) {

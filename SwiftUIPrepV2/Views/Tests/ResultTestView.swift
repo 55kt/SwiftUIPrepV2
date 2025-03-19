@@ -29,21 +29,21 @@ struct ResultTestView: View {
     // MARK: - Body
     var body: some View {
         NavigationStack {
-            ScrollView {
-                GeometryReader { geometry in
-                    ZStack {
-                        Image("ui-icon")
-                            .resizable()
-                            .scaledToFit()
-                            .opacity(0.2)
-                            .padding(.bottom, 250)
-                        
+            ZStack {
+                Image("leaderboard-icon")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 350, height: 350)
+                    .opacity(0.4)
+                    .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
+                
+                ScrollView {
+                    GeometryReader { geometry in
                         VStack(spacing: 20) {
                             // MARK: - Medal at the top
                             Image(systemName: "medal.fill")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 140, height: 140)
                                 .foregroundStyle(medalDetails.color)
                                 .shadow(color: Color.black.opacity(0.3), radius: 8, x: 0, y: 4)
                                 .padding(.top, 20)
@@ -56,6 +56,15 @@ struct ResultTestView: View {
                             
                             // MARK: - Results
                             VStack(spacing: 10) {
+                                
+                                Image(systemName: "medal.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .foregroundStyle(medalDetails.color)
+                                    .frame(width: 100, height: 100)
+                                    .shadow(color: Color.black.opacity(0.3), radius: 8, x: 0, y: 4)
+                                    .padding(.top, 20)
+                                
                                 Text("You answered 12 out of 30 questions correctly.")
                                     .bold()
                                     .foregroundStyle(.primary)
@@ -105,16 +114,13 @@ struct ResultTestView: View {
                                 }// NavigationLink
                             }// VStack
                             .padding()
-                            .background(.ultraThinMaterial)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                            .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
                         }// VStack
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                         .padding()
-                    }
-                }// GeometryReader
-                .navigationTitle("Results")
-                .navigationBarTitleDisplayMode(.inline)
+                    }// GeometryReader
+                    .navigationTitle("Results")
+                    .navigationBarTitleDisplayMode(.inline)
+                }
             }// ScrollView
         }// NavigationStack
     }// Body

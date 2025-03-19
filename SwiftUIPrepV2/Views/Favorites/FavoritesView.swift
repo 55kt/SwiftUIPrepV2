@@ -20,12 +20,12 @@ struct FavoritesView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // MARK: - Background Icon (как в TestSettingsView)
-                Image("ui-icon")
+                // MARK: - Background Icon
+                Image("favorites-icon")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 300, height: 300)
-                    .opacity(0.15)
+                    .frame(width: 350, height: 350)
+                    .opacity(0.4)
                     .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
                 
                 FavoritesQuestionsListView(questions: ["1", "2"])
