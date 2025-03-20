@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PickerWheelView: View {
     // MARK: - Properties
-    @State private var numberOfQuestions = 5
+    @Binding var numberOfQuestions: Int
     let questionOptions = Array(1...150)
     
     var body: some View {
@@ -28,15 +28,12 @@ struct PickerWheelView: View {
                         .font(.title)
                 }// ForEach
             }// Picker
+            .frame(width: 350, height: 350)
             .pickerStyle(.inline)
-            
-            
-            
-            
         }// ZStack
     }// Body
 }// View
 
 #Preview {
-    PickerWheelView()
+    PickerWheelView(numberOfQuestions: .constant(5))
 }

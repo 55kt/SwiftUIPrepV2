@@ -17,62 +17,46 @@ struct StartTestView: View {
     // MARK: - Body
     var body: some View {
         NavigationStack {
-            ZStack {
-                Image("test-icon")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 350, height: 350)
-                    .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
-                    .opacity(0.2)
-                
-                ScrollView {
-                    VStack(spacing: 20) {
-                        // MARK: - Header
-                        VStack(spacing: 5) {
-                            Text("Test")
-                                .font(.largeTitle)
-                                .bold()
-                        }// VStack
-                        
-                        // MARK: - Central content
-                        VStack {
-                            Text("Count of questions:")
-                                .font(.title2)
-                            // MARK: - Wheel Picker
-                            Picker("Number of questions", selection: $numberOfQuestions) {
-                                ForEach(questionOptions, id: \.self) { num in
-                                    Text("\(num)")
-                                        .tag(num)
-                                        .font(.title)
-                                }// ForEach
-                            }// Picker
-                            .pickerStyle(.inline)
-                            
-                            // MARK: - Start test button
-                            NavigationLink(destination: TestView()
-                                .navigationBarBackButtonHidden(true)
-                            ) {
-                                Circle()
-                                    .frame(height: 150)
-                                    .overlay(
-                                        Text("START")
-                                            .font(.title)
-                                            .fontWeight(.bold)
-                                            .foregroundColor(.white)
-                                    )
-                                    .scaleEffect(isButtonPulsating ? 1.07 : 1.0)
-                                    .animation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: isButtonPulsating)
-                                    .shadow(color: Color.gray.opacity(0.6), radius: 6, x: 0, y: 4)
-                                    .onAppear {
-                                        isButtonPulsating = true
-                                    }
-                            }// NavigationLink
-                        }// VStack
-                        .frame(maxHeight: .infinity, alignment: .center)
+            ScrollView {
+                VStack(spacing: 20) {
+                    // MARK: - Header
+                    VStack(spacing: 5) {
+                        Text("Test")
+                            .font(.largeTitle)
+                            .bold()
                     }// VStack
-                    .padding()
-                }// ScrollView
-            }// ZStack
+                    
+                    // MARK: - Central content
+                    VStack {
+                        Text("Count of questions:")
+                            .font(.title2)
+                        // MARK: - Wheel Picker
+                        PickerWheelView(numberOfQuestions: $numberOfQuestions)
+                        
+                        // MARK: - Start test button
+                        NavigationLink(destination: TestView()
+                            .navigationBarBackButtonHidden(true)
+                        ) {
+                            Circle()
+                                .frame(height: 150)
+                                .overlay(
+                                    Text("START")
+                                        .font(.title)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                )
+                                .scaleEffect(isButtonPulsating ? 1.07 : 1.0)
+                                .animation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: isButtonPulsating)
+                                .shadow(color: Color.gray.opacity(0.6), radius: 6, x: 0, y: 4)
+                                .onAppear {
+                                    isButtonPulsating = true
+                                }
+                        }// NavigationLink
+                    }// VStack
+                    .frame(maxHeight: .infinity, alignment: .center)
+                }// VStack
+                .padding()
+            }// ScrollView
         }// NavigationStack
     }// Body
 }// View
