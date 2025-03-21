@@ -1,0 +1,188 @@
+{
+  "categories": [
+    {
+      "id": "uuid-1",
+      "name": "Swift Basics",
+      "iconName": "swift-icon",
+      "priority": "mandatory",
+      "questions": [
+        {
+          "id": "uuid-1-1",
+          "categoryName": "Swift Basics",
+          "question": "What are optionals in Swift and why are they important?",
+          "correctAnswer": "A type that can hold either a value or nil.",
+          "incorrectAnswers": [
+            "A type that can only hold a value.",
+            "A type that can only hold nil.",
+            "A type that cannot hold any value."
+          ],
+          "iconName": "swift-icon",
+          "questionDescription": "This question tests your understanding of optionals in Swift, which allow variables to have a value or be nil.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        },
+        {
+          "id": "uuid-1-2",
+          "categoryName": "Swift Basics",
+          "question": "What is the difference between `let` and `var` in Swift?",
+          "correctAnswer": "`let` is for constants, `var` is for variables.",
+          "incorrectAnswers": [
+            "`let` is for variables, `var` is for constants.",
+            "There is no difference.",
+            "`let` and `var` are interchangeable."
+          ],
+          "iconName": "swift-icon",
+          "questionDescription": "This question checks your knowledge of variable declaration in Swift, focusing on immutability.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        },
+        {
+          "id": "uuid-1-3",
+          "categoryName": "Swift Basics",
+          "question": "What is a closure in Swift?",
+          "correctAnswer": "A self-contained block of functionality that can be passed around.",
+          "incorrectAnswers": [
+            "A type of variable.",
+            "A protocol for networking.",
+            "A method for memory management."
+          ],
+          "iconName": "swift-icon",
+          "questionDescription": "This question tests your understanding of closures, which are widely used in Swift for functional programming.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        }
+      ]
+    },
+    {
+      "id": "uuid-2",
+      "name": "SwiftUI Basics",
+      "iconName": "ui-icon",
+      "priority": "optional",
+      "questions": [
+        {
+          "id": "uuid-2-1",
+          "categoryName": "SwiftUI Basics",
+          "question": "What is the purpose of the `@State` property wrapper in SwiftUI?",
+          "correctAnswer": "To manage mutable state in a view.",
+          "incorrectAnswers": [
+            "To create a static view.",
+            "To handle network requests.",
+            "To define a constant value."
+          ],
+          "iconName": "ui-icon",
+          "questionDescription": "This question checks your understanding of state management in SwiftUI using @State.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        },
+        {
+          "id": "uuid-2-2",
+          "categoryName": "SwiftUI Basics",
+          "question": "What does the `VStack` component do in SwiftUI?",
+          "correctAnswer": "Arranges views vertically.",
+          "incorrectAnswers": [
+            "Arranges views horizontally.",
+            "Creates a grid layout.",
+            "Manages navigation."
+          ],
+          "iconName": "ui-icon",
+          "questionDescription": "This question tests your understanding of SwiftUI's layout components, specifically VStack.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        },
+        {
+          "id": "uuid-2-3",
+          "categoryName": "SwiftUI Basics",
+          "question": "How do you navigate between views in SwiftUI?",
+          "correctAnswer": "Using NavigationLink.",
+          "incorrectAnswers": [
+            "Using VStack.",
+            "Using Button.",
+            "Using TextField."
+          ],
+          "iconName": "ui-icon",
+          "questionDescription": "This question checks your knowledge of navigation in SwiftUI using NavigationLink.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        },
+        {
+          "id": "uuid-2-4",
+          "categoryName": "SwiftUI Basics",
+          "question": "What is the role of the `onAppear` modifier in SwiftUI?",
+          "correctAnswer": "It executes code when a view appears.",
+          "incorrectAnswers": [
+            "It executes code when a view disappears.",
+            "It handles user input.",
+            "It manages state changes."
+          ],
+          "iconName": "ui-icon",
+          "questionDescription": "This question tests your understanding of lifecycle events in SwiftUI using onAppear.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        }
+      ]
+    },
+    {
+      "id": "uuid-3",
+      "name": "iOS Development",
+      "iconName": "ios-icon",
+      "priority": "optional",
+      "questions": [
+        {
+          "id": "uuid-3-1",
+          "categoryName": "iOS Development",
+          "question": "What is the primary language used for iOS app development?",
+          "correctAnswer": "Swift.",
+          "incorrectAnswers": [
+            "Java.",
+            "Python.",
+            "C++."
+          ],
+          "iconName": "ios-icon",
+          "questionDescription": "This question tests your knowledge of the primary programming language for iOS development.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        },
+        {
+          "id": "uuid-3-2",
+          "categoryName": "iOS Development",
+          "question": "What framework is used for building user interfaces in iOS?",
+          "correctAnswer": "SwiftUI or UIKit.",
+          "incorrectAnswers": [
+            "CoreData.",
+            "Alamofire.",
+            "CoreMotion."
+          ],
+          "iconName": "ios-icon",
+          "questionDescription": "This question checks your understanding of UI frameworks in iOS development.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        },
+        {
+          "id": "uuid-3-3",
+          "categoryName": "iOS Development",
+          "question": "What is the purpose of Auto Layout in iOS?",
+          "correctAnswer": "To create adaptive layouts for different screen sizes.",
+          "incorrectAnswers": [
+            "To manage app navigation.",
+            "To handle network requests.",
+            "To store user data."
+          ],
+          "iconName": "ios-icon",
+          "questionDescription": "This question tests your understanding of Auto Layout for building responsive UI in iOS.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        }
+      ]
+    }
+  ]
+}

@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ExploreView: View {
     // MARK: - Properties
-    let categories = ["Data", "Math", "Science", "History", "Geography", "Art", "Literature", "Solid & somethingnamed "]
     let gridLayout = [GridItem(.flexible()), GridItem(.flexible())]
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(
+        entity: Category.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)]
+    ) private var categories: FetchedResults<Category>
     
     // MARK: - Body
     var body: some View {
@@ -26,14 +32,29 @@ struct ExploreView: View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: gridLayout, alignment: .center, spacing: 15) {
-                        ForEach(categories, id: \.self) { category in
-                            NavigationLink(destination: QuestionsListView(questions: ["Question 1"])
-                                .navigationTitle("Data")
-                                .navigationBarTitleDisplayMode(.inline)
-                            ) {
-                                CategoryCard(category: category, iconName: "data-icon")
-                            }// NavigationLink
-                        }// ForEach
+                        if categories.isEmpty {
+                            Text("No categories found")
+                                .font(.headline)
+                                .foregroundStyle(.red)
+                        } else {
+                            ForEach(categories) { category in
+                                VStack {
+                                    Image(category.iconName)
+                                        .resizable()
+                                        .frame(width: 120, height: 120)
+                                        .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
+                                    Text(category.name)
+                                        .font(.headline)
+                                        .lineLimit(1)
+                                        .truncationMode(.tail)
+                                }
+                                .frame(width: 120, height: 160)
+                                .padding()
+                                .background(Material.ultraThinMaterial)
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
+                            }
+                        }
                     }// LazyVGrid
                     .padding()
                 }// ScrollView

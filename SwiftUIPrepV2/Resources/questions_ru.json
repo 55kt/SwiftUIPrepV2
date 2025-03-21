@@ -1,0 +1,188 @@
+{
+  "categories": [
+    {
+      "id": "uuid-1",
+      "name": "Основы Swift",
+      "iconName": "swift",
+      "priority": "mandatory",
+      "questions": [
+        {
+          "id": "uuid-1-1",
+          "categoryName": "Основы Swift",
+          "question": "Что такое опционалы в Swift и почему они важны?",
+          "correctAnswer": "Тип, который может содержать либо значение, либо nil.",
+          "incorrectAnswers": [
+            "Тип, который может содержать только значение.",
+            "Тип, который может содержать только nil.",
+            "Тип, который не может содержать никакого значения."
+          ],
+          "iconName": "swift",
+          "questionDescription": "Этот вопрос проверяет ваше понимание опционалов в Swift, которые позволяют переменным иметь значение или быть nil.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        },
+        {
+          "id": "uuid-1-2",
+          "categoryName": "Основы Swift",
+          "question": "В чём разница между `let` и `var` в Swift?",
+          "correctAnswer": "`let` — для констант, `var` — для переменных.",
+          "incorrectAnswers": [
+            "`let` — для переменных, `var` — для констант.",
+            "Разницы нет.",
+            "`let` и `var` взаимозаменяемы."
+          ],
+          "iconName": "swift",
+          "questionDescription": "Этот вопрос проверяет ваше знание объявления переменных в Swift, с акцентом на неизменяемость.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        },
+        {
+          "id": "uuid-1-3",
+          "categoryName": "Основы Swift",
+          "question": "Что такое замыкание (closure) в Swift?",
+          "correctAnswer": "Самодостаточный блок функциональности, который можно передавать.",
+          "incorrectAnswers": [
+            "Тип переменной.",
+            "Протокол для работы с сетью.",
+            "Метод управления памятью."
+          ],
+          "iconName": "swift",
+          "questionDescription": "Этот вопрос проверяет ваше понимание замыканий, которые широко используются в Swift для функционального программирования.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        }
+      ]
+    },
+    {
+      "id": "uuid-2",
+      "name": "Основы SwiftUI",
+      "iconName": "swiftui",
+      "priority": "optional",
+      "questions": [
+        {
+          "id": "uuid-2-1",
+          "categoryName": "Основы SwiftUI",
+          "question": "Какова цель обёртки свойства `@State` в SwiftUI?",
+          "correctAnswer": "Для управления изменяемым состоянием в представлении.",
+          "incorrectAnswers": [
+            "Для создания статического представления.",
+            "Для обработки сетевых запросов.",
+            "Для определения константного значения."
+          ],
+          "iconName": "swiftui",
+          "questionDescription": "Этот вопрос проверяет ваше понимание управления состоянием в SwiftUI с помощью @State.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        },
+        {
+          "id": "uuid-2-2",
+          "categoryName": "Основы SwiftUI",
+          "question": "Что делает компонент `VStack` в SwiftUI?",
+          "correctAnswer": "Располагает представления вертикально.",
+          "incorrectAnswers": [
+            "Располагает представления горизонтально.",
+            "Создаёт сетку.",
+            "Управляет навигацией."
+          ],
+          "iconName": "swiftui",
+          "questionDescription": "Этот вопрос проверяет ваше понимание компонентов компоновки SwiftUI, в частности VStack.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        },
+        {
+          "id": "uuid-2-3",
+          "categoryName": "Основы SwiftUI",
+          "question": "Как осуществляется навигация между представлениями в SwiftUI?",
+          "correctAnswer": "С помощью NavigationLink.",
+          "incorrectAnswers": [
+            "С помощью VStack.",
+            "С помощью Button.",
+            "С помощью TextField."
+          ],
+          "iconName": "swiftui",
+          "questionDescription": "Этот вопрос проверяет ваше знание навигации в SwiftUI с использованием NavigationLink.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        },
+        {
+          "id": "uuid-2-4",
+          "categoryName": "Основы SwiftUI",
+          "question": "Какова роль модификатора `onAppear` в SwiftUI?",
+          "correctAnswer": "Он выполняет код, когда представление появляется.",
+          "incorrectAnswers": [
+            "Он выполняет код, когда представление исчезает.",
+            "Он обрабатывает ввод пользователя.",
+            "Он управляет изменениями состояния."
+          ],
+          "iconName": "swiftui",
+          "questionDescription": "Этот вопрос проверяет ваше понимание событий жизненного цикла в SwiftUI с использованием onAppear.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        }
+      ]
+    },
+    {
+      "id": "uuid-3",
+      "name": "Разработка для iOS",
+      "iconName": "ios",
+      "priority": "optional",
+      "questions": [
+        {
+          "id": "uuid-3-1",
+          "categoryName": "Разработка для iOS",
+          "question": "Какой основной язык используется для разработки приложений под iOS?",
+          "correctAnswer": "Swift.",
+          "incorrectAnswers": [
+            "Java.",
+            "Python.",
+            "C++."
+          ],
+          "iconName": "ios",
+          "questionDescription": "Этот вопрос проверяет ваше знание основного языка программирования для разработки под iOS.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        },
+        {
+          "id": "uuid-3-2",
+          "categoryName": "Разработка для iOS",
+          "question": "Какой фреймворк используется для создания пользовательских интерфейсов в iOS?",
+          "correctAnswer": "SwiftUI или UIKit.",
+          "incorrectAnswers": [
+            "CoreData.",
+            "Alamofire.",
+            "CoreMotion."
+          ],
+          "iconName": "ios",
+          "questionDescription": "Этот вопрос проверяет ваше понимание фреймворков для создания интерфейсов в iOS.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        },
+        {
+          "id": "uuid-3-3",
+          "categoryName": "Разработка для iOS",
+          "question": "Какова цель Auto Layout в iOS?",
+          "correctAnswer": "Создание адаптивных макетов для разных размеров экрана.",
+          "incorrectAnswers": [
+            "Управление навигацией приложения.",
+            "Обработка сетевых запросов.",
+            "Хранение пользовательских данных."
+          ],
+          "iconName": "ios",
+          "questionDescription": "Этот вопрос проверяет ваше понимание Auto Layout для создания отзывчивого интерфейса в iOS.",
+          "isFavorite": false,
+          "isAnswered": false,
+          "isAnsweredCorrectly": null
+        }
+      ]
+    }
+  ]
+}

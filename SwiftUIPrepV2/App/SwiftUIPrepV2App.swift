@@ -6,11 +6,18 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct SwiftUIPrepV2App: App {
     let persistenceController = PersistenceController.shared
     @AppStorage("AppTheme") private var isDarkMode: Bool = false
+    
+    init() {
+            ValueTransformer.setValueTransformer(StringArrayTransformer(), forName: NSValueTransformerName(rawValue: "StringArrayTransformer"))
+            
+            LocalizationHelper.shared.loadCategoriesAndQuestions(into: persistenceController.container.viewContext)
+        }
 
     var body: some Scene {
         WindowGroup {
