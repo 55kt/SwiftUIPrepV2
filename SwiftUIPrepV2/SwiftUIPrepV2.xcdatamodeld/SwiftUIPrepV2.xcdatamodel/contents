@@ -10,7 +10,6 @@
     <entity name="Question" representedClassName="Question" syncable="YES">
         <attribute name="categoryName" optional="YES" attributeType="String"/>
         <attribute name="correctAnswer" optional="YES" attributeType="String"/>
-        <attribute name="iconName" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="incorrectAnswers" optional="YES" attributeType="Transformable" valueTransformerName="StringArrayTransformer" customClassName="[String]"/>
         <attribute name="isAnswered" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>

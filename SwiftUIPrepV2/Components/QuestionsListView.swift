@@ -9,19 +9,29 @@ import SwiftUI
 
 struct QuestionsListView: View {
     // MARK: - Properties
-    let questions: [String]
+    let categoryName: String
+    let questions: [Question]
     @Environment(\.dismiss) var dismiss
+    @Environment(\.managedObjectContext) private var viewContext
     
     // MARK: - Body
     var body: some View {
         List {
-            ForEach(questions, id: \.self) { questions in
-                NavigationLink(destination: QuestionDetailView()) {
-                    QuestionListItemView(iconName: "data-icon")
+            ForEach(questions) { question in
+                NavigationLink(destination: QuestionDetailView(question: question)) {
+                    QuestionListItemView(iconName: question.iconName, questionText: question.question)
                 }// NavigationLink
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button {
-                        print("Added to favorites: \(questions)")
+                        if !question.isFavorite {
+                            question.isFavorite = true
+                            do {
+                                try viewContext.save()
+                                print("💾 Saved isFavorite: \(question.isFavorite) for question: \(question.question) 💾")
+                            } catch {
+                                print("❌ Error saving isFavorite: \(error) ❌")
+                            }
+                        }
                     } label: {
                         Image(systemName: "star.fill")
                     }
@@ -47,13 +57,15 @@ struct QuestionsListView: View {
             // MARK: - Navigation title
             ToolbarItem(placement: .principal) {
                 HStack {
-                    Image("data-icon")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 30, height: 30)
-                        .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
+                    (questions.first?.iconName != nil ?
+                     Image(questions.first!.iconName) :
+                        Image("unknown-icon"))
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30, height: 30)
+                    .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
                     
-                    Text("Loading & Somethingname ...")
+                    Text(categoryName)
                         .font(.caption)
                         .foregroundStyle(.primary)
                 }// HStack
@@ -66,6 +78,10 @@ struct QuestionsListView: View {
 // MARK: - Preview
 #Preview {
     NavigationStack {
-        QuestionsListView(questions: ["Question 1", "Question 2", "Question 3"])
+        QuestionsListView(
+            categoryName: "Swift Basics",
+            questions: []
+        )
+        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
     }
 }

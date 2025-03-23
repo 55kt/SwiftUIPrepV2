@@ -2,12 +2,13 @@
 //  Question+CoreDataProperties.swift
 //  SwiftUIPrepV2
 //
-//  Created by Vlad on 21/3/25.
+//  Created by Vlad on 23/3/25.
 //
 //
 
 import Foundation
 import CoreData
+
 
 extension Question {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Question> {
@@ -19,7 +20,6 @@ extension Question {
     @NSManaged public var question: String
     @NSManaged public var correctAnswer: String
     @NSManaged public var incorrectAnswers: [String]?
-    @NSManaged public var iconName: String
     @NSManaged public var questionDescription: String
     @NSManaged public var isFavorite: Bool
     @NSManaged public var isAnswered: Bool
@@ -31,4 +31,9 @@ extension Question {
     }
     
     @NSManaged public var category: Category?
+
+    // Getter to get iconName from category
+    public var iconName: String {
+        return category?.iconName ?? "default-icon"
+    }
 }

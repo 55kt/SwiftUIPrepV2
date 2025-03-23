@@ -9,9 +9,15 @@ import SwiftUI
 
 struct FavoritesQuestionsListView: View {
     // MARK: - Properties
-    let questions: [String]
     @Environment(\.dismiss) var dismiss
+    @Environment(\.managedObjectContext) private var viewContext
     @State private var isShowingStopAlert: Bool = false
+    
+    @FetchRequest(
+        entity: Question.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Question.question, ascending: true)],
+        predicate: NSPredicate(format: "isFavorite == true")
+    ) private var questions: FetchedResults<Question>
     
     private var formattedDate: String {
         let formatter = DateFormatter()
@@ -23,45 +29,33 @@ struct FavoritesQuestionsListView: View {
     // MARK: - Body
     var body: some View {
         List {
-            HStack {
-                Image(systemName: "star.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(.yellow)
-                
-                NavigationLink(destination: QuestionDetailView()) {
-                    QuestionListItemView(iconName: "loading-icon")
-                }// NavigationLink
-                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                    Button(role: .destructive) {
-                        //action
-                    } label: {
-                        Image(systemName: "trash.fill")
+            ForEach(questions) { question in
+                HStack {
+                    Image(systemName: "star.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(.yellow)
+                    
+                    NavigationLink(destination: QuestionDetailView(question: question)) {
+                        QuestionListItemView(iconName: question.iconName, questionText: question.question)
+                    }// NavigationLink
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button(role: .destructive) {
+                            question.isFavorite = false
+                            do {
+                                try viewContext.save()
+                                print("🗑️ Removed question from favorites: \(question.question) 🗑️")
+                            } catch {
+                                print("❌ Error removing question from favorites: \(error) ❌")
+                            }
+                        } label: {
+                            Image(systemName: "trash.fill")
+                        }
                     }
-                }
-            }// HStack
-            .listRowBackground(Color.clear)
-            
-            HStack {
-                Image(systemName: "star.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(.yellow)
-                
-                NavigationLink(destination: QuestionDetailView()) {
-                    QuestionListItemView(iconName: "swift-icon")
-                }// NavigationLink
-                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                    Button(role: .destructive) {
-                        //action
-                    } label: {
-                        Image(systemName: "trash.fill")
-                    }
-                }// swipe
-            }// HStack
-            .listRowBackground(Color.clear)
+                }// HStack
+                .listRowBackground(Color.clear)
+            }// ForEach
         }// List
         .listStyle(.plain)
         .navigationBarBackButtonHidden(true)
@@ -83,7 +77,12 @@ struct FavoritesQuestionsListView: View {
         .alert("Delete all favorites ?", isPresented: $isShowingStopAlert) {
             Button("Cancel", role: .cancel) {}
             Button("Delete", role: .destructive) {
-                // action
+                do {
+                    try viewContext.save()
+                    print("🗑️ All favorites deleted successfully")
+                } catch {
+                    print("❌ Error deleting all favorites: \(error)")
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     dismiss()
                 }
@@ -97,6 +96,7 @@ struct FavoritesQuestionsListView: View {
 
 #Preview {
     NavigationStack {
-        FavoritesQuestionsListView(questions: ["1", "2", "3"])
+        FavoritesQuestionsListView()
+            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
     }
 }

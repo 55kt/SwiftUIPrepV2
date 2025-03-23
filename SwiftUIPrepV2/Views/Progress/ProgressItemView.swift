@@ -9,10 +9,17 @@ import SwiftUI
 
 struct ProgressItemView: View {
     // MARK: - Properties
-    var answeredQText: LocalizedStringKey
-    var time: LocalizedStringKey
-    var date: Date
-    var medalColor: Color
+    let answeredQText: String
+    let time: LocalizedStringKey
+    let date: Date
+    let medalColor: Color
+    
+    private var formattedDate: String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter.string(from: date)
+    }
     
     // MARK: - Body
     var body: some View {

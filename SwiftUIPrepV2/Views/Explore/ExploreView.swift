@@ -32,30 +32,18 @@ struct ExploreView: View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: gridLayout, alignment: .center, spacing: 15) {
-                        if categories.isEmpty {
-                            Text("No categories found")
-                                .font(.headline)
-                                .foregroundStyle(.red)
-                        } else {
-                            ForEach(categories) { category in
-                                VStack {
-                                    Image(category.iconName)
-                                        .resizable()
-                                        .frame(width: 120, height: 120)
-                                        .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
-                                    Text(category.name)
-                                        .font(.headline)
-                                        .lineLimit(1)
-                                        .truncationMode(.tail)
-                                }
-                                .frame(width: 120, height: 160)
-                                .padding()
-                                .background(Material.ultraThinMaterial)
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                                .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
-                            }
-                        }
+                        ForEach(categories) { category in
+                            let questions = (category.questions?.allObjects as? [Question]) ?? []
+                            let destination = QuestionsListView(categoryName: category.name, questions: questions)
+                                .navigationTitle(category.name)
+                                .navigationBarTitleDisplayMode(.inline)
+                            
+                            NavigationLink(destination: destination) {
+                                CategoryCard(category: category.name, iconName: category.iconName)
+                            }// NavigationLink
+                        }// ForEach
                     }// LazyVGrid
+                    .padding()
                     .padding()
                 }// ScrollView
                 .navigationTitle("Explore")
@@ -69,4 +57,5 @@ struct ExploreView: View {
 // MARK: - Preview
 #Preview {
     ExploreView()
+        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
 }

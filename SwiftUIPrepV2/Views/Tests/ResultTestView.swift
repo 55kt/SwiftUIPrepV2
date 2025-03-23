@@ -9,11 +9,17 @@ import SwiftUI
 
 struct ResultTestView: View {
     // MARK: - Properties
+    let totalQuestions: Int
+    let correctAnswers: Int
+    let testDuration: String
     @State private var isButtonPulsating = false
     @State private var showQuestionsList = false
     @Environment(\.dismiss) var dismiss
     
-    private var scorePercentage: Double = 80.0
+    private var scorePercentage: Double {
+        guard totalQuestions > 0 else { return 0.0 }
+        return (Double(correctAnswers) / Double(totalQuestions)) * 100
+    }
     
     private var medalDetails: (color: Color, text: String) {
         switch scorePercentage {
@@ -65,15 +71,15 @@ struct ResultTestView: View {
                                     .shadow(color: Color.black.opacity(0.3), radius: 8, x: 0, y: 4)
                                     .padding(.top, 20)
                                 
-                                Text("You answered 12 out of 30 questions correctly.")
+                                Text("You answered \(correctAnswers) out of \(totalQuestions) questions correctly.")
                                     .bold()
                                     .foregroundStyle(.primary)
                                 
-                                Text("Your time remaining was 14:21:22")
+                                Text("Your time remaining was \(testDuration)")
                                     .font(.body)
                                     .foregroundStyle(.secondary)
                                 
-                                Text("Your score was 80%")
+                                Text("Your score was \(String(format: "%.1f", scorePercentage))%")
                                     .font(.body)
                                     .foregroundStyle(.secondary)
                                 
@@ -88,7 +94,7 @@ struct ResultTestView: View {
                                         .padding(.bottom, 40)
                                 }
                                 .navigationDestination(isPresented: $showQuestionsList) {
-                                    AnsweredQuestionsListView(questions: ["Question 1", "Question 2", "Question 3"])
+                                    AnsweredQuestionsListView()
                                         .navigationBarBackButtonHidden(true)
                                 }// navigationDestination
                                 
@@ -128,5 +134,10 @@ struct ResultTestView: View {
 
 // MARK: - Preview
 #Preview {
-    ResultTestView()
+    ResultTestView(
+        totalQuestions: 10,
+        correctAnswers: 8,
+        testDuration: "Not implemented yet"
+    )
+    .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
 }

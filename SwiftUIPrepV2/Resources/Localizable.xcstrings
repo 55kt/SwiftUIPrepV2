@@ -43,6 +43,9 @@
     "Copyright © %@ Volos Software LLC. All rights reserved" : {
 
     },
+    "Correct: %@%%" : {
+
+    },
     "Count of questions:" : {
 
     },
@@ -50,9 +53,6 @@
 
     },
     "Dark Mode" : {
-
-    },
-    "Data" : {
 
     },
     "Delete" : {
@@ -118,22 +118,7 @@
     "Language Selection" : {
 
     },
-    "Loading & Somethingname ..." : {
-
-    },
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id blandit neque. Praesent porta, metus a feugiat mollis, nulla ligula tincidunt risus, ac pretium dolor est eu dolor. Mauris placerat tortor eget justo lacinia, et dapibus nisl dignissim. Proin eu accumsan ex. Nulla suscipit neque id gravida iaculis. Fusce interdum a nisl eu auctor. Maecenas non tristique velit, id vulputate ante. Vivamus sit amet ipsum neque." : {
-
-    },
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sagittis lacus interdum quam interdum, eget cursus justo luctus. Ut vitae mi malesuada, sollicitudin felis a, dictum odio. Integer dui arcu, accumsan id tellus eget, dictum rhoncus orci. In nec facilisis mauris. Donec egestas, nisi sed finibus elementum, nisi enim volutpat lectus, sed pretium orci nulla quis ex. Duis convallis venenatis tortor, id laoreet ante pellentesque blandit." : {
-
-    },
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus." : {
-
-    },
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus.?" : {
-
-    },
-    "No categories found" : {
 
     },
     "Number of questions" : {
@@ -223,22 +208,23 @@
     "What is a variable in Swift?" : {
 
     },
-    "You answered 10 out of 10 questions" : {
-
-    },
-    "You answered 12 out of 30 questions correctly." : {
-
+    "You answered %lld out of %lld questions correctly." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You answered %1$lld out of %2$lld questions correctly."
+          }
+        }
+      }
     },
     "You earned a %@ !" : {
 
     },
-    "Your score was 80%" : {
+    "Your score was %@%%" : {
 
     },
-    "Your time is 12:32:11" : {
-
-    },
-    "Your time remaining was 14:21:22" : {
+    "Your time remaining was %@" : {
 
     }
   },

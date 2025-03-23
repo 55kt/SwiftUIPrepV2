@@ -9,11 +9,6 @@ import SwiftUI
 
 struct FavoritesView: View {
     // MARK: - Properties
-    @State private var favoriteQuestions: [String] = [
-        "What is a variable in Swift?",
-        "How to create a struct in Swift?",
-        "What is an enum in Swift?"
-    ] // Заглушка для избранных вопросов
     @Environment(\.dismiss) var dismiss
     
     // MARK: - Body
@@ -28,9 +23,7 @@ struct FavoritesView: View {
                     .opacity(0.4)
                     .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
                 
-                FavoritesQuestionsListView(questions: ["1", "2"])
-                
-                
+                FavoritesQuestionsListView()
             }// ZStack
             .navigationTitle("Favorites")
         }// NavigationStack
@@ -40,4 +33,5 @@ struct FavoritesView: View {
 // MARK: - Preview
 #Preview {
     FavoritesView()
+        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
 }

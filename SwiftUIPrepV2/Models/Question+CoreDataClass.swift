@@ -2,7 +2,7 @@
 //  Question+CoreDataClass.swift
 //  SwiftUIPrepV2
 //
-//  Created by Vlad on 21/3/25.
+//  Created by Vlad on 23/3/25.
 //
 //
 
@@ -11,6 +11,7 @@ import CoreData
 
 @objc(Question)
 public class Question: NSManagedObject, Identifiable, Codable {
+    // Реализация Codable
     enum CodingKeys: String, CodingKey {
         case id, categoryName, question, correctAnswer, incorrectAnswers, iconName, questionDescription, isFavorite, isAnswered, isAnsweredCorrectly, category
     }
@@ -30,7 +31,6 @@ public class Question: NSManagedObject, Identifiable, Codable {
         self.question = try container.decode(String.self, forKey: .question)
         self.correctAnswer = try container.decode(String.self, forKey: .correctAnswer)
         self.incorrectAnswers = try container.decode([String].self, forKey: .incorrectAnswers)
-        self.iconName = try container.decode(String.self, forKey: .iconName)
         self.questionDescription = try container.decode(String.self, forKey: .questionDescription)
         self.isFavorite = try container.decode(Bool.self, forKey: .isFavorite)
         self.isAnswered = try container.decode(Bool.self, forKey: .isAnswered)
@@ -45,7 +45,8 @@ public class Question: NSManagedObject, Identifiable, Codable {
         try container.encode(question, forKey: .question)
         try container.encode(correctAnswer, forKey: .correctAnswer)
         try container.encode(incorrectAnswers, forKey: .incorrectAnswers)
-        try container.encode(iconName, forKey: .iconName)
+        // Используем iconName из category
+        try container.encode(category?.iconName, forKey: .iconName)
         try container.encode(questionDescription, forKey: .questionDescription)
         try container.encode(isFavorite, forKey: .isFavorite)
         try container.encode(isAnswered, forKey: .isAnswered)

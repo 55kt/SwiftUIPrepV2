@@ -16,7 +16,6 @@
             "A type that can only hold nil.",
             "A type that cannot hold any value."
           ],
-          "iconName": "swift-icon",
           "questionDescription": "This question tests your understanding of optionals in Swift, which allow variables to have a value or be nil.",
           "isFavorite": false,
           "isAnswered": false,
@@ -32,7 +31,6 @@
             "There is no difference.",
             "`let` and `var` are interchangeable."
           ],
-          "iconName": "swift-icon",
           "questionDescription": "This question checks your knowledge of variable declaration in Swift, focusing on immutability.",
           "isFavorite": false,
           "isAnswered": false,
@@ -48,7 +46,6 @@
             "A protocol for networking.",
             "A method for memory management."
           ],
-          "iconName": "swift-icon",
           "questionDescription": "This question tests your understanding of closures, which are widely used in Swift for functional programming.",
           "isFavorite": false,
           "isAnswered": false,
@@ -72,7 +69,6 @@
             "To handle network requests.",
             "To define a constant value."
           ],
-          "iconName": "ui-icon",
           "questionDescription": "This question checks your understanding of state management in SwiftUI using @State.",
           "isFavorite": false,
           "isAnswered": false,
@@ -88,7 +84,6 @@
             "Creates a grid layout.",
             "Manages navigation."
           ],
-          "iconName": "ui-icon",
           "questionDescription": "This question tests your understanding of SwiftUI's layout components, specifically VStack.",
           "isFavorite": false,
           "isAnswered": false,
@@ -104,7 +99,6 @@
             "Using Button.",
             "Using TextField."
           ],
-          "iconName": "ui-icon",
           "questionDescription": "This question checks your knowledge of navigation in SwiftUI using NavigationLink.",
           "isFavorite": false,
           "isAnswered": false,
@@ -120,7 +114,6 @@
             "It handles user input.",
             "It manages state changes."
           ],
-          "iconName": "ui-icon",
           "questionDescription": "This question tests your understanding of lifecycle events in SwiftUI using onAppear.",
           "isFavorite": false,
           "isAnswered": false,
@@ -144,7 +137,6 @@
             "Python.",
             "C++."
           ],
-          "iconName": "ios-icon",
           "questionDescription": "This question tests your knowledge of the primary programming language for iOS development.",
           "isFavorite": false,
           "isAnswered": false,
@@ -160,7 +152,6 @@
             "Alamofire.",
             "CoreMotion."
           ],
-          "iconName": "ios-icon",
           "questionDescription": "This question checks your understanding of UI frameworks in iOS development.",
           "isFavorite": false,
           "isAnswered": false,
@@ -176,7 +167,6 @@
             "To handle network requests.",
             "To store user data."
           ],
-          "iconName": "ios-icon",
           "questionDescription": "This question tests your understanding of Auto Layout for building responsive UI in iOS.",
           "isFavorite": false,
           "isAnswered": false,

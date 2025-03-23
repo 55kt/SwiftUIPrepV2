@@ -53,14 +53,24 @@ class LocalizationHelper {
             let jsonData = try decoder.decode([String: [Category]].self, from: data)
             let categories = jsonData["categories"] ?? []
             
+            // Check that all categories have a name and iconName
+            for (index, category) in categories.enumerated() {
+                if category.name.isEmpty {
+                    print("⚠️ Warning: Category at index \(index) has empty name ⚠️")
+                }
+                if category.iconName.isEmpty {
+                    print("⚠️ Warning: Category at index \(index) has empty iconName ⚠️")
+                }
+            }
+            
             // Save changes to Core Data
             try context.save()
             print("👍🏻🎉 Successfully loaded \(categories.count) categories into Core Data 👌🏾")
         } catch {
             print("‼️🆘 Error decoding JSON or saving to Core Data ‼️🆘 : \(error)")
         }// do - catch
-                
-                
+        
+        
     }// loadCategoriesAndQuestions
     
 }// class
