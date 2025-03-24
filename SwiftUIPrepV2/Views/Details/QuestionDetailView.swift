@@ -102,7 +102,7 @@ struct QuestionDetailView: View {
                         }
                     } label: {
                         Image(systemName: isFavorite ? "star.circle.fill" : "star.circle")
-                            .foregroundStyle(.accent)
+                            .foregroundStyle(isFavorite ? .yellow : .accent)
                             .font(.title2)
                             .bold()
                     }
@@ -110,6 +110,9 @@ struct QuestionDetailView: View {
             }// toolbar
         }// ScrollView
         .navigationBarBackButtonHidden(true)
+        .onChange(of: question.isFavorite) { oldValue, newValue in
+            isFavorite = newValue
+        }// onChange
     }// Body
 }// View
 

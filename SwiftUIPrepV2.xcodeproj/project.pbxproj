@@ -151,6 +151,12 @@
 		4BD482362D8B59A7004C4DA5 /* PickerWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD482342D8B59A7004C4DA5 /* PickerWheelView.swift */; };
 		4BD482372D8B59A7004C4DA5 /* PickerWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD482342D8B59A7004C4DA5 /* PickerWheelView.swift */; };
 		4BD4824C2D8DAC4F004C4DA5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD4824B2D8DAC4F004C4DA5 /* CoreData.framework */; };
+		4BE09F6F2D91E0DF0035FE52 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE09F6E2D91E0DF0035FE52 /* SearchResultsView.swift */; };
+		4BE09F702D91E0DF0035FE52 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE09F6E2D91E0DF0035FE52 /* SearchResultsView.swift */; };
+		4BE09F712D91E0DF0035FE52 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE09F6E2D91E0DF0035FE52 /* SearchResultsView.swift */; };
+		4BE09F732D91E1660035FE52 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE09F722D91E1660035FE52 /* CategoriesView.swift */; };
+		4BE09F742D91E1660035FE52 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE09F722D91E1660035FE52 /* CategoriesView.swift */; };
+		4BE09F752D91E1660035FE52 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE09F722D91E1660035FE52 /* CategoriesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,6 +237,8 @@
 		4BC881DA2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesQuestionsListView.swift; sourceTree = "<group>"; };
 		4BD482342D8B59A7004C4DA5 /* PickerWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerWheelView.swift; sourceTree = "<group>"; };
 		4BD4824B2D8DAC4F004C4DA5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		4BE09F6E2D91E0DF0035FE52 /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
+		4BE09F722D91E1660035FE52 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -361,6 +369,8 @@
 			isa = PBXGroup;
 			children = (
 				4B1E44842D70FE7900AD2B84 /* ExploreView.swift */,
+				4BE09F6E2D91E0DF0035FE52 /* SearchResultsView.swift */,
+				4BE09F722D91E1660035FE52 /* CategoriesView.swift */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -675,6 +685,7 @@
 				4B13AB412D8DCA66006631F8 /* Category+CoreDataClass.swift in Sources */,
 				4B13AB422D8DCA66006631F8 /* Category+CoreDataProperties.swift in Sources */,
 				4B13AB462D8DDE04006631F8 /* StringArrayTransformer.swift in Sources */,
+				4BE09F6F2D91E0DF0035FE52 /* SearchResultsView.swift in Sources */,
 				4B1E449E2D70FEE700AD2B84 /* SettingsView.swift in Sources */,
 				4B5FB6802D84A3ED003FF080 /* ButtonGradients.swift in Sources */,
 				4B5FB6732D84882C003FF080 /* TimeRemainingHolder.swift in Sources */,
@@ -693,6 +704,7 @@
 				4B1E44752D70FCE800AD2B84 /* TestViewModel.swift in Sources */,
 				4B1E448A2D70FE8800AD2B84 /* ResultTestView.swift in Sources */,
 				4B1E44952D70FEB600AD2B84 /* FavoritesView.swift in Sources */,
+				4BE09F742D91E1660035FE52 /* CategoriesView.swift in Sources */,
 				4B89C9392D7DF5D900FB07C6 /* FormRowStaticView.swift in Sources */,
 				4B1E44722D70FCDE00AD2B84 /* ExploreViewModel.swift in Sources */,
 				4B1E44812D70FE5B00AD2B84 /* MainTabView.swift in Sources */,
@@ -741,10 +753,12 @@
 				4B5FB66C2D7F70E8003FF080 /* NavigationGestureFix.swift in Sources */,
 				4B13AB4A2D9073C5006631F8 /* Question+CoreDataProperties.swift in Sources */,
 				4B13AB4B2D9073C5006631F8 /* Question+CoreDataClass.swift in Sources */,
+				4BE09F702D91E0DF0035FE52 /* SearchResultsView.swift in Sources */,
 				4B5FB6752D84882C003FF080 /* TimeRemainingHolder.swift in Sources */,
 				4B1E44E82D7102B000AD2B84 /* MainTabViewUITests.swift in Sources */,
 				4B1E455F2D7773B900AD2B84 /* QuestionDetailView.swift in Sources */,
 				4B5FB6712D81E256003FF080 /* CategoryCard.swift in Sources */,
+				4BE09F732D91E1660035FE52 /* CategoriesView.swift in Sources */,
 				4B1E44B22D70FF5000AD2B84 /* JSONLoader.swift in Sources */,
 				4B1E44732D70FCDE00AD2B84 /* ExploreViewModel.swift in Sources */,
 				4B1E44E32D71029900AD2B84 /* HomeViewUITests.swift in Sources */,
@@ -796,6 +810,8 @@
 				4B1E44E62D7102B000AD2B84 /* MainTabViewUITests.swift in Sources */,
 				4B1E449F2D70FEE700AD2B84 /* SettingsView.swift in Sources */,
 				4BC881DB2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift in Sources */,
+				4BE09F712D91E0DF0035FE52 /* SearchResultsView.swift in Sources */,
+				4BE09F752D91E1660035FE52 /* CategoriesView.swift in Sources */,
 				4BD482352D8B59A7004C4DA5 /* PickerWheelView.swift in Sources */,
 				4B5FB6812D84A3ED003FF080 /* ButtonGradients.swift in Sources */,
 				4B5FB66F2D81E256003FF080 /* CategoryCard.swift in Sources */,

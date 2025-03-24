@@ -16,62 +16,64 @@ struct QuestionsListView: View {
     
     // MARK: - Body
     var body: some View {
-        List {
-            ForEach(questions) { question in
-                NavigationLink(destination: QuestionDetailView(question: question)) {
-                    QuestionListItemView(iconName: question.iconName, questionText: question.question)
-                }// NavigationLink
-                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                    Button {
-                        if !question.isFavorite {
-                            question.isFavorite = true
-                            do {
-                                try viewContext.save()
-                                print("💾 Saved isFavorite: \(question.isFavorite) for question: \(question.question) 💾")
-                            } catch {
-                                print("❌ Error saving isFavorite: \(error) ❌")
-                            }
-                        }
-                    } label: {
-                        Image(systemName: "star.fill")
-                    }
-                    .tint(.yellow)
-                }// swipe
-            }// ForEach
-        }// List
-        .listStyle(.plain)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .foregroundStyle(.accent)
-                        .font(.title2)
-                        .bold()
-                }
-            }
+        ZStack {
+            (questions.first?.iconName != nil ?
+             Image(questions.first!.iconName) :
+                Image(systemName: "questionmark.circle"))
+            .resizable()
+            .scaledToFit()
+            .frame(width: 350, height: 350)
+            .opacity(0.2)
+            .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
             
-            // MARK: - Navigation title
-            ToolbarItem(placement: .principal) {
-                HStack {
-                    (questions.first?.iconName != nil ?
-                     Image(questions.first!.iconName) :
-                        Image("unknown-icon"))
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
-                    
+            List {
+                ForEach(questions) { question in
+                    NavigationLink(destination: QuestionDetailView(question: question)) {
+                        QuestionListItemView(iconName: question.iconName, questionText: question.question)
+                    }// NavigationLink
+                    .listRowBackground(Color.clear)
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button {
+                            if !question.isFavorite {
+                                question.isFavorite = true
+                                do {
+                                    try viewContext.save()
+                                    print("💾 Saved isFavorite: \(question.isFavorite) for question: \(question.question) 💾")
+                                } catch {
+                                    print("❌ Error saving isFavorite: \(error) ❌")
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "star.fill")
+                        }
+                        .tint(.yellow)
+                    }// swipe
+                }// ForEach
+            }// List
+            .listStyle(.plain)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .foregroundStyle(.accent)
+                            .font(.title2)
+                            .bold()
+                    }
+                }
+                
+                // MARK: - Navigation title
+                ToolbarItem(placement: .principal) {
                     Text(categoryName)
-                        .font(.caption)
+                        .font(.subheadline)
                         .foregroundStyle(.primary)
-                }// HStack
-            }
-        }// toolbar
-        .enableNavigationGesture()
+                }
+            }// toolbar
+            .enableNavigationGesture()
+        }
     }// Body
 }// View
 

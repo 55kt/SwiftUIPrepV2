@@ -19,11 +19,27 @@ struct FavoritesQuestionsListView: View {
         predicate: NSPredicate(format: "isFavorite == true")
     ) private var questions: FetchedResults<Question>
     
-    private var formattedDate: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        return formatter.string(from: Date())
+    // Function to update isFavorite for a single question
+    private func updateFavoriteStatus(for question: Question, isFavorite: Bool) {
+        question.isFavorite = isFavorite
+        do {
+            try viewContext.save()
+            print(isFavorite ?
+                  "💾 Added to favorites: \(question.question) 💾" :
+                    "🗑️ Removed question from favorites: \(question.question) 🗑️")
+        } catch {
+            print("❌ Error updating isFavorite: \(error) ❌")
+        }
+    }
+    
+    // Function to delete all selected questions
+    private func deleteAllFavorites() {
+        for question in questions {
+            updateFavoriteStatus(for: question, isFavorite: false)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            dismiss()
+        }
     }
     
     // MARK: - Body
@@ -42,24 +58,17 @@ struct FavoritesQuestionsListView: View {
                     }// NavigationLink
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button(role: .destructive) {
-                            question.isFavorite = false
-                            do {
-                                try viewContext.save()
-                                print("🗑️ Removed question from favorites: \(question.question) 🗑️")
-                            } catch {
-                                print("❌ Error removing question from favorites: \(error) ❌")
-                            }
+                            updateFavoriteStatus(for: question, isFavorite: false)
                         } label: {
                             Image(systemName: "trash.fill")
                         }
-                    }
+                    }// swipe
                 }// HStack
                 .listRowBackground(Color.clear)
             }// ForEach
         }// List
         .listStyle(.plain)
         .navigationBarBackButtonHidden(true)
-        .navigationTitle("Favorites")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(role: .destructive) {
@@ -77,15 +86,7 @@ struct FavoritesQuestionsListView: View {
         .alert("Delete all favorites ?", isPresented: $isShowingStopAlert) {
             Button("Cancel", role: .cancel) {}
             Button("Delete", role: .destructive) {
-                do {
-                    try viewContext.save()
-                    print("🗑️ All favorites deleted successfully")
-                } catch {
-                    print("❌ Error deleting all favorites: \(error)")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    dismiss()
-                }
+                deleteAllFavorites()
             }
         } message: {
             Text("Are you sure you want to delete all favorites questions ? All questions will be lost. !")
