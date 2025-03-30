@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B0784FB2D9996010003180C /* ProgressResult+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0784FA2D9996010003180C /* ProgressResult+CoreDataProperties.swift */; };
+		4B0784FC2D9996010003180C /* ProgressResult+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0784F92D9996010003180C /* ProgressResult+CoreDataClass.swift */; };
+		4B0784FD2D9996010003180C /* ProgressResult+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0784F92D9996010003180C /* ProgressResult+CoreDataClass.swift */; };
+		4B0784FE2D9996010003180C /* ProgressResult+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0784FA2D9996010003180C /* ProgressResult+CoreDataProperties.swift */; };
 		4B13AB362D8DC851006631F8 /* CodingUserInfoKey+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13AB352D8DC851006631F8 /* CodingUserInfoKey+Extension.swift */; };
 		4B13AB372D8DC851006631F8 /* CodingUserInfoKey+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13AB352D8DC851006631F8 /* CodingUserInfoKey+Extension.swift */; };
 		4B13AB382D8DC851006631F8 /* CodingUserInfoKey+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13AB352D8DC851006631F8 /* CodingUserInfoKey+Extension.swift */; };
@@ -25,16 +29,10 @@
 		4B1E44582D70F92100AD2B84 /* SwiftUIPrepV2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44522D70F92100AD2B84 /* SwiftUIPrepV2App.swift */; };
 		4B1E44592D70F92100AD2B84 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B1E444C2D70F92100AD2B84 /* Preview Assets.xcassets */; };
 		4B1E445A2D70F92100AD2B84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B1E444E2D70F92100AD2B84 /* Assets.xcassets */; };
-		4B1E44722D70FCDE00AD2B84 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44712D70FCDE00AD2B84 /* ExploreViewModel.swift */; };
-		4B1E44732D70FCDE00AD2B84 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44712D70FCDE00AD2B84 /* ExploreViewModel.swift */; };
 		4B1E44752D70FCE800AD2B84 /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44742D70FCE800AD2B84 /* TestViewModel.swift */; };
 		4B1E44762D70FCE800AD2B84 /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44742D70FCE800AD2B84 /* TestViewModel.swift */; };
-		4B1E44782D70FCF400AD2B84 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44772D70FCF400AD2B84 /* FavoritesViewModel.swift */; };
-		4B1E44792D70FCF400AD2B84 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44772D70FCF400AD2B84 /* FavoritesViewModel.swift */; };
 		4B1E447B2D70FD0100AD2B84 /* ProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E447A2D70FD0100AD2B84 /* ProgressViewModel.swift */; };
 		4B1E447C2D70FD0100AD2B84 /* ProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E447A2D70FD0100AD2B84 /* ProgressViewModel.swift */; };
-		4B1E447E2D70FD0D00AD2B84 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E447D2D70FD0D00AD2B84 /* SettingsViewModel.swift */; };
-		4B1E447F2D70FD0D00AD2B84 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E447D2D70FD0D00AD2B84 /* SettingsViewModel.swift */; };
 		4B1E44812D70FE5B00AD2B84 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44802D70FE5B00AD2B84 /* MainTabView.swift */; };
 		4B1E44822D70FE5B00AD2B84 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44802D70FE5B00AD2B84 /* MainTabView.swift */; };
 		4B1E44832D70FE5B00AD2B84 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44802D70FE5B00AD2B84 /* MainTabView.swift */; };
@@ -177,6 +175,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B0784F92D9996010003180C /* ProgressResult+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressResult+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4B0784FA2D9996010003180C /* ProgressResult+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressResult+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4B13AB352D8DC851006631F8 /* CodingUserInfoKey+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+Extension.swift"; sourceTree = "<group>"; };
 		4B13AB392D8DCA66006631F8 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4B13AB3A2D8DCA66006631F8 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -191,11 +191,8 @@
 		4B1E44502D70F92100AD2B84 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		4B1E44522D70F92100AD2B84 /* SwiftUIPrepV2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIPrepV2App.swift; sourceTree = "<group>"; };
 		4B1E44542D70F92100AD2B84 /* SwiftUIPrepV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftUIPrepV2.xcdatamodel; sourceTree = "<group>"; };
-		4B1E44712D70FCDE00AD2B84 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		4B1E44742D70FCE800AD2B84 /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
-		4B1E44772D70FCF400AD2B84 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		4B1E447A2D70FD0100AD2B84 /* ProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewModel.swift; sourceTree = "<group>"; };
-		4B1E447D2D70FD0D00AD2B84 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4B1E44802D70FE5B00AD2B84 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4B1E44842D70FE7900AD2B84 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
 		4B1E44882D70FE8800AD2B84 /* ResultTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTestView.swift; sourceTree = "<group>"; };
@@ -335,6 +332,8 @@
 				4B13AB3A2D8DCA66006631F8 /* Category+CoreDataProperties.swift */,
 				4B13AB482D9073C5006631F8 /* Question+CoreDataClass.swift */,
 				4B13AB492D9073C5006631F8 /* Question+CoreDataProperties.swift */,
+				4B0784F92D9996010003180C /* ProgressResult+CoreDataClass.swift */,
+				4B0784FA2D9996010003180C /* ProgressResult+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -342,11 +341,8 @@
 		4B1E445C2D70F98200AD2B84 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				4B1E44712D70FCDE00AD2B84 /* ExploreViewModel.swift */,
 				4B1E44742D70FCE800AD2B84 /* TestViewModel.swift */,
-				4B1E44772D70FCF400AD2B84 /* FavoritesViewModel.swift */,
 				4B1E447A2D70FD0100AD2B84 /* ProgressViewModel.swift */,
-				4B1E447D2D70FD0D00AD2B84 /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -679,7 +675,6 @@
 				4B89C9362D7DF54500FB07C6 /* FormRowLink.swift in Sources */,
 				4B5FB6662D7F426A003FF080 /* ProgressItemView.swift in Sources */,
 				4B1E44B42D70FF5D00AD2B84 /* LocalizationHelper.swift in Sources */,
-				4B1E44782D70FCF400AD2B84 /* FavoritesViewModel.swift in Sources */,
 				4B1E44872D70FE7900AD2B84 /* ExploreView.swift in Sources */,
 				4B1E448D2D70FE9300AD2B84 /* TestView.swift in Sources */,
 				4B13AB412D8DCA66006631F8 /* Category+CoreDataClass.swift in Sources */,
@@ -699,6 +694,8 @@
 				4B1E44E72D7102B000AD2B84 /* MainTabViewUITests.swift in Sources */,
 				4B5FB65E2D7E159E003FF080 /* PrivacyAndPolicyView.swift in Sources */,
 				4BC881DD2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift in Sources */,
+				4B0784FD2D9996010003180C /* ProgressResult+CoreDataClass.swift in Sources */,
+				4B0784FE2D9996010003180C /* ProgressResult+CoreDataProperties.swift in Sources */,
 				4B1E44B12D70FF5000AD2B84 /* JSONLoader.swift in Sources */,
 				4B1E44DE2D71027B00AD2B84 /* QuestionModelTests.swift in Sources */,
 				4B1E44752D70FCE800AD2B84 /* TestViewModel.swift in Sources */,
@@ -706,7 +703,6 @@
 				4B1E44952D70FEB600AD2B84 /* FavoritesView.swift in Sources */,
 				4BE09F742D91E1660035FE52 /* CategoriesView.swift in Sources */,
 				4B89C9392D7DF5D900FB07C6 /* FormRowStaticView.swift in Sources */,
-				4B1E44722D70FCDE00AD2B84 /* ExploreViewModel.swift in Sources */,
 				4B1E44812D70FE5B00AD2B84 /* MainTabView.swift in Sources */,
 				4B1E44562D70F92100AD2B84 /* Persistence.swift in Sources */,
 				4B1E447B2D70FD0100AD2B84 /* ProgressViewModel.swift in Sources */,
@@ -723,7 +719,6 @@
 				4B1E44582D70F92100AD2B84 /* SwiftUIPrepV2App.swift in Sources */,
 				4B1E44AD2D70FF3200AD2B84 /* ProgressBar.swift in Sources */,
 				4BD482362D8B59A7004C4DA5 /* PickerWheelView.swift in Sources */,
-				4B1E447F2D70FD0D00AD2B84 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,7 +727,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B1E44762D70FCE800AD2B84 /* TestViewModel.swift in Sources */,
-				4B1E44792D70FCF400AD2B84 /* FavoritesViewModel.swift in Sources */,
 				4B5FB6782D849EF9003FF080 /* ProgressBarLine.swift in Sources */,
 				4B1E45652D77768000AD2B84 /* HeadingView.swift in Sources */,
 				4B5FB67F2D84A3ED003FF080 /* ButtonGradients.swift in Sources */,
@@ -742,6 +736,8 @@
 				4B89C9342D7DF54500FB07C6 /* FormRowLink.swift in Sources */,
 				4B1E447C2D70FD0100AD2B84 /* ProgressViewModel.swift in Sources */,
 				4B13AB382D8DC851006631F8 /* CodingUserInfoKey+Extension.swift in Sources */,
+				4B0784FB2D9996010003180C /* ProgressResult+CoreDataProperties.swift in Sources */,
+				4B0784FC2D9996010003180C /* ProgressResult+CoreDataClass.swift in Sources */,
 				4B1E449D2D70FEE700AD2B84 /* SettingsView.swift in Sources */,
 				4B1E44DC2D71026500AD2B84 /* TestViewModelTests.swift in Sources */,
 				4B1E44972D70FEB600AD2B84 /* FavoritesView.swift in Sources */,
@@ -760,7 +756,6 @@
 				4B5FB6712D81E256003FF080 /* CategoryCard.swift in Sources */,
 				4BE09F732D91E1660035FE52 /* CategoriesView.swift in Sources */,
 				4B1E44B22D70FF5000AD2B84 /* JSONLoader.swift in Sources */,
-				4B1E44732D70FCDE00AD2B84 /* ExploreViewModel.swift in Sources */,
 				4B1E44E32D71029900AD2B84 /* HomeViewUITests.swift in Sources */,
 				4B89C93A2D7DF5D900FB07C6 /* FormRowStaticView.swift in Sources */,
 				4B5FB65A2D7E12FF003FF080 /* CopyrightSection.swift in Sources */,
@@ -773,7 +768,6 @@
 				4B5FB6642D7F426A003FF080 /* ProgressItemView.swift in Sources */,
 				4B1E449B2D70FEC900AD2B84 /* ProgressTabView.swift in Sources */,
 				4B5FB65C2D7E159E003FF080 /* PrivacyAndPolicyView.swift in Sources */,
-				4B1E447E2D70FD0D00AD2B84 /* SettingsViewModel.swift in Sources */,
 				4B1E44B52D70FF5D00AD2B84 /* LocalizationHelper.swift in Sources */,
 				4B5FB6682D7F4DE3003FF080 /* AnsweredQuestionsListView.swift in Sources */,
 				4B1E44822D70FE5B00AD2B84 /* MainTabView.swift in Sources */,

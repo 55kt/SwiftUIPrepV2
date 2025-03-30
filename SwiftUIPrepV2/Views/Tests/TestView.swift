@@ -23,7 +23,7 @@ struct TestView: View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
-                        TimeRemainingHolder()
+                        TimeRemainingHolder(timeDuration: "13:46:12")
                             .padding()
                         
                         VStack(spacing: 20) {

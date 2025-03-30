@@ -7,6 +7,14 @@
         <attribute name="priority" optional="YES" attributeType="String"/>
         <relationship name="questions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Question" inverseName="category" inverseEntity="Question"/>
     </entity>
+    <entity name="ProgressResult" representedClassName="ProgressResult" syncable="YES">
+        <attribute name="correctAnswers" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="duration" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="totalQuestions" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="questions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Question" inverseName="progressResult" inverseEntity="Question"/>
+    </entity>
     <entity name="Question" representedClassName="Question" syncable="YES">
         <attribute name="categoryName" optional="YES" attributeType="String"/>
         <attribute name="correctAnswer" optional="YES" attributeType="String"/>
@@ -18,5 +26,6 @@
         <attribute name="question" optional="YES" attributeType="String"/>
         <attribute name="questionDescription" optional="YES" attributeType="String"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="questions" inverseEntity="Category"/>
+        <relationship name="progressResult" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProgressResult" inverseName="questions" inverseEntity="ProgressResult"/>
     </entity>
 </model>
