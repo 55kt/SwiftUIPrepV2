@@ -9,18 +9,17 @@
 import Foundation
 import CoreData
 
-
 extension QuestionResult {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<QuestionResult> {
         return NSFetchRequest<QuestionResult>(entityName: "QuestionResult")
     }
 
-    @NSManaged public var questionText: String?
     @NSManaged public var isAnsweredCorrectly: Bool
+    @NSManaged public var progressResult: ProgressResult?
+    @NSManaged public var question: Question?
 
-}
-
-extension QuestionResult : Identifiable {
-
+    // Computed property for Identifiable
+    public var id: NSManagedObjectID {
+        return objectID
+    }
 }

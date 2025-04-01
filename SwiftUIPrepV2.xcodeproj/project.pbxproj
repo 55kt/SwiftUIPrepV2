@@ -142,6 +142,10 @@
 		4B89C9382D7DF5D900FB07C6 /* FormRowStaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B89C9372D7DF5D900FB07C6 /* FormRowStaticView.swift */; };
 		4B89C9392D7DF5D900FB07C6 /* FormRowStaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B89C9372D7DF5D900FB07C6 /* FormRowStaticView.swift */; };
 		4B89C93A2D7DF5D900FB07C6 /* FormRowStaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B89C9372D7DF5D900FB07C6 /* FormRowStaticView.swift */; };
+		4B9CCD832D9C528300319A74 /* QuestionResult+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CCD812D9C528300319A74 /* QuestionResult+CoreDataClass.swift */; };
+		4B9CCD842D9C528300319A74 /* QuestionResult+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CCD822D9C528300319A74 /* QuestionResult+CoreDataProperties.swift */; };
+		4B9CCD852D9C528300319A74 /* QuestionResult+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CCD812D9C528300319A74 /* QuestionResult+CoreDataClass.swift */; };
+		4B9CCD862D9C528300319A74 /* QuestionResult+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CCD822D9C528300319A74 /* QuestionResult+CoreDataProperties.swift */; };
 		4BC881DB2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC881DA2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift */; };
 		4BC881DC2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC881DA2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift */; };
 		4BC881DD2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC881DA2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift */; };
@@ -231,6 +235,8 @@
 		4B89C92F2D7DF31000FB07C6 /* SelectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRowView.swift; sourceTree = "<group>"; };
 		4B89C9332D7DF54500FB07C6 /* FormRowLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRowLink.swift; sourceTree = "<group>"; };
 		4B89C9372D7DF5D900FB07C6 /* FormRowStaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRowStaticView.swift; sourceTree = "<group>"; };
+		4B9CCD812D9C528300319A74 /* QuestionResult+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionResult+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4B9CCD822D9C528300319A74 /* QuestionResult+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionResult+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4BC881DA2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesQuestionsListView.swift; sourceTree = "<group>"; };
 		4BD482342D8B59A7004C4DA5 /* PickerWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerWheelView.swift; sourceTree = "<group>"; };
 		4BD4824B2D8DAC4F004C4DA5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -334,6 +340,8 @@
 				4B13AB492D9073C5006631F8 /* Question+CoreDataProperties.swift */,
 				4B0784F92D9996010003180C /* ProgressResult+CoreDataClass.swift */,
 				4B0784FA2D9996010003180C /* ProgressResult+CoreDataProperties.swift */,
+				4B9CCD812D9C528300319A74 /* QuestionResult+CoreDataClass.swift */,
+				4B9CCD822D9C528300319A74 /* QuestionResult+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -712,6 +720,8 @@
 				4B1E44912D70FE9E00AD2B84 /* StartTestView.swift in Sources */,
 				4B5FB66D2D7F70E8003FF080 /* NavigationGestureFix.swift in Sources */,
 				4B1E45642D77768000AD2B84 /* HeadingView.swift in Sources */,
+				4B9CCD852D9C528300319A74 /* QuestionResult+CoreDataClass.swift in Sources */,
+				4B9CCD862D9C528300319A74 /* QuestionResult+CoreDataProperties.swift in Sources */,
 				4B1E45612D7773B900AD2B84 /* QuestionDetailView.swift in Sources */,
 				4B5FB6692D7F4DE3003FF080 /* AnsweredQuestionsListView.swift in Sources */,
 				4B1E44572D70F92100AD2B84 /* SwiftUIPrepV2.xcdatamodeld in Sources */,
@@ -749,6 +759,8 @@
 				4B5FB66C2D7F70E8003FF080 /* NavigationGestureFix.swift in Sources */,
 				4B13AB4A2D9073C5006631F8 /* Question+CoreDataProperties.swift in Sources */,
 				4B13AB4B2D9073C5006631F8 /* Question+CoreDataClass.swift in Sources */,
+				4B9CCD832D9C528300319A74 /* QuestionResult+CoreDataClass.swift in Sources */,
+				4B9CCD842D9C528300319A74 /* QuestionResult+CoreDataProperties.swift in Sources */,
 				4BE09F702D91E0DF0035FE52 /* SearchResultsView.swift in Sources */,
 				4B5FB6752D84882C003FF080 /* TimeRemainingHolder.swift in Sources */,
 				4B1E44E82D7102B000AD2B84 /* MainTabViewUITests.swift in Sources */,

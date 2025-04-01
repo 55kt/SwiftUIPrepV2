@@ -13,7 +13,7 @@ import CoreData
 public class Category: NSManagedObject, Identifiable, Codable {
     // Реализация Codable
     enum CodingKeys: String, CodingKey {
-        case id, name, iconName, priority, questions
+        case id, name, iconName, questions
     }
     
     public required convenience init(from decoder: Decoder) throws {
@@ -29,7 +29,6 @@ public class Category: NSManagedObject, Identifiable, Codable {
         
         self.name = try container.decode(String.self, forKey: .name)
         self.iconName = try container.decode(String.self, forKey: .iconName)
-        self.priority = try container.decode(String.self, forKey: .priority)
         
         if let questionsArray = try container.decodeIfPresent([Question].self, forKey: .questions) {
             self.questions = NSSet(array: questionsArray)
@@ -41,7 +40,6 @@ public class Category: NSManagedObject, Identifiable, Codable {
         try container.encode(id, forKey: .id)
         try container.encode(name, forKey: .name)
         try container.encode(iconName, forKey: .iconName)
-        try container.encode(priority, forKey: .priority)
         try container.encode(questions?.allObjects as? [Question], forKey: .questions)
     }
 }

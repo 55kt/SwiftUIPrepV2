@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24D81" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Category" representedClassName="Category" syncable="YES">
-        <attribute name="iconName" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="priority" optional="YES" attributeType="String"/>
+        <attribute name="iconName" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
         <relationship name="questions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Question" inverseName="category" inverseEntity="Question"/>
     </entity>
     <entity name="ProgressResult" representedClassName="ProgressResult" syncable="YES">
@@ -13,19 +12,22 @@
         <attribute name="duration" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="totalQuestions" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="questions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Question" inverseName="progressResult" inverseEntity="Question"/>
+        <relationship name="questionResults" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="QuestionResult" inverseName="progressResult" inverseEntity="QuestionResult"/>
     </entity>
     <entity name="Question" representedClassName="Question" syncable="YES">
-        <attribute name="categoryName" optional="YES" attributeType="String"/>
-        <attribute name="correctAnswer" optional="YES" attributeType="String"/>
+        <attribute name="correctAnswer" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="incorrectAnswers" optional="YES" attributeType="Transformable" valueTransformerName="StringArrayTransformer" customClassName="[String]"/>
         <attribute name="isAnswered" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="isAnsweredCorrectlyRaw" optional="YES" attributeType="Integer 16" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="question" optional="YES" attributeType="String"/>
         <attribute name="questionDescription" optional="YES" attributeType="String"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="questions" inverseEntity="Category"/>
-        <relationship name="progressResult" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProgressResult" inverseName="questions" inverseEntity="ProgressResult"/>
+        <relationship name="questionResults" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QuestionResult" inverseName="question" inverseEntity="QuestionResult"/>
+    </entity>
+    <entity name="QuestionResult" representedClassName="QuestionResult" syncable="YES">
+        <attribute name="isAnsweredCorrectly" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <relationship name="progressResult" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProgressResult" inverseName="questionResults" inverseEntity="ProgressResult"/>
+        <relationship name="question" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Question" inverseName="questionResults" inverseEntity="Question"/>
     </entity>
 </model>
