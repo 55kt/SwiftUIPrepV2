@@ -27,16 +27,17 @@ struct ExploreView: View {
     ) private var allQuestions: FetchedResults<Question>
     
     private var filteredQuestions: [Question] {
-        if searchText.isEmpty {
-            return []
+            if searchText.isEmpty {
+                return []
+            }
+            let lowercaseSearchText = searchText.lowercased()
+            return allQuestions.filter { question in
+                question.question.lowercased().contains(lowercaseSearchText) ||
+                question.questionDescription.lowercased().contains(lowercaseSearchText) ||
+                question.correctAnswer.lowercased().contains(lowercaseSearchText) ||
+                (question.incorrectAnswers?.contains { $0.lowercased().contains(lowercaseSearchText) } ?? false)
+            }
         }
-        return allQuestions.filter { question in
-            question.question.lowercased().contains(searchText.lowercased()) ||
-            question.correctAnswer.lowercased().contains(searchText.lowercased()) ||
-            (question.incorrectAnswers?.contains { $0.lowercased().contains(searchText.lowercased()) } ?? false) ||
-            question.questionDescription.lowercased().contains(searchText.lowercased())
-        }
-    }
     
     // MARK: - Body
     var body: some View {

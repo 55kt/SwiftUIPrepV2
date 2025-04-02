@@ -31,7 +31,7 @@ struct QuestionDetailView: View {
                         .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        Text(question.categoryName)
+                        Text(question.category?.name ?? "Unknown")
                             .font(.title2)
                             .fontWeight(.heavy)
                     }// VStack

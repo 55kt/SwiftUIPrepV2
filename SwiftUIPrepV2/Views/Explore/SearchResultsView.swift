@@ -24,7 +24,7 @@ struct SearchResultsView: View {
                 ForEach(questions) { question in
                     NavigationLink {
                         QuestionDetailView(question: question)
-                            .navigationTitle(question.categoryName)
+                            .navigationTitle(question.category?.name ?? "Unknown")
                             .navigationBarTitleDisplayMode(.inline)
                     } label: {
                         QuestionListItemView(iconName: question.iconName, questionText: question.question)

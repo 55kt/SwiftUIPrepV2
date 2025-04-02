@@ -11,7 +11,7 @@ import CoreData
 
 @objc(Question)
 public class Question: NSManagedObject, Identifiable, Codable {
-    // Реализация Codable
+    // MARK: - Codable Implementation
     enum CodingKeys: String, CodingKey {
         case id, question, correctAnswer, incorrectAnswers, questionDescription, isFavorite, isAnswered, isAnsweredCorrectly, category
     }
@@ -27,6 +27,7 @@ public class Question: NSManagedObject, Identifiable, Codable {
         let idString = try container.decode(String.self, forKey: .id)
         self.id = UUID(uuidString: idString) ?? UUID()
         
+        self.question = try container.decode(String.self, forKey: .question)
         self.questionDescription = try container.decode(String.self, forKey: .questionDescription)
         self.correctAnswer = try container.decode(String.self, forKey: .correctAnswer)
         self.incorrectAnswers = try container.decode([String].self, forKey: .incorrectAnswers)
@@ -39,6 +40,7 @@ public class Question: NSManagedObject, Identifiable, Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
+        try container.encode(question, forKey: .question)
         try container.encode(questionDescription, forKey: .questionDescription)
         try container.encode(correctAnswer, forKey: .correctAnswer)
         try container.encode(incorrectAnswers, forKey: .incorrectAnswers)
@@ -47,4 +49,4 @@ public class Question: NSManagedObject, Identifiable, Codable {
         try container.encodeIfPresent(isAnsweredCorrectly, forKey: .isAnsweredCorrectly)
         try container.encodeIfPresent(category, forKey: .category)
     }
-}
+} // Question

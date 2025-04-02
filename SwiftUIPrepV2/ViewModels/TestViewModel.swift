@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 class TestViewModel: ObservableObject {
-    // MARK: - Properties
+    // MARK: - Published Properties
     @Published var currentQuestionIndex: Int = 0
     @Published var questions: [Question] = []
     @Published var answers: [String] = []
@@ -21,12 +21,14 @@ class TestViewModel: ObservableObject {
     @Published var isTestFinished: Bool = false
     @Published var progressResult: ProgressResult? // Для хранения результатов теста
     
+    // MARK: - Private Properties
     private var timer: Timer?
     private var numberOfQuestions: Int = 0
     private var allQuestions: FetchedResults<Question>?
     private var viewContext: NSManagedObjectContext?
     
-    // Количество правильных ответов
+    // MARK: - Computed Properties
+    // Number of correct answers
     var correctAnswers: Int {
         questions.filter { $0.isAnswered && ($0.isAnsweredCorrectly ?? false) }.count
     }
@@ -49,23 +51,23 @@ class TestViewModel: ObservableObject {
         selectedAnswer = answer
         showCorrectAnswer = true
         
-        // Сохраняем результат ответа
+        // Save the answer result
         question.isAnswered = true
         question.isAnsweredCorrectly = (answer == question.correctAnswer)
         do {
             try viewContext?.save()
             print("💾 Saved answer for question: \(question.question), correct: \(question.isAnsweredCorrectly ?? false) 💾")
         } catch {
-            print("❌ Error saving answer: \(error) ❌")
+            print("❌ Error saving answer: \(error.localizedDescription) ❌")
         }
         
-        // Переходим к следующему вопросу с задержкой
+        // Move to the next question with a delay
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             if self.currentQuestionIndex < self.questions.count - 1 {
                 self.currentQuestionIndex += 1
                 self.loadQuestion()
             } else {
-                // Тест завершён, сохраняем прогресс
+                // Test is finished, save progress
                 self.saveTestProgress()
                 self.isTestFinished = true
             }
@@ -78,45 +80,52 @@ class TestViewModel: ObservableObject {
         let progressResult = ProgressResult(context: viewContext)
         progressResult.id = UUID()
         progressResult.date = Date()
-        progressResult.totalQuestions = Int32(numberOfQuestions)
+        progressResult.totalQuestions = Int32(questions.count)
         progressResult.correctAnswers = Int32(correctAnswers)
         progressResult.duration = testDuration
         
-        // Добавляем вопросы в отношение
+        // Create QuestionResult for each question and add to progressResult
         for question in questions {
-            progressResult.addToQuestions(question)
+            let questionResult = QuestionResult(context: viewContext)
+            questionResult.isAnsweredCorrectly = question.isAnsweredCorrectly ?? false
+            questionResult.question = question
+            questionResult.progressResult = progressResult
+            progressResult.addToQuestionResults(questionResult)
         }
         
         do {
             try viewContext.save()
-            self.progressResult = progressResult // Сохраняем объект ProgressResult
-            print("💾 Saved test progress: \(correctAnswers)/\(numberOfQuestions), duration: \(testDuration) 💾")
+            print("✅ Saved test progress: \(correctAnswers)/\(questions.count), duration: \(testDuration)")
         } catch {
-            print("❌ Error saving test progress: \(error) ❌")
+            print("❌ Error saving test progress: \(error.localizedDescription)")
         }
+        
+        // Store the progress result
+        self.progressResult = progressResult
     }
     
     // MARK: - Private Methods
     private func startTest() {
         guard let allQuestions = allQuestions else { return }
         
-        // Загружаем все вопросы и перемешиваем их
+        // Load and shuffle questions
         let shuffledQuestions = allQuestions.shuffled()
         
-        // Берём нужное количество вопросов
+        // Take the required number of questions
         questions = Array(shuffledQuestions.prefix(numberOfQuestions))
         
-        // Проверяем, что вопросы есть
+        // Check if there are any questions
         if questions.isEmpty {
             return
         }
         
-        // Инициализируем первый вопрос
+        // Initialize the first question
         loadQuestion()
         
-        // Запускаем таймер
+        // Start the timer
         testStartTime = Date()
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
             let elapsedTime = Int(Date().timeIntervalSince(self.testStartTime))
             let minutes = elapsedTime / 60
             let seconds = elapsedTime % 60
@@ -128,20 +137,20 @@ class TestViewModel: ObservableObject {
         guard currentQuestionIndex < questions.count else { return }
         let question = questions[currentQuestionIndex]
         
-        // Рандомизируем варианты ответа
+        // Randomize answer options
         var answerOptions = [question.correctAnswer]
         if let incorrectAnswers = question.incorrectAnswers {
-            answerOptions.append(contentsOf: incorrectAnswers.prefix(2)) // Берём только 2 неправильных ответа
+            answerOptions.append(contentsOf: incorrectAnswers.prefix(2)) // Take only 2 incorrect answers
         }
         answers = answerOptions.shuffled()
         
-        // Сбрасываем состояние
+        // Reset state
         selectedAnswer = nil
         showCorrectAnswer = false
     }
     
     private func resetTestProgress() {
-        // Сбрасываем прогресс текущего теста
+        // Reset the progress of the current test
         for question in questions {
             question.isAnswered = false
             question.isAnsweredCorrectlyRaw = nil
@@ -150,7 +159,7 @@ class TestViewModel: ObservableObject {
             try viewContext?.save()
             print("🗑️ Test progress reset successfully 🗑️")
         } catch {
-            print("❌ Error resetting test progress: \(error) ❌")
+            print("❌ Error resetting test progress: \(error.localizedDescription) ❌")
         }
     }
 }
