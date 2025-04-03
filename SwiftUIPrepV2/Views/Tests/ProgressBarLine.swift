@@ -21,7 +21,7 @@ struct ProgressBarLine: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Question 12 of 30")
+                Text("Question \(currentQuestion) of \(totalQuestions)")
                     .font(.callout)
                     .fontWeight(.bold)
                     .foregroundStyle(.primary)

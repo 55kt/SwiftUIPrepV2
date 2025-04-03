@@ -12,6 +12,7 @@ struct ResultTestView: View {
     let totalQuestions: Int
     let correctAnswers: Int
     let testDuration: String
+    let progressResult: ProgressResult? // Add progressResult
     @State private var isButtonPulsating = false
     @State private var showQuestionsList = false
     @Environment(\.dismiss) var dismiss
@@ -54,7 +55,7 @@ struct ResultTestView: View {
                                 .shadow(color: Color.black.opacity(0.3), radius: 8, x: 0, y: 4)
                                 .padding(.top, 20)
                             
-                            Text("You earned a \(medalDetails.text) !")
+                            Text("You earned a \(medalDetails.text)!")
                                 .font(.title2)
                                 .bold()
                                 .foregroundStyle(.primary)
@@ -62,7 +63,6 @@ struct ResultTestView: View {
                             
                             // MARK: - Results
                             VStack(spacing: 10) {
-                                
                                 Image(systemName: "medal.fill")
                                     .resizable()
                                     .scaledToFit()
@@ -94,14 +94,15 @@ struct ResultTestView: View {
                                         .padding(.bottom, 40)
                                 }
                                 .navigationDestination(isPresented: $showQuestionsList) {
-                                    AnsweredQuestionsListView()
+                                    AnsweredQuestionsListView(progressResult: progressResult)
                                         .navigationBarBackButtonHidden(true)
-                                }// navigationDestination
+                                } // navigationDestination
                                 
                                 // MARK: - Try Again Button
-                                NavigationLink(destination: StartTestView()
-                                    .navigationBarBackButtonHidden(true)
-                                ) {
+                                NavigationLink {
+                                    StartTestView()
+                                        .navigationBarBackButtonHidden(true)
+                                } label: {
                                     Circle()
                                         .foregroundStyle(.accent)
                                         .frame(height: 150)
@@ -116,28 +117,29 @@ struct ResultTestView: View {
                                         .shadow(color: Color.gray.opacity(0.6), radius: 6, x: 0, y: 4)
                                         .onAppear {
                                             isButtonPulsating = true
-                                        }// onAppear
-                                }// NavigationLink
-                            }// VStack
+                                        } // onAppear
+                                } // NavigationLink
+                            } // VStack
                             .padding()
-                        }// VStack
+                        } // VStack
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                         .padding()
-                    }// GeometryReader
+                    } // GeometryReader
                     .navigationTitle("Results")
                     .navigationBarTitleDisplayMode(.inline)
-                }
-            }// ScrollView
-        }// NavigationStack
-    }// Body
-}// View
+                } // ScrollView
+            } // ZStack
+        } // NavigationStack
+    } // body
+} // View
 
 // MARK: - Preview
 #Preview {
     ResultTestView(
         totalQuestions: 10,
         correctAnswers: 8,
-        testDuration: "Not implemented yet"
+        testDuration: "00:45",
+        progressResult: nil
     )
-    .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+    .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

@@ -19,7 +19,7 @@ class TestViewModel: ObservableObject {
     @Published var testDuration: String = "00:00"
     @Published var isShowingStopAlert: Bool = false
     @Published var isTestFinished: Bool = false
-    @Published var progressResult: ProgressResult? // Для хранения результатов теста
+    @Published var progressResult: ProgressResult?
     
     // MARK: - Private Properties
     private var timer: Timer?
@@ -28,7 +28,6 @@ class TestViewModel: ObservableObject {
     private var viewContext: NSManagedObjectContext?
     
     // MARK: - Computed Properties
-    // Number of correct answers
     var correctAnswers: Int {
         questions.filter { $0.isAnswered && ($0.isAnsweredCorrectly ?? false) }.count
     }
@@ -38,6 +37,7 @@ class TestViewModel: ObservableObject {
         self.numberOfQuestions = numberOfQuestions
         self.allQuestions = allQuestions
         self.viewContext = viewContext
+        reset() // Reset state before starting a new test
         startTest()
     }
     
@@ -70,6 +70,7 @@ class TestViewModel: ObservableObject {
                 // Test is finished, save progress
                 self.saveTestProgress()
                 self.isTestFinished = true
+                print("🏁 Test finished, isTestFinished set to true")
             }
         }
     }
@@ -91,6 +92,7 @@ class TestViewModel: ObservableObject {
             questionResult.question = question
             questionResult.progressResult = progressResult
             progressResult.addToQuestionResults(questionResult)
+            print("🔍 Added QuestionResult for question: \(question.question)")
         }
         
         do {
@@ -100,22 +102,51 @@ class TestViewModel: ObservableObject {
             print("❌ Error saving test progress: \(error.localizedDescription)")
         }
         
-        // Store the progress result
         self.progressResult = progressResult
     }
     
     // MARK: - Private Methods
+    private func reset() {
+        // Reset all state for a new test
+        currentQuestionIndex = 0
+        questions = []
+        answers = []
+        selectedAnswer = nil
+        showCorrectAnswer = false
+        testStartTime = Date()
+        testDuration = "00:00"
+        isTestFinished = false
+        progressResult = nil
+        timer?.invalidate()
+        timer = nil
+    }
+    
     private func startTest() {
-        guard let allQuestions = allQuestions else { return }
+        guard let allQuestions = allQuestions, let viewContext = viewContext else { return }
         
         // Load and shuffle questions
         let shuffledQuestions = allQuestions.shuffled()
         
-        // Take the required number of questions
-        questions = Array(shuffledQuestions.prefix(numberOfQuestions))
+        // Take the required number of questions and create copies
+        let selectedQuestions = Array(shuffledQuestions.prefix(numberOfQuestions))
+        questions = selectedQuestions.map { originalQuestion in
+            let newQuestion = Question(context: viewContext)
+            newQuestion.id = UUID()
+            newQuestion.question = originalQuestion.question
+            newQuestion.correctAnswer = originalQuestion.correctAnswer
+            newQuestion.incorrectAnswers = originalQuestion.incorrectAnswers
+            newQuestion.questionDescription = originalQuestion.questionDescription
+            newQuestion.isFavorite = false
+            newQuestion.isAnswered = false
+            newQuestion.isAnsweredCorrectlyRaw = nil
+            newQuestion.categoryIconName = originalQuestion.category?.iconName // Copy iconName
+            // Do not set category to avoid adding to the original category
+            return newQuestion
+        }
         
         // Check if there are any questions
         if questions.isEmpty {
+            print("⚠️ No questions available to start the test")
             return
         }
         
@@ -139,14 +170,22 @@ class TestViewModel: ObservableObject {
         
         // Randomize answer options
         var answerOptions = [question.correctAnswer]
-        if let incorrectAnswers = question.incorrectAnswers {
-            answerOptions.append(contentsOf: incorrectAnswers.prefix(2)) // Take only 2 incorrect answers
+        if let incorrectAnswers = question.incorrectAnswers, !incorrectAnswers.isEmpty {
+            // Take up to 2 incorrect answers, shuffle them to ensure variety
+            let shuffledIncorrect = incorrectAnswers.shuffled()
+            answerOptions.append(contentsOf: shuffledIncorrect.prefix(2))
+        } else {
+            // Fallback if no incorrect answers are available
+            answerOptions.append("Incorrect Option 1")
+            answerOptions.append("Incorrect Option 2")
         }
         answers = answerOptions.shuffled()
         
         // Reset state
         selectedAnswer = nil
         showCorrectAnswer = false
+        
+        print("🔍 Loaded question: \(question.question), answers: \(answers)")
     }
     
     private func resetTestProgress() {

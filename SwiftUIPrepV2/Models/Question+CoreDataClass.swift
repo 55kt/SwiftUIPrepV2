@@ -13,7 +13,7 @@ import CoreData
 public class Question: NSManagedObject, Identifiable, Codable {
     // MARK: - Codable Implementation
     enum CodingKeys: String, CodingKey {
-        case id, question, correctAnswer, incorrectAnswers, questionDescription, isFavorite, isAnswered, isAnsweredCorrectly, category
+        case id, question, correctAnswer, incorrectAnswers, questionDescription, isFavorite, isAnswered, isAnsweredCorrectly, category, categoryIconName
     }
     
     public required convenience init(from decoder: Decoder) throws {
@@ -35,6 +35,7 @@ public class Question: NSManagedObject, Identifiable, Codable {
         self.isAnswered = try container.decode(Bool.self, forKey: .isAnswered)
         self.isAnsweredCorrectly = try container.decodeIfPresent(Bool.self, forKey: .isAnsweredCorrectly)
         self.category = try container.decodeIfPresent(Category.self, forKey: .category)
+        self.categoryIconName = try container.decodeIfPresent(String.self, forKey: .categoryIconName)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -48,5 +49,6 @@ public class Question: NSManagedObject, Identifiable, Codable {
         try container.encode(isAnswered, forKey: .isAnswered)
         try container.encodeIfPresent(isAnsweredCorrectly, forKey: .isAnsweredCorrectly)
         try container.encodeIfPresent(category, forKey: .category)
+        try container.encodeIfPresent(categoryIconName, forKey: .categoryIconName)
     }
 } // Question

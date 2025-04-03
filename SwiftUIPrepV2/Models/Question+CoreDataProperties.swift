@@ -24,6 +24,7 @@ extension Question {
     @NSManaged public var questionDescription: String
     @NSManaged public var category: Category?
     @NSManaged public var questionResults: NSSet?
+    @NSManaged public var categoryIconName: String?
 
     // MARK: - Computed Properties
     public var isAnsweredCorrectly: Bool? {
@@ -32,8 +33,8 @@ extension Question {
     }
 
     public var iconName: String {
-        return category?.iconName ?? "default-icon"
-    }
+            return categoryIconName ?? category?.iconName ?? "default-icon"
+        }
 
     // MARK: - Generated Accessors for questionResults
     @objc(addQuestionResultsObject:)

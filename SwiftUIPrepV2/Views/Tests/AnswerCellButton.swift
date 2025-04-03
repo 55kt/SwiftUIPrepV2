@@ -26,10 +26,11 @@ struct AnswerCellButton: View {
     var body: some View {
         Button {
             withAnimation(.easeInOut) {
+                action()
                 isTapped = true
             }
         } label: {
-            Text("Variable in Swift is a data type that can hold any value of a certain type.")
+            Text(answerText)
                 .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)

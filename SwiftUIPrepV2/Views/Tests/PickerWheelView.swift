@@ -10,7 +10,7 @@ import SwiftUI
 struct PickerWheelView: View {
     // MARK: - Properties
     @Binding var numberOfQuestions: Int
-    let questionOptions = Array(1...150)
+    let questionOptions = Array(10...150)
     
     var body: some View {
         ZStack {

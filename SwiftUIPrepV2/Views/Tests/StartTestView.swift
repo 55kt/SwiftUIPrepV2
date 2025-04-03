@@ -9,8 +9,8 @@ import SwiftUI
 
 struct StartTestView: View {
     // MARK: - Properties
-    @State private var numberOfQuestions = 5
-    let questionOptions = Array(1...150)
+    @State private var numberOfQuestions = 10
+    let questionOptions = Array(10...150)
     @State private var isButtonPulsating = false
     @Environment(\.dismiss) var dismiss
     
@@ -34,7 +34,7 @@ struct StartTestView: View {
                         PickerWheelView(numberOfQuestions: $numberOfQuestions)
                         
                         // MARK: - Start test button
-                        NavigationLink(destination: TestView()
+                        NavigationLink(destination: TestView(numberOfQuestions: numberOfQuestions)
                             .navigationBarBackButtonHidden(true)
                         ) {
                             Circle()

@@ -12,17 +12,24 @@ struct AnsweredQuestionsListView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) private var viewContext
     
-    @FetchRequest(
-        entity: Question.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Question.question, ascending: true)],
-        predicate: NSPredicate(format: "isAnswered == true")
-    ) private var questions: FetchedResults<Question>
+    let progressResult: ProgressResult?
+    
+    private var questions: [Question] {
+            guard let progressResult = progressResult,
+                  let questionResults = progressResult.questionResults as? Set<QuestionResult> else {
+                print("⚠️ progressResult or questionResults is nil")
+                return []
+            }
+            let questions = questionResults.compactMap { $0.question }.sorted { $0.question < $1.question }
+            print("🔍 Loaded \(questions.count) questions for progressResult with date: \(progressResult.date?.description ?? "unknown")")
+            return questions
+        }
     
     private var formattedDate: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
-        return formatter.string(from: Date())
+        return formatter.string(from: progressResult?.date ?? Date())
     }
     
     // MARK: - Body
@@ -35,13 +42,13 @@ struct AnsweredQuestionsListView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 40, height: 40)
-                        .foregroundStyle(question.isAnsweredCorrectly ?? false ? .green : .red)
+                        .foregroundStyle(isCorrect ? .green : .red)
                     
-                    NavigationLink(destination: QuestionDetailView(question: question)) {
+                    NavigationLink {
+                        QuestionDetailView(question: question)
+                    } label: {
                         QuestionListItemView(iconName: question.iconName, questionText: question.question)
-                        
-                        
-                    }// NavigationLink
+                    } // NavigationLink
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {
                             question.isFavorite.toggle()
@@ -55,11 +62,11 @@ struct AnsweredQuestionsListView: View {
                             Image(systemName: question.isFavorite ? "star.slash.fill" : "star.fill")
                         }
                         .tint(.yellow)
-                    }// swipe
-                }// HStack
+                    } // swipe
+                } // HStack
                 .listRowBackground(Color.clear)
-            }// ForEach
-        }// List
+            } // ForEach
+        } // List
         .listStyle(.plain)
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
@@ -83,16 +90,17 @@ struct AnsweredQuestionsListView: View {
                     Text(formattedDate)
                         .font(.caption2)
                         .foregroundStyle(.gray)
-                }// VStack
+                } // VStack
             }
-        }// toolbar
+        } // toolbar
         .enableNavigationGesture()
-    }// Body
-}// View
+    } // body
+} // View
 
+// MARK: - Preview
 #Preview {
     NavigationStack {
-        AnsweredQuestionsListView()
+        AnsweredQuestionsListView(progressResult: nil)
             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
     }
 }

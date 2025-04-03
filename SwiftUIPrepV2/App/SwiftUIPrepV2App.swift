@@ -14,11 +14,9 @@ struct SwiftUIPrepV2App: App {
     @AppStorage("AppTheme") private var isDarkMode: Bool = false
     
     init() {
-            ValueTransformer.setValueTransformer(StringArrayTransformer(), forName: NSValueTransformerName(rawValue: "StringArrayTransformer"))
-            
-            LocalizationHelper.shared.loadCategoriesAndQuestions(into: persistenceController.container.viewContext)
-        }
-
+        ValueTransformer.setValueTransformer(StringArrayTransformer(), forName: NSValueTransformerName(rawValue: "StringArrayTransformer"))
+    }
+    
     var body: some Scene {
         WindowGroup {
             MainTabView()
