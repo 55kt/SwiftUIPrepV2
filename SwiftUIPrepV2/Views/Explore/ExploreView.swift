@@ -23,21 +23,22 @@ struct ExploreView: View {
     
     @FetchRequest(
         entity: Question.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Question.question, ascending: true)]
+        sortDescriptors: [NSSortDescriptor(keyPath: \Question.questionDescription, ascending: true)],
+        predicate: NSPredicate(format: "category != nil")
     ) private var allQuestions: FetchedResults<Question>
     
     private var filteredQuestions: [Question] {
-            if searchText.isEmpty {
-                return []
-            }
-            let lowercaseSearchText = searchText.lowercased()
-            return allQuestions.filter { question in
-                question.question.lowercased().contains(lowercaseSearchText) ||
-                question.questionDescription.lowercased().contains(lowercaseSearchText) ||
-                question.correctAnswer.lowercased().contains(lowercaseSearchText) ||
-                (question.incorrectAnswers?.contains { $0.lowercased().contains(lowercaseSearchText) } ?? false)
-            }
+        if searchText.isEmpty {
+            return []
         }
+        let lowercaseSearchText = searchText.lowercased()
+        return allQuestions.filter { question in
+            question.question.lowercased().contains(lowercaseSearchText) ||
+            question.questionDescription.lowercased().contains(lowercaseSearchText) ||
+            question.correctAnswer.lowercased().contains(lowercaseSearchText) ||
+            (question.incorrectAnswers?.contains { $0.lowercased().contains(lowercaseSearchText) } ?? false)
+        }
+    }
     
     // MARK: - Body
     var body: some View {
@@ -59,8 +60,8 @@ struct ExploreView: View {
                         )
                     } else {
                         SearchResultsView(questions: filteredQuestions)
-                    }// if - else
-                }// ScrollView
+                    }
+                }
                 .animation(.easeInOut(duration: 0.3), value: searchText.isEmpty)
                 .navigationTitle("Explore")
                 .navigationDestination(isPresented: Binding(
@@ -75,20 +76,13 @@ struct ExploreView: View {
                         .navigationTitle(category.name)
                         .navigationBarTitleDisplayMode(.inline)
                     }
-                }// navigationDestination
-                .onAppear {
-                    print("🖥️ ExploreView appeared, loaded \(categories.count) categories")
-                    for category in categories {
-                        let questionsCount = (category.questions?.allObjects as? [Question])?.count ?? 0
-                        print("📋 Category: \(category.name), icon: \(category.iconName), questions: \(questionsCount)")
-                    }
-                }// onAppear
-            }// ZStack
-        }// NavigationStack
+                }
+            }
+        }
         .searchable(text: $searchText, prompt: "Search for some question")
         .foregroundStyle(.primary)
-    }// body
-}// View
+    }
+}
 
 // MARK: - Preview
 #Preview {

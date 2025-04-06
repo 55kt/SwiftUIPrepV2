@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AnsweredQuestionsListView: View {
     // MARK: - Properties
@@ -15,15 +16,12 @@ struct AnsweredQuestionsListView: View {
     let progressResult: ProgressResult?
     
     private var questions: [Question] {
-            guard let progressResult = progressResult,
-                  let questionResults = progressResult.questionResults as? Set<QuestionResult> else {
-                print("⚠️ progressResult or questionResults is nil")
-                return []
-            }
-            let questions = questionResults.compactMap { $0.question }.sorted { $0.question < $1.question }
-            print("🔍 Loaded \(questions.count) questions for progressResult with date: \(progressResult.date?.description ?? "unknown")")
-            return questions
+        guard let progressResult = progressResult,
+              let questionResults = progressResult.questionResults as? Set<QuestionResult> else {
+            return []
         }
+        return questionResults.compactMap { $0.question }.sorted { $0.question < $1.question }
+    }
     
     private var formattedDate: String {
         let formatter = DateFormatter()
@@ -47,14 +45,15 @@ struct AnsweredQuestionsListView: View {
                     NavigationLink {
                         QuestionDetailView(question: question)
                     } label: {
-                        QuestionListItemView(iconName: question.iconName, questionText: question.question)
-                    } // NavigationLink
+                        // Use iconName directly, with a fallback to "unknown-icon"
+                        let iconName = question.iconName?.isEmpty == false ? question.iconName! : "unknown-icon"
+                        QuestionListItemView(iconName: iconName, questionText: question.question)
+                    }
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {
                             question.isFavorite.toggle()
                             do {
                                 try viewContext.save()
-                                print("💾 Saved isFavorite: \(question.isFavorite) for question: \(question.question) 💾")
                             } catch {
                                 print("❌ Error saving isFavorite: \(error)")
                             }
@@ -62,17 +61,16 @@ struct AnsweredQuestionsListView: View {
                             Image(systemName: question.isFavorite ? "star.slash.fill" : "star.fill")
                         }
                         .tint(.yellow)
-                    } // swipe
-                } // HStack
+                    }
+                }
                 .listRowBackground(Color.clear)
-            } // ForEach
-        } // List
+            }
+        }
         .listStyle(.plain)
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .background(MotionAnimationView())
         .toolbar {
-            // MARK: - Navigation title
             ToolbarItem(placement: .topBarLeading) {
                 Button {
                     dismiss()
@@ -90,12 +88,12 @@ struct AnsweredQuestionsListView: View {
                     Text(formattedDate)
                         .font(.caption2)
                         .foregroundStyle(.gray)
-                } // VStack
+                }
             }
-        } // toolbar
+        }
         .enableNavigationGesture()
-    } // body
-} // View
+    }
+}
 
 // MARK: - Preview
 #Preview {

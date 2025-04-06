@@ -11,11 +11,17 @@ import CoreData
 
 @objc(QuestionResult)
 public class QuestionResult: NSManagedObject, Identifiable, Codable {
-    // Реализация Codable
+    // MARK: - Codable Implementation
+    // Codable is implemented for potential export/import of QuestionResult data
+    // Note: id is not decoded as it is generated programmatically
+    // MARK: Coding Keys
+    // Defines the keys for decoding/encoding QuestionResult from/to JSON
     enum CodingKeys: String, CodingKey {
         case isAnsweredCorrectly, progressResult, question
     }
     
+    // MARK: Decoding
+    // Initializes a QuestionResult object from JSON data
     public required convenience init(from decoder: Decoder) throws {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             fatalError("Failed to decode QuestionResult: Missing managed object context")
@@ -29,6 +35,8 @@ public class QuestionResult: NSManagedObject, Identifiable, Codable {
         self.question = try container.decodeIfPresent(Question.self, forKey: .question)
     }
     
+    // MARK: Encoding
+    // Encodes the QuestionResult object into JSON data
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(isAnsweredCorrectly, forKey: .isAnsweredCorrectly)

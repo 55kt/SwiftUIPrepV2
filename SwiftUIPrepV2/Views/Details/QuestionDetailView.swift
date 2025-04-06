@@ -24,7 +24,7 @@ struct QuestionDetailView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 20) {
                 HStack {
-                    Image(question.iconName)
+                    Image(question.iconName ?? "unknown-icon")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 80, height: 80)

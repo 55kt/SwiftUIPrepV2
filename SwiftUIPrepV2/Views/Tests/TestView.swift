@@ -16,9 +16,13 @@ struct TestView: View {
     @State private var shouldNavigateToResults: Bool = false // State to control navigation
     
     @FetchRequest(
-        entity: Question.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Question.question, ascending: true)]
-    ) private var allQuestions: FetchedResults<Question>
+            entity: Question.entity(),
+            sortDescriptors: [NSSortDescriptor(keyPath: \Question.question, ascending: true)],
+            predicate: NSCompoundPredicate(andPredicateWithSubpredicates: [
+                NSPredicate(format: "category != nil"),
+                NSPredicate(format: "isAnswered == false")
+            ])
+        ) private var allQuestions: FetchedResults<Question>
     
     // MARK: - Initialization
     init(numberOfQuestions: Int) {

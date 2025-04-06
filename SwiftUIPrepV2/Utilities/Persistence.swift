@@ -32,16 +32,19 @@ struct PersistenceController {
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
         
-        // Load questions from JSON only if the database is empty
         let viewContext = container.viewContext
         let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
         do {
             let categories = try viewContext.fetch(fetchRequest)
             if categories.isEmpty {
-                print("📀🚀 Starting to load categories and questions into Core Data 🚀📀")
+                clearCategoriesAndQuestions(from: viewContext)
                 loadCategoriesAndQuestions(into: viewContext)
-            } else {
-                print("📂 Categories already exist in Core Data, skipping JSON load")
+            }
+            // Debug: Check iconName for all questions
+            let allQuestionsFetchRequest: NSFetchRequest<Question> = Question.fetchRequest()
+            let allQuestions = try viewContext.fetch(allQuestionsFetchRequest)
+            for question in allQuestions {
+                print("🔍 Question: \(question.question), iconName: \(question.iconName ?? "nil")")
             }
         } catch {
             print("❌ Error checking categories: \(error)")
@@ -49,14 +52,28 @@ struct PersistenceController {
     }
     
     // MARK: - Private Methods
+    private func clearCategoriesAndQuestions(from context: NSManagedObjectContext) {
+        let entities = ["Category", "Question", "QuestionResult"]
+        for entity in entities {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            do {
+                try context.execute(deleteRequest)
+            } catch {
+                print("❌ Error clearing \(entity) entities: \(error)")
+            }
+        }
+        do {
+            try context.save()
+        } catch {
+            print("❌ Error saving context after clearing data: \(error)")
+        }
+    }
+    
     func loadCategoriesAndQuestions(into context: NSManagedObjectContext) {
-        // Determine the language for the JSON file
         let languageCode = Locale.preferredLanguages.first ?? "en-US"
-        print("🌐 Preferred language: \(languageCode) 🌐")
         let jsonFileName = languageCode.hasPrefix("ru") ? "questions_ru" : "questions_en"
-        print("📂 Attempting to load JSON file: \(jsonFileName).json 📂")
         
-        // Load JSON data
         guard let url = Bundle.main.url(forResource: jsonFileName, withExtension: "json") else {
             print("❌ Failed to locate \(jsonFileName).json in bundle")
             return
@@ -66,13 +83,15 @@ struct PersistenceController {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
             decoder.userInfo[.managedObjectContext] = context
-            let categories = try decoder.decode([Category].self, from: data)
-            print("✅🥳🎉 Successfully loaded JSON data from \(jsonFileName).json 🥳🎉✅")
-            
+            let container = try decoder.decode(CategoriesContainer.self, from: data)
             try context.save()
-            print("👍🏻🎉 Successfully loaded \(categories.count) categories into Core Data 👌🏾")
         } catch {
             print("❌ Error loading JSON data: \(error)")
         }
     }
+}
+
+// MARK: - Helper Struct for Decoding JSON
+struct CategoriesContainer: Codable {
+    let categories: [Category]
 }

@@ -27,7 +27,7 @@ struct SearchResultsView: View {
                             .navigationTitle(question.category?.name ?? "Unknown")
                             .navigationBarTitleDisplayMode(.inline)
                     } label: {
-                        QuestionListItemView(iconName: question.iconName, questionText: question.question)
+                        QuestionListItemView(iconName: question.iconName ?? "unknown-icon", questionText: question.question)
                             .padding(.horizontal)
                             .padding(.vertical, 5)
                     }// NavigationLink

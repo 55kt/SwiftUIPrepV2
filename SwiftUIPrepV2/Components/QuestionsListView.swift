@@ -17,20 +17,19 @@ struct QuestionsListView: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            (questions.first?.iconName != nil ?
-             Image(questions.first!.iconName) :
-                Image(systemName: "questionmark.circle"))
-            .resizable()
-            .scaledToFit()
-            .frame(width: 350, height: 350)
-            .opacity(0.2)
-            .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
+            Image(questions.first?.iconName ?? "questionmark.circle")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 350, height: 350)
+                .opacity(0.2)
+                .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
             
             List {
                 ForEach(questions) { question in
                     NavigationLink(destination: QuestionDetailView(question: question)) {
-                        QuestionListItemView(iconName: question.iconName, questionText: question.question)
-                    }// NavigationLink
+                        let iconName = question.iconName ?? "unknown-icon"
+                        QuestionListItemView(iconName: iconName, questionText: question.question)
+                    }
                     .listRowBackground(Color.clear)
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {

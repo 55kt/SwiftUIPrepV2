@@ -15,8 +15,8 @@
         <relationship name="questionResults" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="QuestionResult" inverseName="progressResult" inverseEntity="QuestionResult"/>
     </entity>
     <entity name="Question" representedClassName="Question" syncable="YES">
-        <attribute name="categoryIconName" optional="YES" attributeType="String"/>
         <attribute name="correctAnswer" attributeType="String"/>
+        <attribute name="iconName" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="incorrectAnswers" optional="YES" attributeType="Transformable" valueTransformerName="StringArrayTransformer" customClassName="[String]"/>
         <attribute name="isAnswered" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>

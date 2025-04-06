@@ -53,9 +53,13 @@ struct FavoritesQuestionsListView: View {
                         .frame(width: 30, height: 30)
                         .foregroundColor(.yellow)
                     
-                    NavigationLink(destination: QuestionDetailView(question: question)) {
-                        QuestionListItemView(iconName: question.iconName, questionText: question.question)
-                    }// NavigationLink
+                    NavigationLink(
+                        destination: QuestionDetailView(question: question),
+                        label: {
+                            let iconName = question.iconName ?? "unknown-icon"
+                            QuestionListItemView(iconName: iconName, questionText: question.question)
+                        }
+                    )
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button(role: .destructive) {
                             updateFavoriteStatus(for: question, isFavorite: false)
