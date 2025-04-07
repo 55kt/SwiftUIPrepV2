@@ -31,8 +31,6 @@
 		4B1E445A2D70F92100AD2B84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B1E444E2D70F92100AD2B84 /* Assets.xcassets */; };
 		4B1E44752D70FCE800AD2B84 /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44742D70FCE800AD2B84 /* TestViewModel.swift */; };
 		4B1E44762D70FCE800AD2B84 /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44742D70FCE800AD2B84 /* TestViewModel.swift */; };
-		4B1E447B2D70FD0100AD2B84 /* ProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E447A2D70FD0100AD2B84 /* ProgressViewModel.swift */; };
-		4B1E447C2D70FD0100AD2B84 /* ProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E447A2D70FD0100AD2B84 /* ProgressViewModel.swift */; };
 		4B1E44812D70FE5B00AD2B84 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44802D70FE5B00AD2B84 /* MainTabView.swift */; };
 		4B1E44822D70FE5B00AD2B84 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44802D70FE5B00AD2B84 /* MainTabView.swift */; };
 		4B1E44832D70FE5B00AD2B84 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44802D70FE5B00AD2B84 /* MainTabView.swift */; };
@@ -193,7 +191,6 @@
 		4B1E44522D70F92100AD2B84 /* SwiftUIPrepV2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIPrepV2App.swift; sourceTree = "<group>"; };
 		4B1E44542D70F92100AD2B84 /* SwiftUIPrepV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftUIPrepV2.xcdatamodel; sourceTree = "<group>"; };
 		4B1E44742D70FCE800AD2B84 /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
-		4B1E447A2D70FD0100AD2B84 /* ProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewModel.swift; sourceTree = "<group>"; };
 		4B1E44802D70FE5B00AD2B84 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4B1E44842D70FE7900AD2B84 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
 		4B1E44882D70FE8800AD2B84 /* ResultTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTestView.swift; sourceTree = "<group>"; };
@@ -346,7 +343,6 @@
 			isa = PBXGroup;
 			children = (
 				4B1E44742D70FCE800AD2B84 /* TestViewModel.swift */,
-				4B1E447A2D70FD0100AD2B84 /* ProgressViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -708,7 +704,6 @@
 				4B89C9392D7DF5D900FB07C6 /* FormRowStaticView.swift in Sources */,
 				4B1E44812D70FE5B00AD2B84 /* MainTabView.swift in Sources */,
 				4B1E44562D70F92100AD2B84 /* Persistence.swift in Sources */,
-				4B1E447B2D70FD0100AD2B84 /* ProgressViewModel.swift in Sources */,
 				4B5FB6582D7E12FF003FF080 /* CopyrightSection.swift in Sources */,
 				4B1E44E22D71029900AD2B84 /* HomeViewUITests.swift in Sources */,
 				4B13AB372D8DC851006631F8 /* CodingUserInfoKey+Extension.swift in Sources */,
@@ -738,7 +733,6 @@
 				4B5FB67C2D84A2AC003FF080 /* AnswerCellButton.swift in Sources */,
 				4B5FB6612D7F4134003FF080 /* MotionAnimationView.swift in Sources */,
 				4B89C9342D7DF54500FB07C6 /* FormRowLink.swift in Sources */,
-				4B1E447C2D70FD0100AD2B84 /* ProgressViewModel.swift in Sources */,
 				4B13AB382D8DC851006631F8 /* CodingUserInfoKey+Extension.swift in Sources */,
 				4B0784FB2D9996010003180C /* ProgressResult+CoreDataProperties.swift in Sources */,
 				4B0784FC2D9996010003180C /* ProgressResult+CoreDataClass.swift in Sources */,

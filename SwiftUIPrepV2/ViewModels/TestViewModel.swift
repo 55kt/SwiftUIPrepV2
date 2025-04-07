@@ -19,17 +19,37 @@ class TestViewModel: ObservableObject {
     @Published var testDuration: String = "00:00"
     @Published var isShowingStopAlert: Bool = false
     @Published var isTestFinished: Bool = false
+    @Published var progressResult: ProgressResult?
     
     // MARK: - Private Properties
     private var timer: Timer?
     private var numberOfQuestions: Int = 0
     private var allQuestions: FetchedResults<Question>?
     private var viewContext: NSManagedObjectContext?
-    private let progressViewModel: ProgressViewModel
     
-    // MARK: - Initialization
-    init(progressViewModel: ProgressViewModel = ProgressViewModel()) {
-        self.progressViewModel = progressViewModel
+    // MARK: - Computed Properties
+    var correctAnswers: Int {
+        guard let progressResult = progressResult,
+              let questionResults = progressResult.questionResults as? Set<QuestionResult> else {
+            return 0
+        }
+        return questionResults.filter { $0.isAnsweredCorrectly }.count
+    }
+    
+    var scorePercentage: Double {
+        guard progressResult?.totalQuestions ?? 0 > 0 else { return 0.0 }
+        return (Double(correctAnswers) / Double(progressResult?.totalQuestions ?? 1)) * 100
+    }
+    
+    var medalDetails: (color: Color, text: String) {
+        switch scorePercentage {
+        case 80...100:
+            return (.yellow, "Gold Medal")
+        case 50..<80:
+            return (.gray, "Silver Medal")
+        default:
+            return (.brown, "Bronze Medal")
+        }
     }
     
     // MARK: - Public Methods
@@ -37,7 +57,6 @@ class TestViewModel: ObservableObject {
         self.numberOfQuestions = numberOfQuestions
         self.allQuestions = allQuestions
         self.viewContext = viewContext
-        progressViewModel.setup(viewContext: viewContext)
         reset()
         startTest()
     }
@@ -66,8 +85,65 @@ class TestViewModel: ObservableObject {
                 self.loadQuestion()
             }
         } else {
-            progressViewModel.saveTestProgress(questions: questions, duration: testDuration)
-            isTestFinished = true
+            saveTestProgress()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.isTestFinished = true
+            }
+        }
+    }
+    
+    func saveTestProgress() {
+        guard let viewContext = viewContext else { return }
+        
+        let progressResult = ProgressResult(context: viewContext)
+        progressResult.id = UUID()
+        progressResult.date = Date()
+        progressResult.totalQuestions = Int32(questions.count)
+        progressResult.correctAnswers = Int32(questions.filter { $0.isAnswered && ($0.isAnsweredCorrectly ?? false) }.count)
+        progressResult.duration = testDuration
+        
+        for question in questions {
+            let questionResult = QuestionResult(context: viewContext)
+            questionResult.isAnsweredCorrectly = question.isAnsweredCorrectly ?? false
+            questionResult.question = question
+            questionResult.progressResult = progressResult
+            progressResult.addToQuestionResults(questionResult)
+        }
+        
+        do {
+            try viewContext.save()
+        } catch {
+            print("❌ Error saving test progress: \(error.localizedDescription)") // delete this code in final commit
+        }
+        
+        self.progressResult = progressResult
+    }
+    
+    func calculateCorrectPercentage(for progressResult: ProgressResult) -> Double {
+        guard progressResult.totalQuestions > 0 else { return 0.0 }
+        return (Double(progressResult.correctAnswers) / Double(progressResult.totalQuestions)) * 100
+    }
+    
+    func calculateMedalColor(for progressResult: ProgressResult) -> Color {
+        let percentage = calculateCorrectPercentage(for: progressResult)
+        if percentage >= 80 {
+            return .yellow
+        } else if percentage >= 50 {
+            return .gray
+        } else {
+            return .brown
+        }
+    }
+    
+    func deleteAllProgressResults(progressResults: [ProgressResult]) {
+        guard let viewContext = viewContext else { return }
+        for progressResult in progressResults {
+            viewContext.delete(progressResult)
+        }
+        do {
+            try viewContext.save()
+        } catch {
+            print("❌ Error resetting progress: \(error)") // delete this code in final commit
         }
     }
     
@@ -81,6 +157,7 @@ class TestViewModel: ObservableObject {
         testStartTime = Date()
         testDuration = "00:00"
         isTestFinished = false
+        progressResult = nil // Reset progressResult
         timer?.invalidate()
         timer = nil
     }

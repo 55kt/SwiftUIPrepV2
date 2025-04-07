@@ -14,7 +14,6 @@ struct SwiftUIPrepV2App: App {
     let persistenceController = PersistenceController.shared
     @AppStorage("AppTheme") private var isDarkMode: Bool = false
     @StateObject private var testViewModel = TestViewModel()
-    @StateObject private var progressViewModel = ProgressViewModel()
     
     // MARK: - Initialization
     init() {
@@ -28,7 +27,6 @@ struct SwiftUIPrepV2App: App {
             MainTabView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(testViewModel)
-                .environmentObject(progressViewModel)
                 .preferredColorScheme(isDarkMode ? .dark : nil)
         }// WindowGroup
     }// Body

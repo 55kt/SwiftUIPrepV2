@@ -10,10 +10,9 @@ import CoreData
 
 struct TestView: View {
     // MARK: - Properties
-    @Environment(\.dismiss) var dismiss // For dismissing the view
+    @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject private var testViewModel: TestViewModel
-    @EnvironmentObject private var progressViewModel: ProgressViewModel
     @State private var isShowingStopAlert: Bool = false
     @State private var shouldNavigateToResults: Bool = false
     
@@ -24,7 +23,7 @@ struct TestView: View {
             NSPredicate(format: "category != nil"),
             NSPredicate(format: "isAnswered == false")
         ])
-    ) private var allQuestions: FetchedResults<Question> // Fetches questions for the test
+    ) private var allQuestions: FetchedResults<Question>
     
     // MARK: - Initialization
     init(numberOfQuestions: Int) {
@@ -80,13 +79,20 @@ struct TestView: View {
                         } // if - else
                     } // VStack
                 } // ScrollView
+                // Loading indicator
+                
                 .navigationTitle("Current Test")
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(isPresented: $shouldNavigateToResults) {
                     // Navigate to ResultTestView when the test is finished
-                    ResultTestView()
-                        .environmentObject(progressViewModel)
-                        .navigationBarBackButtonHidden(true)
+                    ResultTestView(
+                        totalQuestions: testViewModel.questions.count,
+                        correctAnswers: testViewModel.correctAnswers,
+                        testDuration: testViewModel.testDuration,
+                        progressResult: testViewModel.progressResult
+                    )
+                    .environmentObject(testViewModel)
+                    .navigationBarBackButtonHidden(true)
                 } // navigationDestination
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -99,7 +105,7 @@ struct TestView: View {
                         } // Button
                     } // ToolbarItem
                 } // toolbar
-                .alert("Stop Test?", isPresented: $isShowingStopAlert) {
+                .alert("Stop Test?", isPresented: $shouldNavigateToResults) {
                     Button("Cancel", role: .cancel) {}
                     Button("Stop", role: .destructive) {
                         testViewModel.stopTest()
@@ -118,8 +124,8 @@ struct TestView: View {
                         viewContext: viewContext
                     )
                 } // onAppear
-                .onChange(of: testViewModel.isTestFinished) {oldValue, newValue in
-                    if newValue {
+                .onChange(of: testViewModel.isTestFinished) {oldValue, value in
+                    if value {
                         shouldNavigateToResults = true
                     }
                 } // onChange
@@ -133,5 +139,4 @@ struct TestView: View {
     TestView(numberOfQuestions: 10)
         .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         .environmentObject(TestViewModel())
-        .environmentObject(ProgressViewModel())
 } // Preview

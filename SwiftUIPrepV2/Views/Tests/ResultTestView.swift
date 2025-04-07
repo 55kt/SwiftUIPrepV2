@@ -10,10 +10,23 @@ import CoreData
 
 struct ResultTestView: View {
     // MARK: - Properties
-    @EnvironmentObject private var progressViewModel: ProgressViewModel
+    let totalQuestions: Int
+    let correctAnswers: Int
+    let testDuration: String
+    let progressResult: ProgressResult?
+    
+    @EnvironmentObject private var testViewModel: TestViewModel
     @State private var isButtonPulsating = false
     @State private var showQuestionsList = false
     @Environment(\.dismiss) var dismiss
+    
+    // MARK: - Initialization
+    init(totalQuestions: Int, correctAnswers: Int, testDuration: String, progressResult: ProgressResult?) {
+        self.totalQuestions = totalQuestions
+        self.correctAnswers = correctAnswers
+        self.testDuration = testDuration
+        self.progressResult = progressResult
+    }
     
     // MARK: - Body
     var body: some View {
@@ -33,11 +46,11 @@ struct ResultTestView: View {
                             Image(systemName: "medal.fill")
                                 .resizable()
                                 .scaledToFit()
-                                .foregroundStyle(progressViewModel.medalDetails.color)
+                                .foregroundStyle(testViewModel.medalDetails.color)
                                 .shadow(color: Color.black.opacity(0.3), radius: 8, x: 0, y: 4)
                                 .padding(.top, 20)
                             
-                            Text("You earned a \(progressViewModel.medalDetails.text)!")
+                            Text("You earned a \(testViewModel.medalDetails.text)!")
                                 .font(.title2)
                                 .bold()
                                 .foregroundStyle(.primary)
@@ -48,20 +61,20 @@ struct ResultTestView: View {
                                 Image(systemName: "medal.fill")
                                     .resizable()
                                     .scaledToFit()
-                                    .foregroundStyle(progressViewModel.medalDetails.color)
+                                    .foregroundStyle(testViewModel.medalDetails.color)
                                     .frame(width: 100, height: 100)
                                     .shadow(color: Color.black.opacity(0.3), radius: 8, x: 0, y: 4)
                                     .padding(.top, 20)
                                 
-                                Text("You answered \(progressViewModel.correctAnswers) out of \(progressViewModel.progressResult?.totalQuestions ?? 0) questions correctly.")
+                                Text("You answered \(correctAnswers) out of \(totalQuestions) questions correctly.")
                                     .bold()
                                     .foregroundStyle(.primary)
                                 
-                                Text("Your time remaining was \(progressViewModel.progressResult?.duration ?? "00:00")")
+                                Text("Your time remaining was \(testDuration)")
                                     .font(.body)
                                     .foregroundStyle(.secondary)
                                 
-                                Text("Your score was \(String(format: "%.1f", progressViewModel.scorePercentage))%")
+                                Text("Your score was \(String(format: "%.1f", testViewModel.scorePercentage))%")
                                     .font(.body)
                                     .foregroundStyle(.secondary)
                                 
@@ -76,7 +89,7 @@ struct ResultTestView: View {
                                         .padding(.bottom, 40)
                                 } // Button
                                 .navigationDestination(isPresented: $showQuestionsList) {
-                                    AnsweredQuestionsListView(progressResult: progressViewModel.progressResult)
+                                    AnsweredQuestionsListView(progressResult: progressResult)
                                         .navigationBarBackButtonHidden(true)
                                 } // navigationDestination
                                 
@@ -84,7 +97,7 @@ struct ResultTestView: View {
                                 NavigationLink {
                                     StartTestView()
                                         .navigationBarBackButtonHidden(true)
-                                        .environmentObject(progressViewModel)
+                                        .environmentObject(testViewModel)
                                 } label: {
                                     Circle()
                                         .foregroundStyle(.accent)
@@ -118,8 +131,8 @@ struct ResultTestView: View {
 
 // MARK: - Preview
 #Preview {
-    ResultTestView()
+    ResultTestView(totalQuestions: 10, correctAnswers: 8, testDuration: "00:45", progressResult: nil)
         .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-        .environmentObject(ProgressViewModel())
+        .environmentObject(TestViewModel())
 } // Preview
 
