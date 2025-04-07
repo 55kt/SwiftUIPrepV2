@@ -19,17 +19,17 @@ class TestViewModel: ObservableObject {
     @Published var testDuration: String = "00:00"
     @Published var isShowingStopAlert: Bool = false
     @Published var isTestFinished: Bool = false
-    @Published var progressResult: ProgressResult?
     
     // MARK: - Private Properties
     private var timer: Timer?
     private var numberOfQuestions: Int = 0
     private var allQuestions: FetchedResults<Question>?
     private var viewContext: NSManagedObjectContext?
+    private let progressViewModel: ProgressViewModel
     
-    // MARK: - Computed Properties
-    var correctAnswers: Int {
-        questions.filter { $0.isAnswered && ($0.isAnsweredCorrectly ?? false) }.count
+    // MARK: - Initialization
+    init(progressViewModel: ProgressViewModel = ProgressViewModel()) {
+        self.progressViewModel = progressViewModel
     }
     
     // MARK: - Public Methods
@@ -37,6 +37,7 @@ class TestViewModel: ObservableObject {
         self.numberOfQuestions = numberOfQuestions
         self.allQuestions = allQuestions
         self.viewContext = viewContext
+        progressViewModel.setup(viewContext: viewContext)
         reset()
         startTest()
     }
@@ -56,45 +57,18 @@ class TestViewModel: ObservableObject {
         do {
             try viewContext?.save()
         } catch {
-            print("❌ Error saving answer: \(error.localizedDescription) ❌")
+            print("❌ Error saving answer: \(error.localizedDescription) ❌") // delete this code in final commit
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            if self.currentQuestionIndex < self.questions.count - 1 {
+        if currentQuestionIndex < questions.count - 1 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.currentQuestionIndex += 1
                 self.loadQuestion()
-            } else {
-                self.saveTestProgress()
-                self.isTestFinished = true
             }
+        } else {
+            progressViewModel.saveTestProgress(questions: questions, duration: testDuration)
+            isTestFinished = true
         }
-    }
-    
-    func saveTestProgress() {
-        guard let viewContext = viewContext else { return }
-        
-        let progressResult = ProgressResult(context: viewContext)
-        progressResult.id = UUID()
-        progressResult.date = Date()
-        progressResult.totalQuestions = Int32(questions.count)
-        progressResult.correctAnswers = Int32(correctAnswers)
-        progressResult.duration = testDuration
-        
-        for question in questions {
-            let questionResult = QuestionResult(context: viewContext)
-            questionResult.isAnsweredCorrectly = question.isAnsweredCorrectly ?? false
-            questionResult.question = question
-            questionResult.progressResult = progressResult
-            progressResult.addToQuestionResults(questionResult)
-        }
-        
-        do {
-            try viewContext.save()
-        } catch {
-            print("❌ Error saving test progress: \(error.localizedDescription)")
-        }
-        
-        self.progressResult = progressResult
     }
     
     // MARK: - Private Methods
@@ -107,7 +81,6 @@ class TestViewModel: ObservableObject {
         testStartTime = Date()
         testDuration = "00:00"
         isTestFinished = false
-        progressResult = nil
         timer?.invalidate()
         timer = nil
     }
@@ -128,15 +101,15 @@ class TestViewModel: ObservableObject {
             newQuestion.isAnswered = false
             newQuestion.isAnsweredCorrectlyRaw = nil
             newQuestion.iconName = originalQuestion.iconName ?? "unknown-icon"
-            print("🔍 Original question: \(originalQuestion.question), iconName: \(originalQuestion.iconName ?? "nil")")
-            print("🔍 New question: \(newQuestion.question), iconName: \(newQuestion.iconName ?? "nil")")
+            print("🔍 Original question: \(originalQuestion.question), iconName: \(originalQuestion.iconName ?? "nil")") // delete this code in final commit
+            print("🔍 New question: \(newQuestion.question), iconName: \(newQuestion.iconName ?? "nil")") // delete this code in final commit
             return newQuestion
         }
         
         do {
             try viewContext.save()
         } catch {
-            print("❌ Error saving questions: \(error)")
+            print("❌ Error saving questions: \(error)") // delete this code in final commit
         }
         
         if questions.isEmpty {
@@ -181,7 +154,7 @@ class TestViewModel: ObservableObject {
         do {
             try viewContext?.save()
         } catch {
-            print("❌ Error resetting test progress: \(error.localizedDescription) ❌")
+            print("❌ Error resetting test progress: \(error.localizedDescription) ❌") // delete this code in final commit
         }
     }
-}
+} // TestViewModel

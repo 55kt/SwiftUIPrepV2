@@ -215,6 +215,16 @@
     "Volos Software LLC" : {
 
     },
+    "You answered %lld out of %d questions correctly." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You answered %1$lld out of %2$d questions correctly."
+          }
+        }
+      }
+    },
     "You answered %lld out of %lld questions correctly." : {
       "localizations" : {
         "en" : {

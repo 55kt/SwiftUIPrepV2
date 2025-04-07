@@ -6,28 +6,28 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct TestView: View {
     // MARK: - Properties
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) var dismiss // For dismissing the view
     @Environment(\.managedObjectContext) private var viewContext
-    @StateObject private var viewModel: TestViewModel
+    @EnvironmentObject private var testViewModel: TestViewModel
+    @EnvironmentObject private var progressViewModel: ProgressViewModel
     @State private var isShowingStopAlert: Bool = false
-    @State private var shouldNavigateToResults: Bool = false // State to control navigation
+    @State private var shouldNavigateToResults: Bool = false
     
     @FetchRequest(
-            entity: Question.entity(),
-            sortDescriptors: [NSSortDescriptor(keyPath: \Question.question, ascending: true)],
-            predicate: NSCompoundPredicate(andPredicateWithSubpredicates: [
-                NSPredicate(format: "category != nil"),
-                NSPredicate(format: "isAnswered == false")
-            ])
-        ) private var allQuestions: FetchedResults<Question>
+        entity: Question.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Question.question, ascending: true)],
+        predicate: NSCompoundPredicate(andPredicateWithSubpredicates: [
+            NSPredicate(format: "category != nil"),
+            NSPredicate(format: "isAnswered == false")
+        ])
+    ) private var allQuestions: FetchedResults<Question> // Fetches questions for the test
     
     // MARK: - Initialization
     init(numberOfQuestions: Int) {
-        let viewModel = TestViewModel()
-        _viewModel = StateObject(wrappedValue: viewModel)
         self.numberOfQuestions = numberOfQuestions
     }
     
@@ -44,53 +44,49 @@ struct TestView: View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
-                        TimeRemainingHolder(timeDuration: viewModel.testDuration)
+                        TimeRemainingHolder(timeDuration: testViewModel.testDuration)
                             .padding()
                         
-                        if !viewModel.questions.isEmpty && !viewModel.isTestFinished {
+                        if !testViewModel.questions.isEmpty && !testViewModel.isTestFinished {
                             // Display the current question
                             VStack(spacing: 20) {
                                 ProgressBarLine(
-                                    currentQuestion: viewModel.currentQuestionIndex + 1,
-                                    totalQuestions: viewModel.questions.count
+                                    currentQuestion: testViewModel.currentQuestionIndex + 1,
+                                    totalQuestions: testViewModel.questions.count
                                 )
                                 
-                                Text(viewModel.questions[viewModel.currentQuestionIndex].question)
+                                Text(testViewModel.questions[testViewModel.currentQuestionIndex].question)
                                     .font(.title2)
                                     .fontWeight(.heavy)
                                 
                                 // Display answer options
-                                ForEach(viewModel.answers, id: \.self) { answer in
+                                ForEach(testViewModel.answers, id: \.self) { answer in
                                     AnswerCellButton(
-                                        isCorrect: viewModel.showCorrectAnswer ? (answer == viewModel.questions[viewModel.currentQuestionIndex].correctAnswer) : nil,
+                                        isCorrect: testViewModel.showCorrectAnswer ? (answer == testViewModel.questions[testViewModel.currentQuestionIndex].correctAnswer) : nil,
                                         answerText: answer
                                     ) {
-                                        viewModel.selectAnswer(answer, for: viewModel.questions[viewModel.currentQuestionIndex])
+                                        testViewModel.selectAnswer(answer, for: testViewModel.questions[testViewModel.currentQuestionIndex])
                                     }
-                                }// ForEach
+                                } // ForEach
                                 
                                 Spacer()
                             } // VStack
                             .padding()
-                        } else if viewModel.questions.isEmpty {
+                        } else if testViewModel.questions.isEmpty {
                             Text("No questions available")
                                 .font(.title2)
                                 .foregroundStyle(.gray)
                                 .padding()
-                        }// if - else
+                        } // if - else
                     } // VStack
                 } // ScrollView
                 .navigationTitle("Current Test")
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(isPresented: $shouldNavigateToResults) {
                     // Navigate to ResultTestView when the test is finished
-                    ResultTestView(
-                        totalQuestions: viewModel.questions.count,
-                        correctAnswers: viewModel.correctAnswers,
-                        testDuration: viewModel.testDuration,
-                        progressResult: viewModel.progressResult
-                    )// ResultTestView
-                    .navigationBarBackButtonHidden(true)
+                    ResultTestView()
+                        .environmentObject(progressViewModel)
+                        .navigationBarBackButtonHidden(true)
                 } // navigationDestination
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -100,34 +96,33 @@ struct TestView: View {
                             Image(systemName: "wrongwaysign.fill")
                                 .font(.title2)
                                 .bold()
-                        }
-                    }
+                        } // Button
+                    } // ToolbarItem
                 } // toolbar
                 .alert("Stop Test?", isPresented: $isShowingStopAlert) {
                     Button("Cancel", role: .cancel) {}
                     Button("Stop", role: .destructive) {
-                        viewModel.stopTest()
+                        testViewModel.stopTest()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                             dismiss()
                         }
-                    }
+                    } // Button
                 } message: {
                     Text("Are you sure you want to stop the test? All progress will be lost.")
                 } // alert
                 .onAppear {
                     // Setup the test when the view appears
-                    viewModel.setupTest(
+                    testViewModel.setupTest(
                         numberOfQuestions: numberOfQuestions,
                         allQuestions: allQuestions,
                         viewContext: viewContext
                     )
-                }// onAppear
-                .onChange(of: viewModel.isTestFinished) {oldValue, newValue in
-                    print("🔍 isTestFinished changed to: \(newValue)")
+                } // onAppear
+                .onChange(of: testViewModel.isTestFinished) {oldValue, newValue in
                     if newValue {
                         shouldNavigateToResults = true
                     }
-                }// onChange
+                } // onChange
             } // ZStack
         } // NavigationStack
     } // body
@@ -137,4 +132,6 @@ struct TestView: View {
 #Preview {
     TestView(numberOfQuestions: 10)
         .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-}
+        .environmentObject(TestViewModel())
+        .environmentObject(ProgressViewModel())
+} // Preview
