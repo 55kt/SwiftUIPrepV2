@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ProgressTabView: View {
     // MARK: - Properties
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject private var testViewModel: TestViewModel
     @State private var isShowingStopAlert: Bool = false
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
     
     @FetchRequest(
         entity: ProgressResult.entity(),
@@ -22,6 +24,7 @@ struct ProgressTabView: View {
     var body: some View {
         NavigationStack {
             ZStack {
+                // Background image
                 Image("progress-icon")
                     .resizable()
                     .scaledToFit()
@@ -29,16 +32,18 @@ struct ProgressTabView: View {
                     .opacity(0.4)
                     .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
                 
+                // Progress list
                 List {
                     ForEach(progressResults) { progressResult in
                         NavigationLink {
+                            // Navigate to AnsweredQuestionsListView for the selected progress result
                             AnsweredQuestionsListView(progressResult: progressResult)
                         } label: {
                             ProgressItemView(
                                 answeredQText: "You answered \(progressResult.correctAnswers) out of \(progressResult.totalQuestions) questions",
-                                time: "Correct: \(String(format: "%.1f", calculateCorrectPercentage(for: progressResult)))%",
+                                time: "Correct: \(String(format: "%.1f", testViewModel.calculateCorrectPercentage(for: progressResult)))%",
                                 date: progressResult.date ?? Date(),
-                                medalColor: calculateMedalColor(for: progressResult)
+                                medalColor: testViewModel.calculateMedalColor(for: progressResult)
                             )
                         }
                         .listRowBackground(Color.clear)
@@ -54,25 +59,15 @@ struct ProgressTabView: View {
                         } label: {
                             Image(systemName: "trash")
                                 .font(.title2)
-                                .bold()
-                        }
-                    }
+                                .fontWeight(.bold)
+                        } // Button
+                    } // ToolbarItem
                 } // toolbar
-                .alert("Delete Progress ?", isPresented: $isShowingStopAlert) {
+                .alert("Delete Progress?", isPresented: $isShowingStopAlert) {
                     Button("Cancel", role: .cancel) {}
                     Button("Delete", role: .destructive) {
-                        for progressResult in progressResults {
-                            viewContext.delete(progressResult)
-                        }
-                        do {
-                            try viewContext.save()
-                            print("🗑️ Progress reset successfully 🗑️")
-                        } catch {
-                            print("❌ Error resetting progress: \(error) ❌")
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            dismiss()
-                        }
+                        testViewModel.deleteAllProgressResults(progressResults: Array(progressResults))
+                        dismiss()
                     }
                 } message: {
                     Text("Are you sure you want to delete your progress? This action cannot be undone.")
@@ -80,27 +75,11 @@ struct ProgressTabView: View {
             } // ZStack
         } // NavigationStack
     } // body
-    
-    // MARK: - Helper Methods
-    private func calculateCorrectPercentage(for progressResult: ProgressResult) -> Double {
-        guard progressResult.totalQuestions > 0 else { return 0.0 }
-        return (Double(progressResult.correctAnswers) / Double(progressResult.totalQuestions)) * 100
-    }
-    
-    private func calculateMedalColor(for progressResult: ProgressResult) -> Color {
-        let percentage = calculateCorrectPercentage(for: progressResult)
-        if percentage >= 80 {
-            return .yellow
-        } else if percentage >= 50 {
-            return .gray
-        } else {
-            return .brown
-        }
-    }
 } // View
 
 // MARK: - Preview
 #Preview {
     ProgressTabView()
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-}
+        .environmentObject(TestViewModel())
+} // Preview
