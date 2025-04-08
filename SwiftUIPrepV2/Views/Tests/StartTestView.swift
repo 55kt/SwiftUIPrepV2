@@ -9,34 +9,37 @@ import SwiftUI
 
 struct StartTestView: View {
     // MARK: - Properties
-    @State private var numberOfQuestions = 5
-    let questionOptions = Array(1...150)
-    @State private var isButtonPulsating = false
-    @Environment(\.dismiss) var dismiss
+    @State private var numberOfQuestions: Int = 10
+    let questionOptions: [Int] = Array(10...150)
+    @State private var isButtonPulsating: Bool = false
+    @Environment(\.dismiss) private var dismiss
     
     // MARK: - Body
     var body: some View {
         NavigationStack {
-            ScrollView {
+            ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 20) {
                     // MARK: - Header
                     VStack(spacing: 5) {
                         Text("Test")
                             .font(.largeTitle)
-                            .bold()
-                    }// VStack
+                            .fontWeight(.bold)
+                    } // VStack
                     
                     // MARK: - Central content
                     VStack {
                         Text("Count of questions:")
                             .font(.title2)
+                        
                         // MARK: - Wheel Picker
                         PickerWheelView(numberOfQuestions: $numberOfQuestions)
                         
                         // MARK: - Start test button
-                        NavigationLink(destination: TestView()
-                            .navigationBarBackButtonHidden(true)
-                        ) {
+                        NavigationLink {
+                            // Navigate to TestView with the selected number of questions
+                            TestView(numberOfQuestions: numberOfQuestions)
+                                .navigationBarBackButtonHidden(true)
+                        } label: {
                             Circle()
                                 .frame(height: 150)
                                 .overlay(
@@ -50,15 +53,15 @@ struct StartTestView: View {
                                 .shadow(color: Color.gray.opacity(0.6), radius: 6, x: 0, y: 4)
                                 .onAppear {
                                     isButtonPulsating = true
-                                }
-                        }// NavigationLink
-                    }// VStack
+                                }// onAppear
+                        } // NavigationLink
+                    } // VStack
                     .frame(maxHeight: .infinity, alignment: .center)
-                }// VStack
+                } // VStack
                 .padding()
-            }// ScrollView
-        }// NavigationStack
-    }// Body
+            } // ScrollView
+        } // NavigationStack
+    } // body
 }// View
 
 // MARK: - Preview

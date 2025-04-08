@@ -6,51 +6,64 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct QuestionDetailView: View {
     // MARK: - Properties
-    @Environment(\.dismiss) var dismiss
+    @ObservedObject var question: Question
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.managedObjectContext) private var viewContext
+    @State private var isFavorite: Bool
     
-    // MARK: - Body
+    // MARK: - Initialization
+    // Initializes the view with a question and sets the initial favorite status
+    init(question: Question) {
+        self.question = question
+        self._isFavorite = State(initialValue: question.isFavorite)
+    }
+    
+    // MARK: - body
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 20) {
+                // Question header with icon and category
                 HStack {
-                    Image("data-icon")
+                    Image(question.iconName ?? "unknown-icon")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 80, height: 80)
                         .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Data")
+                        Text(question.category?.name ?? "Unknown")
                             .font(.title2)
                             .fontWeight(.heavy)
-                    }// VStack
-                }// HStack
+                    } // VStack
+                } // HStack
                 .padding(.horizontal)
                 .padding(.vertical)
                 
+                // Question details
                 VStack(alignment: .center, spacing: 0) {
                     // MARK: - Question
                     Section {
                         HeadingView(headingImage: "questionmark.bubble.fill", headingText: "Question", headingColor: .accent)
                         
-                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus.?")
+                        Text(question.question)
                             .font(.largeTitle)
                             .fontWeight(.heavy)
                             .padding(.vertical, 8)
-                    }// Question section
+                    } // Question section
                     .padding(.horizontal)
                     
                     // MARK: - Answer
                     Section {
                         HeadingView(headingImage: "graduationcap.fill", headingText: "Answer", headingColor: .accent)
                         
-                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus.")
+                        Text(question.correctAnswer)
                             .font(.headline)
                             .padding(.horizontal)
-                    }// Answer section
+                    } // Answer section
                     .padding(.horizontal)
                     
                     // MARK: - Description
@@ -58,50 +71,68 @@ struct QuestionDetailView: View {
                         VStack(alignment: .center, spacing: 2) {
                             HeadingView(headingImage: "info.circle.fill", headingText: LocalizedStringKey("Description"), headingColor: .accent)
                             
-                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sagittis lacus interdum quam interdum, eget cursus justo luctus. Ut vitae mi malesuada, sollicitudin felis a, dictum odio. Integer dui arcu, accumsan id tellus eget, dictum rhoncus orci. In nec facilisis mauris. Donec egestas, nisi sed finibus elementum, nisi enim volutpat lectus, sed pretium orci nulla quis ex. Duis convallis venenatis tortor, id laoreet ante pellentesque blandit.")
+                            Text(question.questionDescription)
                                 .font(.headline)
                                 .padding(.horizontal)
-                        }// VStack
-                    }// Description section
+                        } // VStack
+                    } // Description section
                     .padding(.horizontal)
-                }// VStack
-            }// VStack
+                } // VStack
+            } // VStack
             .padding(.bottom, 50)
-
-            // MARK: - Toolbar buttons
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundStyle(.accent)
-                            .font(.title2)
-                            .bold()
-
-                    }
-                }
-//                    .enableNavigationGesture()
-
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        // action
-                    } label: {
-                        Image(systemName: "star.circle.fill")
-                            .foregroundStyle(.accent)
-                            .font(.title2)
-                            .bold()
-                    }
-                }
-            }// toolbar
-        }// ScrollView
+        } // ScrollView
         .navigationBarBackButtonHidden(true)
-    }// Body
-}// View
+        .toolbar {
+            // Back button
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundStyle(.accent)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                } // Button
+            } // ToolbarItem
+            
+            // Favorite button
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    toggleFavorite()
+                } label: {
+                    Image(systemName: isFavorite ? "star.circle.fill" : "star.circle")
+                        .foregroundStyle(isFavorite ? .yellow : .accent)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                } // Button
+            } // ToolbarItem
+        } // toolbar
+    } // body
+    
+    // MARK: - Helper Methods
+    // Toggles the favorite status of the question and saves the context
+    private func toggleFavorite() {
+        isFavorite.toggle()
+        question.isFavorite = isFavorite
+        do {
+            try viewContext.save()
+        } catch {
+            print("❌ Error saving isFavorite: \(error)") // delete this code in final commit
+        }
+    }
+} // View
 
 // MARK: - Preview
 #Preview {
     NavigationStack {
-        QuestionDetailView()
-    }
-}
+        let context = PersistenceController.shared.container.viewContext
+        let question = Question(context: context)
+        question.question = "Sample Question"
+        question.correctAnswer = "Sample Answer"
+        question.questionDescription = "Sample Description"
+        question.iconName = "unknown-icon"
+        question.isFavorite = true
+        return QuestionDetailView(question: question)
+            .environment(\.managedObjectContext, context)
+    } // NavigationStack
+} // Preview

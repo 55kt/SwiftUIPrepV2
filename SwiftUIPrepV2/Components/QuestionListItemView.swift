@@ -9,7 +9,9 @@ import SwiftUI
 
 struct QuestionListItemView: View {
     // MARK: - Properties
-    @State var iconName: String = ""
+    let iconName: String
+    let questionText: String
+    
     
     // MARK: - Body
     var body: some View {
@@ -20,7 +22,7 @@ struct QuestionListItemView: View {
                 .frame(width: 80, height: 80)
                 .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
             
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis pretium dapibus.?")
+            Text(questionText)
                 .font(.headline)
                 .fontWeight(.semibold)
                 .multilineTextAlignment(.leading)
@@ -31,5 +33,5 @@ struct QuestionListItemView: View {
 
 // MARK: - Preview
 #Preview {
-    QuestionListItemView(iconName: "data-icon")
+    QuestionListItemView(iconName: "data-icon", questionText: "What is a variable ?")
 }

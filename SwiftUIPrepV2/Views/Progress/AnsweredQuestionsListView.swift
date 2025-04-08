@@ -6,83 +6,81 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AnsweredQuestionsListView: View {
     // MARK: - Properties
-    let questions: [String]
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    let progressResult: ProgressResult?
+    
+    // MARK: - Computed Properties
+    private var questions: [Question] {
+        // Get sorted questions from the progress result
+        guard let progressResult = progressResult,
+              let questionResults = progressResult.questionResults as? Set<QuestionResult> else {
+            return []
+        }
+        return questionResults.compactMap { $0.question }.sorted { $0.question < $1.question }
+    }
     
     private var formattedDate: String {
+        // Format the date of the progress result
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
-        return formatter.string(from: Date())
+        return formatter.string(from: progressResult?.date ?? Date())
     }
     
     // MARK: - Body
     var body: some View {
         List {
-            HStack {
-                Image(systemName: "checkmark.circle.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(.green)
-                
-                NavigationLink(destination: QuestionDetailView()) {
-                    QuestionListItemView(iconName: "loading-icon")
+            ForEach(questions) { question in
+                HStack {
+                    // Display checkmark or cross based on answer correctness
+                    let isCorrect = question.isAnsweredCorrectly ?? false
+                    Image(systemName: isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .foregroundStyle(isCorrect ? .green : .red)
                     
-                    
-                }// NavigationLink
-                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                    Button {
-                        print("Added to favorites: \(questions)")
+                    // Navigate to question details
+                    NavigationLink {
+                        QuestionDetailView(question: question)
                     } label: {
-                        Image(systemName: "star.fill")
-                    }
-                    .tint(.yellow)
-                }// swipe
-            }// HStack
-            .listRowBackground(Color.clear)
-            
-            HStack {
-                Image(systemName: "xmark.circle.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(.red)
-                
-                NavigationLink(destination: QuestionDetailView()) {
-                    QuestionListItemView(iconName: "loading-icon")
-                    
-                    
-                }// NavigationLink
-                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                    Button {
-                        print("Added to favorites: \(questions)")
-                    } label: {
-                        Image(systemName: "star.fill")
-                    }
-                    .tint(.yellow)
-                }// swipe
-            }// HStack
-            .listRowBackground(Color.clear)
-        }// List
+                        // Use iconName directly, with a fallback to "unknown-icon"
+                        let iconName = question.iconName?.isEmpty == false ? question.iconName! : "unknown-icon"
+                        QuestionListItemView(iconName: iconName, questionText: question.question)
+                    } // NavigationLink
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button {
+                            toggleFavorite(for: question)
+                        } label: {
+                            Image(systemName: question.isFavorite ? "star.slash.fill" : "star.fill")
+                        }
+                        .tint(.yellow)
+                    } // swipeActions
+                } // HStack
+                .listRowBackground(Color.clear)
+            } // ForEach
+        } // List
         .listStyle(.plain)
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .background(MotionAnimationView())
         .toolbar {
-            // MARK: - Navigation title
             ToolbarItem(placement: .topBarLeading) {
                 Button {
                     dismiss()
                 } label: {
                     Image(systemName: "chevron.left")
                         .font(.title2)
-                        .bold()
-                }
-            }
+                        .fontWeight(.bold)
+                } // Button
+            } // ToolbarItem
+            
             ToolbarItem(placement: .principal) {
                 VStack {
                     Text("Answered Questions")
@@ -91,15 +89,28 @@ struct AnsweredQuestionsListView: View {
                     Text(formattedDate)
                         .font(.caption2)
                         .foregroundStyle(.gray)
-                }// VStack
-            }
-        }// toolbar
+                } // VStack
+            } // ToolbarItem
+        } // toolbar
         .enableNavigationGesture()
-    }// Body
-}// View
+    } // body
+    
+    // MARK: - Helper Methods
+    // Toggles the favorite status of a question and saves the context
+    private func toggleFavorite(for question: Question) {
+        question.isFavorite.toggle()
+        do {
+            try viewContext.save()
+        } catch {
+            print("❌ Error saving isFavorite: \(error)") // delete this code in final commit
+        }
+    }
+} // View
 
+// MARK: - Preview
 #Preview {
     NavigationStack {
-        AnsweredQuestionsListView(questions: ["Question 1", "Question 2", "Question 3"])
-    }
-}
+        AnsweredQuestionsListView(progressResult: nil)
+            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+    } // NavigationStack
+} // Preview

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TimeRemainingHolder: View {
     // MARK: - Properties
+    var timeDuration: String
     
     // MARK: - Body
     var body: some View {
@@ -28,7 +29,7 @@ struct TimeRemainingHolder: View {
                     .font(.title2)
                     .fontWeight(.bold)
                 
-                Text("23 : 45 : 32")
+                Text(timeDuration)
                     .font(.headline)
             }// HStack
             .padding()
@@ -38,5 +39,5 @@ struct TimeRemainingHolder: View {
 
 // MARK: - Preview
 #Preview {
-    TimeRemainingHolder()
+    TimeRemainingHolder(timeDuration: "12:55:09")
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct MainTabView: View {
     // MARK: - Properties
@@ -39,4 +40,6 @@ struct MainTabView: View {
 // MARK: - Preview
 #Preview {
     MainTabView()
+        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+
 }

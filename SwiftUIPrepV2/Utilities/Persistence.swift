@@ -8,50 +8,109 @@
 import CoreData
 
 struct PersistenceController {
-    static let shared = PersistenceController()
-
+    // MARK: - Properties
+    static let shared = PersistenceController() // Singleton instance for the app
+    
     @MainActor
     static let preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
+        result.loadCategoriesAndQuestions(into: viewContext)
         do {
             try viewContext.save()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            print("❌ Error saving preview context: \(error)") // delete this code in final commit
         }
         return result
-    }()
-
-    let container: NSPersistentContainer
-
+    }() // Preview instance for SwiftUI previews
+    
+    let container: NSPersistentContainer // Core Data persistent container
+    
+    // MARK: - Initialization
+    // Initializes the persistence controller, optionally in-memory for previews
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "SwiftUIPrepV2")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
+        
+        // Load persistent stores
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                print("❌ Error loading persistent stores: \(error), \(error.userInfo)") // delete this code in final commit
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+        
+        // Check and load categories if needed
+        let viewContext = container.viewContext
+        let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+        do {
+            let categories = try viewContext.fetch(fetchRequest)
+            if categories.isEmpty {
+                clearCategoriesAndQuestions(from: viewContext)
+                loadCategoriesAndQuestions(into: viewContext)
+            }
+            
+            // Debug: Check iconName for all questions
+            let allQuestionsFetchRequest: NSFetchRequest<Question> = Question.fetchRequest()
+            let allQuestions = try viewContext.fetch(allQuestionsFetchRequest)
+            for question in allQuestions {
+                print("🔍 Question: \(question.question), iconName: \(question.iconName ?? "nil")") // delete this code in final commit
+            }
+        } catch {
+            print("❌ Error checking categories: \(error)") // delete this code in final commit
+        }
+    } // init
+    
+    // MARK: - Private Methods
+    // Clears all categories, questions, and question results from the context
+    private func clearCategoriesAndQuestions(from context: NSManagedObjectContext) {
+        let entities = ["Category", "Question", "QuestionResult"]
+        // Delete all entities of each type
+        for entity in entities {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            do {
+                try context.execute(deleteRequest)
+            } catch {
+                print("❌ Error clearing \(entity) entities: \(error)") // delete this code in final commit
+            }
+        }
+        
+        // Save the context after clearing
+        do {
+            try context.save()
+        } catch {
+            print("❌ Error saving context after clearing data: \(error)") // delete this code in final commit
+        }
+    }
+    
+    // Loads categories and questions from a JSON file into the context
+    func loadCategoriesAndQuestions(into context: NSManagedObjectContext) {
+        // Determine the JSON file based on the user's language
+        let languageCode = Locale.preferredLanguages.first ?? "en-US"
+        let jsonFileName = languageCode.hasPrefix("ru") ? "questions_ru" : "questions_en"
+        
+        // Load the JSON file
+        guard let url = Bundle.main.url(forResource: jsonFileName, withExtension: "json") else {
+            print("❌ Failed to locate \(jsonFileName).json in bundle") // delete this code in final commit
+            return
+        }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let decoder = JSONDecoder()
+            decoder.userInfo[.managedObjectContext] = context
+            _ = try decoder.decode(CategoriesContainer.self, from: data)
+            try context.save()
+        } catch {
+            print("❌ Error loading JSON data: \(error)") // delete this code in final commit
+        }
     }
 }
+
+// MARK: - Helper Struct for Decoding JSON
+struct CategoriesContainer: Codable {
+    let categories: [Category] // Array of categories decoded from JSON
+} // CategoriesContainer

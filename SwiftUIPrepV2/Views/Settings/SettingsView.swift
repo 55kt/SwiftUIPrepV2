@@ -12,18 +12,20 @@ struct SettingsView: View {
     @State private var isShowingSheet: Bool = false
     @AppStorage("AppTheme") private var isDarkMode: Bool = false
     
-    // MARK: - Body
+    // MARK: - body
     var body: some View {
         NavigationStack {
             VStack(alignment: .center, spacing: 6) {
                 Form {
-                    
                     // MARK: - Language
                     Section(header: Text("Language Selection")) {
-                        NavigationLink(destination: LanguageSelectionView()) {
-                            SelectRowView( color: .pink, icon: "globe", text: "Language") {}
-                        }
-                    }// Language select section
+                        // Navigate to LanguageSelectionView
+                        NavigationLink {
+                            LanguageSelectionView()
+                        } label: {
+                            SelectRowView(color: .pink, icon: "globe", text: "Language") {}
+                        } // NavigationLink
+                    } // Language select section
                     .padding(2)
                     
                     // MARK: - Appearance
@@ -37,10 +39,10 @@ struct SettingsView: View {
                                     .font(.title)
                                     .foregroundStyle(!isDarkMode ? .gray : .blue)
                                     .animation(.easeInOut(duration: 0.3), value: isDarkMode)
-                            }// HStack
+                            } // HStack
                             .padding(5)
-                        }// Toggle
-                    }// Appearance section
+                        } // Toggle
+                    } // Appearance section
                     
                     // MARK: - About
                     Section(header: Text("About the application")) {
@@ -49,39 +51,38 @@ struct SettingsView: View {
                         FormRowStaticView(icon: "keyboard", firstText: "Developer", secondText: "Volos Software LLC", rectangleFillColor: .orange)
                         FormRowStaticView(icon: "paintbrush", firstText: "Designer", secondText: "Ivanno Ruddio", rectangleFillColor: .pink)
                         FormRowStaticView(icon: "flag", firstText: "Version", secondText: "1.0", rectangleFillColor: .blue)
-                    }// FormRowStatic Section
-
+                    } // FormRowStatic Section
                     
                     // MARK: - Footer
                     Section {
                         VStack {
+                            // Show Privacy and Policy sheet
                             Button {
                                 isShowingSheet.toggle()
                             } label: {
                                 Text("Privacy and Policy")
                                     .foregroundStyle(.blue)
-                            }
+                            } // Button
                             .padding()
                             .sheet(isPresented: $isShowingSheet) {
                                 PrivacyAndPolicyView()
-                            }// .sheet
+                            } // sheet
                             
+                            // Copyright information
                             CopyrightSection()
                                 .padding(.top, 6)
                                 .padding(.bottom, 8)
-                        }// VStack
+                        } // VStack
                         .frame(maxWidth: .infinity, alignment: .center)
-                    }// Section
-                }// Form
+                    } // Section
+                } // Form
                 .listStyle(GroupedListStyle())
                 .environment(\.horizontalSizeClass, .regular)
-                
-                
-            }// VStack
+            } // VStack
             .navigationTitle("Settings")
-        }// NavigationStack
-    }// Body
-}// View
+        } // NavigationStack
+    } // body
+}
 
 // MARK: - Preview
 #Preview {

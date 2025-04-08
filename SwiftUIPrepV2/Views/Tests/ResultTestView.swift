@@ -6,24 +6,26 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ResultTestView: View {
     // MARK: - Properties
+    let totalQuestions: Int
+    let correctAnswers: Int
+    let testDuration: String
+    let progressResult: ProgressResult?
+    
+    @EnvironmentObject private var testViewModel: TestViewModel
     @State private var isButtonPulsating = false
     @State private var showQuestionsList = false
     @Environment(\.dismiss) var dismiss
     
-    private var scorePercentage: Double = 80.0
-    
-    private var medalDetails: (color: Color, text: String) {
-        switch scorePercentage {
-        case 80...100:
-            return (.yellow, "Gold Medal")
-        case 50..<80:
-            return (.gray, "Silver Medal")
-        default:
-            return (.brown, "Bronze Medal")
-        }
+    // MARK: - Initialization
+    init(totalQuestions: Int, correctAnswers: Int, testDuration: String, progressResult: ProgressResult?) {
+        self.totalQuestions = totalQuestions
+        self.correctAnswers = correctAnswers
+        self.testDuration = testDuration
+        self.progressResult = progressResult
     }
     
     // MARK: - Body
@@ -44,11 +46,11 @@ struct ResultTestView: View {
                             Image(systemName: "medal.fill")
                                 .resizable()
                                 .scaledToFit()
-                                .foregroundStyle(medalDetails.color)
+                                .foregroundStyle(testViewModel.medalDetails.color)
                                 .shadow(color: Color.black.opacity(0.3), radius: 8, x: 0, y: 4)
                                 .padding(.top, 20)
                             
-                            Text("You earned a \(medalDetails.text) !")
+                            Text("You earned a \(testViewModel.medalDetails.text)!")
                                 .font(.title2)
                                 .bold()
                                 .foregroundStyle(.primary)
@@ -56,24 +58,23 @@ struct ResultTestView: View {
                             
                             // MARK: - Results
                             VStack(spacing: 10) {
-                                
                                 Image(systemName: "medal.fill")
                                     .resizable()
                                     .scaledToFit()
-                                    .foregroundStyle(medalDetails.color)
+                                    .foregroundStyle(testViewModel.medalDetails.color)
                                     .frame(width: 100, height: 100)
                                     .shadow(color: Color.black.opacity(0.3), radius: 8, x: 0, y: 4)
                                     .padding(.top, 20)
                                 
-                                Text("You answered 12 out of 30 questions correctly.")
+                                Text("You answered \(correctAnswers) out of \(totalQuestions) questions correctly.")
                                     .bold()
                                     .foregroundStyle(.primary)
                                 
-                                Text("Your time remaining was 14:21:22")
+                                Text("Your time remaining was \(testDuration)")
                                     .font(.body)
                                     .foregroundStyle(.secondary)
                                 
-                                Text("Your score was 80%")
+                                Text("Your score was \(String(format: "%.1f", testViewModel.scorePercentage))%")
                                     .font(.body)
                                     .foregroundStyle(.secondary)
                                 
@@ -86,16 +87,18 @@ struct ResultTestView: View {
                                         .foregroundColor(.blue)
                                         .underline()
                                         .padding(.bottom, 40)
-                                }
+                                } // Button
                                 .navigationDestination(isPresented: $showQuestionsList) {
-                                    AnsweredQuestionsListView(questions: ["Question 1", "Question 2", "Question 3"])
+                                    AnsweredQuestionsListView(progressResult: progressResult)
                                         .navigationBarBackButtonHidden(true)
-                                }// navigationDestination
+                                } // navigationDestination
                                 
                                 // MARK: - Try Again Button
-                                NavigationLink(destination: StartTestView()
-                                    .navigationBarBackButtonHidden(true)
-                                ) {
+                                NavigationLink {
+                                    StartTestView()
+                                        .navigationBarBackButtonHidden(true)
+                                        .environmentObject(testViewModel)
+                                } label: {
                                     Circle()
                                         .foregroundStyle(.accent)
                                         .frame(height: 150)
@@ -110,23 +113,26 @@ struct ResultTestView: View {
                                         .shadow(color: Color.gray.opacity(0.6), radius: 6, x: 0, y: 4)
                                         .onAppear {
                                             isButtonPulsating = true
-                                        }// onAppear
-                                }// NavigationLink
-                            }// VStack
+                                        } // onAppear
+                                } // NavigationLink
+                            } // VStack
                             .padding()
-                        }// VStack
+                        } // VStack
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                         .padding()
-                    }// GeometryReader
+                    } // GeometryReader
                     .navigationTitle("Results")
                     .navigationBarTitleDisplayMode(.inline)
-                }
-            }// ScrollView
-        }// NavigationStack
-    }// Body
-}// View
+                } // ScrollView
+            } // ZStack
+        } // NavigationStack
+    } // body
+} // View
 
 // MARK: - Preview
 #Preview {
-    ResultTestView()
-}
+    ResultTestView(totalQuestions: 10, correctAnswers: 8, testDuration: "00:45", progressResult: nil)
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        .environmentObject(TestViewModel())
+} // Preview
+
