@@ -12,7 +12,7 @@ import CoreData
 struct SwiftUIPrepV2App: App {
     // MARK: - Properties
     let persistenceController = PersistenceController.shared
-    @AppStorage("AppTheme") private var isDarkMode: Bool = false
+    @StateObject private var themeManager = ThemeManager()
     @StateObject private var testViewModel = TestViewModel()
     
     // MARK: - Initialization
@@ -27,7 +27,12 @@ struct SwiftUIPrepV2App: App {
             MainTabView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(testViewModel)
-                .preferredColorScheme(isDarkMode ? .dark : nil)
+                .environmentObject(themeManager)
+                .preferredColorScheme(themeManager.themeMode.colorScheme)
+                .onAppear {
+                    // Apply the theme to the window scene on app launch
+                    themeManager.applyTheme(to: UIApplication.shared.connectedScenes.first as? UIWindowScene)
+                } // onAppear
         }// WindowGroup
     }// Body
 }// App

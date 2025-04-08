@@ -9,8 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     // MARK: - Properties
-    @State private var isShowingSheet: Bool = false
-    @AppStorage("AppTheme") private var isDarkMode: Bool = false
+    @State private var isShowingSheet: Bool = false // Controls the presentation of the Privacy and Policy sheet
     
     // MARK: - body
     var body: some View {
@@ -29,20 +28,7 @@ struct SettingsView: View {
                     .padding(2)
                     
                     // MARK: - Appearance
-                    Section(header: Text("Appearance")) {
-                        Toggle(isOn: $isDarkMode) {
-                            HStack {
-                                Text("Dark Mode")
-                                    .padding(.horizontal, 8)
-                                
-                                Image(systemName: "moon.fill")
-                                    .font(.title)
-                                    .foregroundStyle(!isDarkMode ? .gray : .blue)
-                                    .animation(.easeInOut(duration: 0.3), value: isDarkMode)
-                            } // HStack
-                            .padding(5)
-                        } // Toggle
-                    } // Appearance section
+                    AppearanceSectionView()
                     
                     // MARK: - About
                     Section(header: Text("About the application")) {
@@ -76,8 +62,8 @@ struct SettingsView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                     } // Section
                 } // Form
-                .listStyle(GroupedListStyle())
-                .environment(\.horizontalSizeClass, .regular)
+                .listStyle(GroupedListStyle()) // Use grouped style for a more native iOS look
+                .environment(\.horizontalSizeClass, .regular) // Ensure consistent layout on different devices
             } // VStack
             .navigationTitle("Settings")
         } // NavigationStack
@@ -86,5 +72,8 @@ struct SettingsView: View {
 
 // MARK: - Preview
 #Preview {
-    SettingsView()
-}
+    NavigationStack {
+        SettingsView()
+            .environmentObject(ThemeManager())
+    } // NavigationStack
+} // Preview
