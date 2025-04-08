@@ -61,10 +61,6 @@
 		4B1E44A52D70FF1100AD2B84 /* QuestionListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44A42D70FF1100AD2B84 /* QuestionListItemView.swift */; };
 		4B1E44A62D70FF1100AD2B84 /* QuestionListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44A42D70FF1100AD2B84 /* QuestionListItemView.swift */; };
 		4B1E44A72D70FF1100AD2B84 /* QuestionListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44A42D70FF1100AD2B84 /* QuestionListItemView.swift */; };
-		4B1E44B12D70FF5000AD2B84 /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44B02D70FF5000AD2B84 /* JSONLoader.swift */; };
-		4B1E44B22D70FF5000AD2B84 /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44B02D70FF5000AD2B84 /* JSONLoader.swift */; };
-		4B1E44B42D70FF5D00AD2B84 /* LocalizationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44B32D70FF5D00AD2B84 /* LocalizationHelper.swift */; };
-		4B1E44B52D70FF5D00AD2B84 /* LocalizationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1E44B32D70FF5D00AD2B84 /* LocalizationHelper.swift */; };
 		4B1E44BB2D70FFA500AD2B84 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4B1E44BA2D70FFA500AD2B84 /* Localizable.xcstrings */; };
 		4B1E44BC2D70FFA500AD2B84 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4B1E44BA2D70FFA500AD2B84 /* Localizable.xcstrings */; };
 		4B1E44BD2D70FFA500AD2B84 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4B1E44BA2D70FFA500AD2B84 /* Localizable.xcstrings */; };
@@ -201,8 +197,6 @@
 		4B1E449C2D70FEE700AD2B84 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4B1E44A02D70FEF400AD2B84 /* LanguageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionView.swift; sourceTree = "<group>"; };
 		4B1E44A42D70FF1100AD2B84 /* QuestionListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListItemView.swift; sourceTree = "<group>"; };
-		4B1E44B02D70FF5000AD2B84 /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
-		4B1E44B32D70FF5D00AD2B84 /* LocalizationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationHelper.swift; sourceTree = "<group>"; };
 		4B1E44BA2D70FFA500AD2B84 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4B1E44BE2D70FFC400AD2B84 /* questions_en.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = questions_en.json; sourceTree = "<group>"; };
 		4B1E44C22D70FFD600AD2B84 /* questions_ru.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = questions_ru.json; sourceTree = "<group>"; };
@@ -435,8 +429,6 @@
 			isa = PBXGroup;
 			children = (
 				4B1E44502D70F92100AD2B84 /* Persistence.swift */,
-				4B1E44B02D70FF5000AD2B84 /* JSONLoader.swift */,
-				4B1E44B32D70FF5D00AD2B84 /* LocalizationHelper.swift */,
 				4B5FB66B2D7F70E8003FF080 /* NavigationGestureFix.swift */,
 				4B13AB452D8DDE04006631F8 /* StringArrayTransformer.swift */,
 			);
@@ -673,7 +665,6 @@
 				4B89C9322D7DF31000FB07C6 /* SelectRowView.swift in Sources */,
 				4B89C9362D7DF54500FB07C6 /* FormRowLink.swift in Sources */,
 				4B5FB6662D7F426A003FF080 /* ProgressItemView.swift in Sources */,
-				4B1E44B42D70FF5D00AD2B84 /* LocalizationHelper.swift in Sources */,
 				4B1E44872D70FE7900AD2B84 /* ExploreView.swift in Sources */,
 				4B1E448D2D70FE9300AD2B84 /* TestView.swift in Sources */,
 				4B13AB412D8DCA66006631F8 /* Category+CoreDataClass.swift in Sources */,
@@ -695,7 +686,6 @@
 				4BC881DD2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift in Sources */,
 				4B0784FD2D9996010003180C /* ProgressResult+CoreDataClass.swift in Sources */,
 				4B0784FE2D9996010003180C /* ProgressResult+CoreDataProperties.swift in Sources */,
-				4B1E44B12D70FF5000AD2B84 /* JSONLoader.swift in Sources */,
 				4B1E44DE2D71027B00AD2B84 /* QuestionModelTests.swift in Sources */,
 				4B1E44752D70FCE800AD2B84 /* TestViewModel.swift in Sources */,
 				4B1E448A2D70FE8800AD2B84 /* ResultTestView.swift in Sources */,
@@ -755,7 +745,6 @@
 				4B1E455F2D7773B900AD2B84 /* QuestionDetailView.swift in Sources */,
 				4B5FB6712D81E256003FF080 /* CategoryCard.swift in Sources */,
 				4BE09F732D91E1660035FE52 /* CategoriesView.swift in Sources */,
-				4B1E44B22D70FF5000AD2B84 /* JSONLoader.swift in Sources */,
 				4B1E44E32D71029900AD2B84 /* HomeViewUITests.swift in Sources */,
 				4B89C93A2D7DF5D900FB07C6 /* FormRowStaticView.swift in Sources */,
 				4B5FB65A2D7E12FF003FF080 /* CopyrightSection.swift in Sources */,
@@ -767,7 +756,6 @@
 				4B5FB6642D7F426A003FF080 /* ProgressItemView.swift in Sources */,
 				4B1E449B2D70FEC900AD2B84 /* ProgressTabView.swift in Sources */,
 				4B5FB65C2D7E159E003FF080 /* PrivacyAndPolicyView.swift in Sources */,
-				4B1E44B52D70FF5D00AD2B84 /* LocalizationHelper.swift in Sources */,
 				4B5FB6682D7F4DE3003FF080 /* AnsweredQuestionsListView.swift in Sources */,
 				4B1E44822D70FE5B00AD2B84 /* MainTabView.swift in Sources */,
 				4B13AB3E2D8DCA66006631F8 /* Category+CoreDataProperties.swift in Sources */,

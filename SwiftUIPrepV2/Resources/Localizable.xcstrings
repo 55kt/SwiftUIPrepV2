@@ -22,7 +22,7 @@
     "Application" : {
 
     },
-    "Are you sure you want to delete all favorites questions ? All questions will be lost. !" : {
+    "Are you sure you want to delete all favorites questions? All questions will be lost!" : {
 
     },
     "Are you sure you want to delete your progress? This action cannot be undone." : {
@@ -58,7 +58,7 @@
     "Delete" : {
 
     },
-    "Delete all favorites ?" : {
+    "Delete all favorites?" : {
 
     },
     "Delete Progress?" : {

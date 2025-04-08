@@ -6,23 +6,27 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct QuestionDetailView: View {
     // MARK: - Properties
     @ObservedObject var question: Question
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.managedObjectContext) private var viewContext
     @State private var isFavorite: Bool
     
+    // MARK: - Initialization
+    // Initializes the view with a question and sets the initial favorite status
     init(question: Question) {
         self.question = question
         self._isFavorite = State(initialValue: question.isFavorite)
     }
     
-    // MARK: - Body
+    // MARK: - body
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 20) {
+                // Question header with icon and category
                 HStack {
                     Image(question.iconName ?? "unknown-icon")
                         .resizable()
@@ -34,11 +38,12 @@ struct QuestionDetailView: View {
                         Text(question.category?.name ?? "Unknown")
                             .font(.title2)
                             .fontWeight(.heavy)
-                    }// VStack
-                }// HStack
+                    } // VStack
+                } // HStack
                 .padding(.horizontal)
                 .padding(.vertical)
                 
+                // Question details
                 VStack(alignment: .center, spacing: 0) {
                     // MARK: - Question
                     Section {
@@ -48,7 +53,7 @@ struct QuestionDetailView: View {
                             .font(.largeTitle)
                             .fontWeight(.heavy)
                             .padding(.vertical, 8)
-                    }// Question section
+                    } // Question section
                     .padding(.horizontal)
                     
                     // MARK: - Answer
@@ -58,7 +63,7 @@ struct QuestionDetailView: View {
                         Text(question.correctAnswer)
                             .font(.headline)
                             .padding(.horizontal)
-                    }// Answer section
+                    } // Answer section
                     .padding(.horizontal)
                     
                     // MARK: - Description
@@ -69,57 +74,65 @@ struct QuestionDetailView: View {
                             Text(question.questionDescription)
                                 .font(.headline)
                                 .padding(.horizontal)
-                        }// VStack
-                    }// Description section
+                        } // VStack
+                    } // Description section
                     .padding(.horizontal)
-                }// VStack
-            }// VStack
+                } // VStack
+            } // VStack
             .padding(.bottom, 50)
-
-            // MARK: - Toolbar buttons
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundStyle(.accent)
-                            .font(.title2)
-                            .bold()
-
-                    }
-                }
-
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        isFavorite.toggle()
-                        question.isFavorite = isFavorite
-                        do {
-                            try viewContext.save()
-                            print("💾 Saved isFavorite: \(isFavorite) for question: \(question.question) 💾")
-                        } catch {
-                            print("❌ Error saving isFavorite: \(error)")
-                        }
-                    } label: {
-                        Image(systemName: isFavorite ? "star.circle.fill" : "star.circle")
-                            .foregroundStyle(isFavorite ? .yellow : .accent)
-                            .font(.title2)
-                            .bold()
-                    }
-                }
-            }// toolbar
-        }// ScrollView
+        } // ScrollView
         .navigationBarBackButtonHidden(true)
-        .onChange(of: question.isFavorite) { oldValue, newValue in
-            isFavorite = newValue
-        }// onChange
-    }// Body
-}// View
+        .toolbar {
+            // Back button
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundStyle(.accent)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                } // Button
+            } // ToolbarItem
+            
+            // Favorite button
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    toggleFavorite()
+                } label: {
+                    Image(systemName: isFavorite ? "star.circle.fill" : "star.circle")
+                        .foregroundStyle(isFavorite ? .yellow : .accent)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                } // Button
+            } // ToolbarItem
+        } // toolbar
+    } // body
+    
+    // MARK: - Helper Methods
+    // Toggles the favorite status of the question and saves the context
+    private func toggleFavorite() {
+        isFavorite.toggle()
+        question.isFavorite = isFavorite
+        do {
+            try viewContext.save()
+        } catch {
+            print("❌ Error saving isFavorite: \(error)") // delete this code in final commit
+        }
+    }
+} // View
 
 // MARK: - Preview
 #Preview {
     NavigationStack {
-        QuestionDetailView(question: Question(context: PersistenceController.shared.container.viewContext))
-            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-    }
-}
+        let context = PersistenceController.shared.container.viewContext
+        let question = Question(context: context)
+        question.question = "Sample Question"
+        question.correctAnswer = "Sample Answer"
+        question.questionDescription = "Sample Description"
+        question.iconName = "unknown-icon"
+        question.isFavorite = true
+        return QuestionDetailView(question: question)
+            .environment(\.managedObjectContext, context)
+    } // NavigationStack
+} // Preview
