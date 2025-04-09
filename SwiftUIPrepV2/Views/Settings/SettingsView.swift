@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     // MARK: - Properties
-    @State private var isShowingSheet: Bool = false // Controls the presentation of the Privacy and Policy sheet
+    @State private var isShowingSheet: Bool = false
     
     // MARK: - body
     var body: some View {

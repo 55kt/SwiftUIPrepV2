@@ -10,22 +10,22 @@ import CoreData
 
 struct ExploreView: View {
     // MARK: - Properties
-    let gridLayout = [GridItem(.flexible()), GridItem(.flexible())]
-    @Environment(\.dismiss) private var dismiss // For dismissing the view
-    @Environment(\.managedObjectContext) private var viewContext // Core Data context
-    @State private var searchText: String = "" // Search text input
-    @State private var selectedCategory: Category? // Selected category for navigation
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @State private var searchText: String = ""
+    @State private var selectedCategory: Category?
     
     @FetchRequest(
         entity: Category.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \Category.name, ascending: true)]
-    ) private var categories: FetchedResults<Category> // Fetches all categories
+    ) private var categories: FetchedResults<Category>
     
     @FetchRequest(
         entity: Question.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \Question.questionDescription, ascending: true)],
         predicate: NSPredicate(format: "category != nil")
-    ) private var allQuestions: FetchedResults<Question> // Fetches questions with a category
+    ) private var allQuestions: FetchedResults<Question>
     
     // MARK: - Computed Properties
     private var isSearchActive: Bool {
@@ -44,51 +44,64 @@ struct ExploreView: View {
         }
     }
     
+    // Dynamic grid layout based on orientation
+    private var gridLayout: [GridItem] {
+        if horizontalSizeClass == .regular {
+            return [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+        } else {
+            return [GridItem(.flexible()), GridItem(.flexible())]
+        }
+    }
+    
     // MARK: - Body
     var body: some View {
         NavigationStack {
-            ZStack {
-                // Background image
-                Image("explore-icon")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 350, height: 350)
-                    .opacity(0.2)
-                    .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
-                
-                // Main content
-                ScrollView(.vertical, showsIndicators: false) {
-                    if isSearchActive {
-                        SearchResultsView(questions: filteredQuestions)
-                    } else {
-                        CategoriesView(
-                            gridLayout: gridLayout,
-                            categories: Array(categories),
-                            selectedCategory: $selectedCategory
+            GeometryReader { geometry in
+                ZStack {
+                    // Background image
+                    Image("explore-icon")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: min(geometry.size.width * 0.7, 350), height: min(geometry.size.height * 0.7, 350))
+                        .opacity(0.2)
+                        .shadow(color: Color.gray.opacity(0.3), radius: 4, x: 0, y: 2)
+                    
+                    // Main content
+                    ScrollView(.vertical, showsIndicators: false) {
+                        Group {
+                            if isSearchActive {
+                                SearchResultsView(questions: filteredQuestions)
+                            } else {
+                                CategoriesView(
+                                    gridLayout: gridLayout,
+                                    categories: Array(categories),
+                                    selectedCategory: $selectedCategory
+                                )
+                            }
+                        } // if - else group
+                        .padding(.horizontal, horizontalSizeClass == .regular ? 32 : 16) // Larger padding in landscape
+                    } // ScrollView
+                    .animation(.easeInOut(duration: 0.3), value: isSearchActive)
+                } // ZStack
+                .navigationTitle("Explore")
+                .navigationDestination(isPresented: Binding(
+                    get: { selectedCategory != nil },
+                    set: { if !$0 { selectedCategory = nil } }
+                )) {
+                    if let category = selectedCategory {
+                        QuestionsListView(
+                            categoryName: category.name,
+                            questions: (category.questions?.allObjects as? [Question]) ?? []
                         )
-                    }// if - else
-                } // ScrollView
-                .animation(.easeInOut(duration: 0.3), value: isSearchActive)
-            } // ZStack
-            .navigationTitle("Explore")
-            .navigationDestination(isPresented: Binding(
-                get: { selectedCategory != nil },
-                set: { if !$0 { selectedCategory = nil } }
-            )) {
-                if let category = selectedCategory {
-                    QuestionsListView(
-                        categoryName: category.name,
-                        questions: (category.questions?.allObjects as? [Question]) ?? []
-                    )
-                    .navigationTitle(category.name)
-                    .navigationBarTitleDisplayMode(.inline)
-                }// if
-            } // navigationDestination
+                        .navigationTitle(category.name)
+                        .navigationBarTitleDisplayMode(.inline)
+                    } // if
+                } // navigationDestination
+            } // GeometryReader
         } // NavigationStack
-        .searchable(text: $searchText, prompt: "Search for some question")
-        .foregroundStyle(.primary)
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "Search for some question")        .foregroundStyle(.primary)
     } // body
-}// View
+} // View
 
 // MARK: - Preview
 #Preview {
