@@ -15,6 +15,7 @@ struct TestView: View {
     @EnvironmentObject private var testViewModel: TestViewModel
     @State private var isShowingStopAlert: Bool = false
     @State private var shouldNavigateToResults: Bool = false
+    @State private var hasAnswered: Bool = false
     
     @FetchRequest(
         entity: Question.entity(),
@@ -64,6 +65,8 @@ struct TestView: View {
                                         isCorrect: testViewModel.showCorrectAnswer ? (answer == testViewModel.questions[testViewModel.currentQuestionIndex].correctAnswer) : nil,
                                         answerText: answer
                                     ) {
+                                        guard !hasAnswered else { return } // Prevent multiple answers
+                                        hasAnswered = true
                                         testViewModel.selectAnswer(answer, for: testViewModel.questions[testViewModel.currentQuestionIndex])
                                     }
                                 } // ForEach
@@ -79,57 +82,58 @@ struct TestView: View {
                         } // if - else
                     } // VStack
                 } // ScrollView
-                // Loading indicator
-                
-                .navigationTitle("Current Test")
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationDestination(isPresented: $shouldNavigateToResults) {
-                    // Navigate to ResultTestView when the test is finished
-                    ResultTestView(
-                        totalQuestions: testViewModel.questions.count,
-                        correctAnswers: testViewModel.correctAnswers,
-                        testDuration: testViewModel.testDuration,
-                        progressResult: testViewModel.progressResult
-                    )
-                    .environmentObject(testViewModel)
-                    .navigationBarBackButtonHidden(true)
-                } // navigationDestination
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button(role: .destructive) {
-                            isShowingStopAlert = true
-                        } label: {
-                            Image(systemName: "wrongwaysign.fill")
-                                .font(.title2)
-                                .bold()
-                        } // Button
-                    } // ToolbarItem
-                } // toolbar
-                .alert("Stop Test?", isPresented: $shouldNavigateToResults) {
-                    Button("Cancel", role: .cancel) {}
-                    Button("Stop", role: .destructive) {
-                        testViewModel.stopTest()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            dismiss()
-                        }
-                    } // Button
-                } message: {
-                    Text("Are you sure you want to stop the test? All progress will be lost.")
-                } // alert
-                .onAppear {
-                    // Setup the test when the view appears
-                    testViewModel.setupTest(
-                        numberOfQuestions: numberOfQuestions,
-                        allQuestions: allQuestions,
-                        viewContext: viewContext
-                    )
-                } // onAppear
-                .onChange(of: testViewModel.isTestFinished) {oldValue, value in
-                    if value {
-                        shouldNavigateToResults = true
-                    }
-                } // onChange
             } // ZStack
+            .navigationTitle("Current Test")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(isPresented: $shouldNavigateToResults) {
+                // Navigate to ResultTestView when the test is finished
+                ResultTestView(
+                    totalQuestions: testViewModel.questions.count,
+                    correctAnswers: testViewModel.correctAnswers,
+                    testDuration: testViewModel.testDuration,
+                    progressResult: testViewModel.progressResult
+                )
+                .environmentObject(testViewModel)
+                .navigationBarBackButtonHidden(true)
+            } // navigationDestination
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(role: .destructive) {
+                        isShowingStopAlert = true
+                    } label: {
+                        Image(systemName: "wrongwaysign.fill")
+                            .font(.title2)
+                            .bold()
+                    } // Button
+                } // ToolbarItem
+            } // toolbar
+            .alert("Stop Test?", isPresented: $shouldNavigateToResults) {
+                Button("Cancel", role: .cancel) {}
+                Button("Stop", role: .destructive) {
+                    testViewModel.stopTest()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        dismiss()
+                    }
+                } // Button
+            } message: {
+                Text("Are you sure you want to stop the test? All progress will be lost.")
+            } // alert
+            .onAppear {
+                // Setup the test when the view appears
+                testViewModel.setupTest(
+                    numberOfQuestions: numberOfQuestions,
+                    allQuestions: allQuestions,
+                    viewContext: viewContext
+                )
+            } // onAppear
+            .onChange(of: testViewModel.isTestFinished) { oldValue, newValue in
+                if newValue {
+                    shouldNavigateToResults = true
+                }
+            } // onChange
+            .onChange(of: testViewModel.currentQuestionIndex) { oldValue, newValue in
+                hasAnswered = false
+            } // onChange
         } // NavigationStack
     } // body
 } // View
@@ -139,4 +143,4 @@ struct TestView: View {
     TestView(numberOfQuestions: 10)
         .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         .environmentObject(TestViewModel())
-} // Preview
+}
