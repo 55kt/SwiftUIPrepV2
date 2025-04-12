@@ -11,7 +11,7 @@ import CoreData
 struct FavoritesView: View {
     // MARK: - Properties
     @Environment(\.dismiss) var dismiss
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass // For adapting to orientation
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     
     // MARK: - Body
     var body: some View {
@@ -28,7 +28,7 @@ struct FavoritesView: View {
                     
                     // List of favorite questions
                     FavoritesQuestionsListView()
-                        .padding(.horizontal, horizontalSizeClass == .regular ? 32 : 16) // Larger padding in landscape
+                        .padding(.horizontal, horizontalSizeClass == .regular ? 32 : 6)
                 } // ZStack
                 .navigationTitle("Favorites")
             } // GeometryReader
