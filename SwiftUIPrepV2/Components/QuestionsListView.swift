@@ -15,25 +15,17 @@ struct QuestionsListView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @StateObject private var notificationHandler = FavoriteNotificationHandler()
     
     // MARK: - Helper Methods
-    // Toggles the favorite status of a question to true and saves the context
-    private func addToFavorites(_ question: Question) {
-        if !question.isFavorite {
-            question.isFavorite = true
-            do {
-                try viewContext.save()
-            } catch {
-                print("❌ Error saving isFavorite: \(error)") // delete this code in final commit
-            }
-        }
+    private func toggleFavorite(_ question: Question) {
+        notificationHandler.toggleFavorite(question, in: viewContext, allowRemoval: false)
     }
     
     // MARK: - body
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                // Background image based on the first question's icon
                 Image(questions.first?.iconName ?? "questionmark.circle")
                     .resizable()
                     .scaledToFit()
@@ -44,7 +36,6 @@ struct QuestionsListView: View {
                 // List of questions
                 List {
                     ForEach(questions) { question in
-                        // Navigate to question details
                         NavigationLink {
                             QuestionDetailView(question: question)
                         } label: {
@@ -53,13 +44,14 @@ struct QuestionsListView: View {
                         } // NavigationLink
                         .listRowBackground(Color.clear)
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            // Add question to favorites
-                            Button {
-                                addToFavorites(question)
-                            } label: {
-                                Image(systemName: "star.fill")
-                            } // Button
-                            .tint(.yellow)
+                            if !notificationHandler.isBannerActive {
+                                Button {
+                                    toggleFavorite(question)
+                                } label: {
+                                    Image(systemName: "star.fill")
+                                } // Button
+                                .tint(.yellow)
+                            }
                         } // swipeActions
                     } // ForEach
                 } // List
@@ -88,10 +80,21 @@ struct QuestionsListView: View {
                 } // toolbar
                 .padding(.horizontal, horizontalSizeClass == .regular ? 32 : 6)
                 .enableNavigationGesture() // Custom modifier for navigation gestures
+                
+                // Banner at the top
+                VStack {
+                    BannerView(
+                        showBanner: $notificationHandler.showBanner,
+                        isBannerActive: $notificationHandler.isBannerActive,
+                        message: notificationHandler.bannerMessage,
+                        color: notificationHandler.bannerColor
+                    )
+                    Spacer()
+                }// VStack
             } // ZStack
-        }
+        }// GeometryReader
     } // body
-}// View
+} // View
 
 // MARK: - Preview
 #Preview {
