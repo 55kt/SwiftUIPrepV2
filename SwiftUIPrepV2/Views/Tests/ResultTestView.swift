@@ -127,12 +127,19 @@ struct ResultTestView: View {
             } // ZStack
         } // NavigationStack
     } // body
-} // View
+}
 
 // MARK: - Preview
 #Preview {
-    ResultTestView(totalQuestions: 10, correctAnswers: 8, testDuration: "00:45", progressResult: nil)
-        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-        .environmentObject(TestViewModel())
-} // Preview
-
+    let context = PersistenceController.preview.container.viewContext
+    let coreDataRepository = CoreDataRepository(viewContext: context)
+    let testViewModel = TestViewModel(coreDataRepository: coreDataRepository)
+    return ResultTestView(
+        totalQuestions: 10,
+        correctAnswers: 8,
+        testDuration: "00:45",
+        progressResult: nil
+    )
+    .environment(\.managedObjectContext, context)
+    .environmentObject(testViewModel)
+}

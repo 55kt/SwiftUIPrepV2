@@ -13,13 +13,19 @@ struct SwiftUIPrepV2App: App {
     // MARK: - Properties
     let persistenceController = PersistenceController.shared
     @StateObject private var themeManager = ThemeManager()
-    @StateObject private var testViewModel = TestViewModel()
+    
+    // Create CoreDataRepository and TestViewModel
+    private var coreDataRepository: CoreDataRepositoryProtocol {
+        CoreDataRepository(viewContext: persistenceController.container.viewContext)
+    }
+    
+    @StateObject private var testViewModel = TestViewModel(coreDataRepository: CoreDataRepository(viewContext: PersistenceController.shared.container.viewContext))
     
     // MARK: - Initialization
     init() {
         // Register ValueTransformer for converting String arrays in Core Data (e.g., for incorrectAnswers in Question)
         ValueTransformer.setValueTransformer(StringArrayTransformer(), forName: NSValueTransformerName(rawValue: "StringArrayTransformer"))
-    }// Initializer
+    }
     
     // MARK: - Scene
     var body: some Scene {
@@ -27,12 +33,14 @@ struct SwiftUIPrepV2App: App {
             MainTabView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(testViewModel)
-                .environmentObject(themeManager)
                 .preferredColorScheme(themeManager.themeMode.colorScheme)
+                // Apply the theme to the window scene on app launch
                 .onAppear {
-                    // Apply the theme to the window scene on app launch
-                    themeManager.applyTheme(to: UIApplication.shared.connectedScenes.first as? UIWindowScene)
-                } // onAppear
-        }// WindowGroup
-    }// Body
-}// App
+                    // Get the first UIWindowScene from connectedScenes
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                        themeManager.applyTheme(to: windowScene)
+                    }
+                }
+        } // WindowGroup
+    } // body
+} // App

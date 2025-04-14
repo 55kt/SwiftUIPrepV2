@@ -10,36 +10,50 @@ import CoreData
 
 struct MainTabView: View {
     // MARK: - Properties
+    @Environment(\.managedObjectContext) private var viewContext
+    @State private var needsRefresh: Bool = false
     
     // MARK: - Body
     var body: some View {
+        let coreDataRepository = CoreDataRepository(viewContext: viewContext)
+        let testViewModel = TestViewModel(coreDataRepository: coreDataRepository)
+        
         TabView {
             Tab("Explore", systemImage: "house.fill") {
                 ExploreView()
-            }// Home
+            } // Home
             
             Tab("Tests", systemImage: "pencil.circle.fill") {
                 StartTestView()
-            }// Tests
+            } // Tests
             
             Tab("Favorites", systemImage: "star.fill") {
                 FavoritesView()
-            }// Favorites
+            } // Favorites
             
             Tab("Progress", systemImage: "chart.bar.fill") {
                 ProgressTabView()
-            }// Progress
+            } // Progress
             
             Tab("Settings", systemImage: "gearshape.fill") {
                 SettingsView()
-            }// Settings
-        }// TabView
-    }// Body
-}// View
+            } // Settings
+        } // TabView
+        .environmentObject(testViewModel)
+        .onReceive(NotificationCenter.default.publisher(for: NSManagedObjectContext.didChangeObjectsNotification)) { _ in
+            // Trigger a refresh when Core Data objects change
+            needsRefresh.toggle()
+            print("🔍 MainTabView: Received Core Data change notification, refreshing views")
+        }// onReceive
+    } // Body
+}
 
 // MARK: - Preview
 #Preview {
-    MainTabView()
-        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-    
+    let context = PersistenceController.preview.container.viewContext
+    let coreDataRepository = CoreDataRepository(viewContext: context)
+    let testViewModel = TestViewModel(coreDataRepository: coreDataRepository)
+    return MainTabView()
+        .environment(\.managedObjectContext, context)
+        .environmentObject(testViewModel)
 }

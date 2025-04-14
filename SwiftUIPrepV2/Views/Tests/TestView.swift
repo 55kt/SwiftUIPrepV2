@@ -122,8 +122,7 @@ struct TestView: View {
                 // Setup the test when the view appears
                 testViewModel.setupTest(
                     numberOfQuestions: numberOfQuestions,
-                    allQuestions: allQuestions,
-                    viewContext: viewContext
+                    allQuestions: allQuestions
                 )
             } // onAppear
             .onChange(of: testViewModel.isTestFinished) { oldValue, newValue in
@@ -136,11 +135,14 @@ struct TestView: View {
             } // onChange
         } // NavigationStack
     } // body
-} // View
+}
 
 // MARK: - Preview
 #Preview {
-    TestView(numberOfQuestions: 10)
-        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-        .environmentObject(TestViewModel())
+    let context = PersistenceController.preview.container.viewContext
+    let coreDataRepository = CoreDataRepository(viewContext: context)
+    let testViewModel = TestViewModel(coreDataRepository: coreDataRepository)
+    return TestView(numberOfQuestions: 10)
+        .environment(\.managedObjectContext, context)
+        .environmentObject(testViewModel)
 }

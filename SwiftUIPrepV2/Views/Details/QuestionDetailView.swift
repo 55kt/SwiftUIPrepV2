@@ -14,6 +14,7 @@ struct QuestionDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.managedObjectContext) private var viewContext
     @State private var isFavorite: Bool
+    @State private var needsRefresh: Bool = false
     
     // MARK: - Initialization
     // Initializes the view with a question and sets the initial favorite status
@@ -107,6 +108,15 @@ struct QuestionDetailView: View {
                 } // Button
             } // ToolbarItem
         } // toolbar
+        .onReceive(NotificationCenter.default.publisher(for: NSManagedObjectContext.didChangeObjectsNotification)) { notification in
+            // Check if the changed object is the current question
+            if let updatedObjects = notification.userInfo?[NSUpdatedObjectsKey] as? Set<NSManagedObject>,
+               updatedObjects.contains(where: { $0.objectID == question.objectID }) {
+                // Sync the local state with the updated question
+                isFavorite = question.isFavorite
+                print("🔍 QuestionDetailView: Detected change in question \(question.question), updated isFavorite to \(isFavorite)")
+            }
+        }// onReceive
     } // body
     
     // MARK: - Helper Methods
@@ -116,6 +126,11 @@ struct QuestionDetailView: View {
         question.isFavorite = isFavorite
         do {
             try viewContext.save()
+            // Refresh the specific question object to sync with the context
+            viewContext.refresh(question, mergeChanges: true)
+            // Refresh all objects to ensure FetchRequests update immediately
+            viewContext.refreshAllObjects()
+            print("🔍 QuestionDetailView: toggleFavorite - Updated question: \(question.question), isFavorite: \(question.isFavorite)")
         } catch {
             print("❌ Error saving isFavorite: \(error)") // delete this code in final commit
         }

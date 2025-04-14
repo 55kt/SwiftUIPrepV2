@@ -85,5 +85,5 @@ struct ProgressTabView: View {
 #Preview {
     ProgressTabView()
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-        .environmentObject(TestViewModel())
+        .environmentObject(TestViewModel(coreDataRepository: CoreDataRepository(viewContext: PersistenceController.shared.container.viewContext)))
 } // Preview

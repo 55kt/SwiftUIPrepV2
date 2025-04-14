@@ -25,7 +25,13 @@ class TestViewModel: ObservableObject {
     private var timer: Timer?
     private var numberOfQuestions: Int = 0
     private var allQuestions: FetchedResults<Question>?
-    private var viewContext: NSManagedObjectContext?
+    private let coreDataRepository: CoreDataRepositoryProtocol
+    
+    // MARK: - Initialization
+    init(coreDataRepository: CoreDataRepositoryProtocol) {
+        self.coreDataRepository = coreDataRepository
+        print("🔍 TestViewModel: Initialized with coreDataRepository")
+    }
     
     // MARK: - Computed Properties
     var correctAnswers: Int {
@@ -53,10 +59,9 @@ class TestViewModel: ObservableObject {
     }
     
     // MARK: - Public Methods
-    func setupTest(numberOfQuestions: Int, allQuestions: FetchedResults<Question>, viewContext: NSManagedObjectContext) {
+    func setupTest(numberOfQuestions: Int, allQuestions: FetchedResults<Question>) {
         self.numberOfQuestions = numberOfQuestions
         self.allQuestions = allQuestions
-        self.viewContext = viewContext
         reset()
         startTest()
     }
@@ -71,13 +76,19 @@ class TestViewModel: ObservableObject {
         selectedAnswer = answer
         showCorrectAnswer = true
         
-        question.isAnswered = true
-        question.isAnsweredCorrectly = (answer == question.correctAnswer)
-        do {
-            try viewContext?.save()
-        } catch {
-            print("❌ Error saving answer: \(error.localizedDescription) ❌") // delete this code in final commit
+        // Store the answer in a temporary ProgressResult until the test is finished
+        if progressResult == nil {
+            progressResult = ProgressResult(context: coreDataRepository.viewContext)
+            progressResult?.id = UUID()
+            progressResult?.date = Date()
+            progressResult?.totalQuestions = Int32(questions.count)
+            progressResult?.duration = testDuration
         }
+        
+        let questionResult = QuestionResult(context: coreDataRepository.viewContext)
+        questionResult.isAnsweredCorrectly = (answer == question.correctAnswer)
+        questionResult.question = question
+        coreDataRepository.saveQuestionResult(questionResult, to: progressResult!)
         
         if currentQuestionIndex < questions.count - 1 {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -93,30 +104,8 @@ class TestViewModel: ObservableObject {
     }
     
     func saveTestProgress() {
-        guard let viewContext = viewContext else { return }
-        
-        let progressResult = ProgressResult(context: viewContext)
-        progressResult.id = UUID()
-        progressResult.date = Date()
-        progressResult.totalQuestions = Int32(questions.count)
-        progressResult.correctAnswers = Int32(questions.filter { $0.isAnswered && ($0.isAnsweredCorrectly ?? false) }.count)
-        progressResult.duration = testDuration
-        
-        for question in questions {
-            let questionResult = QuestionResult(context: viewContext)
-            questionResult.isAnsweredCorrectly = question.isAnsweredCorrectly ?? false
-            questionResult.question = question
-            questionResult.progressResult = progressResult
-            progressResult.addToQuestionResults(questionResult)
-        }
-        
-        do {
-            try viewContext.save()
-        } catch {
-            print("❌ Error saving test progress: \(error.localizedDescription)") // delete this code in final commit
-        }
-        
-        self.progressResult = progressResult
+        guard let progressResult = progressResult else { return }
+        coreDataRepository.saveProgressResult(progressResult)
     }
     
     func calculateCorrectPercentage(for progressResult: ProgressResult) -> Double {
@@ -136,15 +125,7 @@ class TestViewModel: ObservableObject {
     }
     
     func deleteAllProgressResults(progressResults: [ProgressResult]) {
-        guard let viewContext = viewContext else { return }
-        for progressResult in progressResults {
-            viewContext.delete(progressResult)
-        }
-        do {
-            try viewContext.save()
-        } catch {
-            print("❌ Error resetting progress: \(error)") // delete this code in final commit
-        }
+        coreDataRepository.deleteProgressResults(progressResults)
     }
     
     // MARK: - Private Methods
@@ -163,32 +144,11 @@ class TestViewModel: ObservableObject {
     }
     
     private func startTest() {
-        guard let allQuestions = allQuestions, let viewContext = viewContext else { return }
+        guard let allQuestions = allQuestions else { return }
         
         let shuffledQuestions = allQuestions.shuffled()
         let selectedQuestions = Array(shuffledQuestions.prefix(numberOfQuestions))
-        questions = selectedQuestions.map { originalQuestion in
-            let newQuestion = Question(context: viewContext)
-            newQuestion.id = UUID()
-            newQuestion.question = originalQuestion.question
-            newQuestion.correctAnswer = originalQuestion.correctAnswer
-            newQuestion.incorrectAnswers = originalQuestion.incorrectAnswers
-            newQuestion.questionDescription = originalQuestion.questionDescription
-            newQuestion.isFavorite = false
-            newQuestion.isAnswered = false
-            newQuestion.isAnsweredCorrectlyRaw = nil
-            newQuestion.iconName = originalQuestion.iconName ?? "unknown-icon"
-            newQuestion.category = originalQuestion.category
-            print("🔍 Original question: \(originalQuestion.question), iconName: \(originalQuestion.iconName ?? "nil")") // delete this code in final commit
-            print("🔍 New question: \(newQuestion.question), iconName: \(newQuestion.iconName ?? "nil")") // delete this code in final commit
-            return newQuestion
-        }
-        
-        do {
-            try viewContext.save()
-        } catch {
-            print("❌ Error saving questions: \(error)") // delete this code in final commit
-        }
+        questions = selectedQuestions // Use original questions directly
         
         if questions.isEmpty {
             return
@@ -225,14 +185,7 @@ class TestViewModel: ObservableObject {
     }
     
     private func resetTestProgress() {
-        for question in questions {
-            question.isAnswered = false
-            question.isAnsweredCorrectlyRaw = nil
-        }
-        do {
-            try viewContext?.save()
-        } catch {
-            print("❌ Error resetting test progress: \(error.localizedDescription) ❌") // delete this code in final commit
-        }
+        // No need to reset isAnswered or isAnsweredCorrectlyRaw since we're not using them
+        progressResult = nil
     }
 } // TestViewModel

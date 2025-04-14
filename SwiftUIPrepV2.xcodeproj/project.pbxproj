@@ -121,6 +121,8 @@
 		4B5FB67F2D84A3ED003FF080 /* ButtonGradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5FB67E2D84A3ED003FF080 /* ButtonGradients.swift */; };
 		4B5FB6802D84A3ED003FF080 /* ButtonGradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5FB67E2D84A3ED003FF080 /* ButtonGradients.swift */; };
 		4B5FB6812D84A3ED003FF080 /* ButtonGradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5FB67E2D84A3ED003FF080 /* ButtonGradients.swift */; };
+		4B6818B12DAD68A20069CAAC /* CoreDataRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6818B02DAD68A20069CAAC /* CoreDataRepositoryProtocol.swift */; };
+		4B6818B22DAD68A20069CAAC /* CoreDataRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6818B02DAD68A20069CAAC /* CoreDataRepositoryProtocol.swift */; };
 		4B89C92C2D7A14DA00FB07C6 /* QuestionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B89C92B2D7A14DA00FB07C6 /* QuestionsListView.swift */; };
 		4B89C92D2D7A14DA00FB07C6 /* QuestionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B89C92B2D7A14DA00FB07C6 /* QuestionsListView.swift */; };
 		4B89C92E2D7A14DA00FB07C6 /* QuestionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B89C92B2D7A14DA00FB07C6 /* QuestionsListView.swift */; };
@@ -229,6 +231,7 @@
 		4B5FB6762D849EF9003FF080 /* ProgressBarLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarLine.swift; sourceTree = "<group>"; };
 		4B5FB67A2D84A2AC003FF080 /* AnswerCellButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCellButton.swift; sourceTree = "<group>"; };
 		4B5FB67E2D84A3ED003FF080 /* ButtonGradients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonGradients.swift; sourceTree = "<group>"; };
+		4B6818B02DAD68A20069CAAC /* CoreDataRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepositoryProtocol.swift; sourceTree = "<group>"; };
 		4B89C92B2D7A14DA00FB07C6 /* QuestionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsListView.swift; sourceTree = "<group>"; };
 		4B89C92F2D7DF31000FB07C6 /* SelectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRowView.swift; sourceTree = "<group>"; };
 		4B89C9332D7DF54500FB07C6 /* FormRowLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRowLink.swift; sourceTree = "<group>"; };
@@ -449,6 +452,7 @@
 				4B5FB66B2D7F70E8003FF080 /* NavigationGestureFix.swift */,
 				4B13AB452D8DDE04006631F8 /* StringArrayTransformer.swift */,
 				4BB212992DAABF6D0033AFB2 /* FavoriteNotificationHandler.swift */,
+				4B6818B02DAD68A20069CAAC /* CoreDataRepositoryProtocol.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -712,6 +716,7 @@
 				4B5FB6772D849EF9003FF080 /* ProgressBarLine.swift in Sources */,
 				4B1E44E72D7102B000AD2B84 /* MainTabViewUITests.swift in Sources */,
 				4B5FB65E2D7E159E003FF080 /* PrivacyAndPolicyView.swift in Sources */,
+				4B6818B12DAD68A20069CAAC /* CoreDataRepositoryProtocol.swift in Sources */,
 				4BC881DD2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift in Sources */,
 				4B0784FD2D9996010003180C /* ProgressResult+CoreDataClass.swift in Sources */,
 				4B0784FE2D9996010003180C /* ProgressResult+CoreDataProperties.swift in Sources */,
@@ -766,6 +771,7 @@
 				4BD482372D8B59A7004C4DA5 /* PickerWheelView.swift in Sources */,
 				4B1E44A12D70FEF400AD2B84 /* LanguageSelectionView.swift in Sources */,
 				4B1E44932D70FE9E00AD2B84 /* StartTestView.swift in Sources */,
+				4B6818B22DAD68A20069CAAC /* CoreDataRepositoryProtocol.swift in Sources */,
 				4B5FB66C2D7F70E8003FF080 /* NavigationGestureFix.swift in Sources */,
 				4B13AB4A2D9073C5006631F8 /* Question+CoreDataProperties.swift in Sources */,
 				4B13AB4B2D9073C5006631F8 /* Question+CoreDataClass.swift in Sources */,
