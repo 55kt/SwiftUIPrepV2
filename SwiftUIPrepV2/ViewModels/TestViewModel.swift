@@ -178,6 +178,7 @@ class TestViewModel: ObservableObject {
             newQuestion.isAnswered = false
             newQuestion.isAnsweredCorrectlyRaw = nil
             newQuestion.iconName = originalQuestion.iconName ?? "unknown-icon"
+            newQuestion.category = originalQuestion.category
             print("🔍 Original question: \(originalQuestion.question), iconName: \(originalQuestion.iconName ?? "nil")") // delete this code in final commit
             print("🔍 New question: \(newQuestion.question), iconName: \(newQuestion.iconName ?? "nil")") // delete this code in final commit
             return newQuestion
