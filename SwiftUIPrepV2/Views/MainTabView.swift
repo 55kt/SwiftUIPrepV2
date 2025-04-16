@@ -41,9 +41,7 @@ struct MainTabView: View {
         } // TabView
         .environmentObject(testViewModel)
         .onReceive(NotificationCenter.default.publisher(for: NSManagedObjectContext.didChangeObjectsNotification)) { _ in
-            // Trigger a refresh when Core Data objects change
             needsRefresh.toggle()
-            print("🔍 MainTabView: Received Core Data change notification, refreshing views")
         }// onReceive
     } // Body
 }

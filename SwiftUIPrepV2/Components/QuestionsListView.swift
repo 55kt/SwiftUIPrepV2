@@ -86,8 +86,7 @@ struct QuestionsListView: View {
                     BannerView(
                         showBanner: $notificationHandler.showBanner,
                         isBannerActive: $notificationHandler.isBannerActive,
-                        message: notificationHandler.bannerMessage,
-                        color: notificationHandler.bannerColor
+                        bannerType: notificationHandler.bannerType
                     )
                     Spacer()
                 }// VStack

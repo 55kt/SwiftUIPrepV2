@@ -18,7 +18,6 @@ struct SettingsView: View {
                 Form {
                     // MARK: - Language
                     Section(header: Text("Language Selection")) {
-                        // Navigate to LanguageSelectionView
                         NavigationLink {
                             LanguageSelectionView()
                         } label: {
@@ -62,8 +61,8 @@ struct SettingsView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                     } // Section
                 } // Form
-                .listStyle(GroupedListStyle()) // Use grouped style for a more native iOS look
-                .environment(\.horizontalSizeClass, .regular) // Ensure consistent layout on different devices
+                .listStyle(GroupedListStyle())
+                .environment(\.horizontalSizeClass, .regular)
             } // VStack
             .navigationTitle("Settings")
         } // NavigationStack

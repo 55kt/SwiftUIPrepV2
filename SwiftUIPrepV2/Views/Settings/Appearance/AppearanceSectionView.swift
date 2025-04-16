@@ -46,7 +46,7 @@ struct AppearanceSectionView: View {
                         )
                     } // Button
                     .padding(.horizontal, 10)
-                    .buttonStyle(.plain) // Ensure precise button interaction
+                    .buttonStyle(.plain)
                 } // ForEach
             } // HStack
         } // Section

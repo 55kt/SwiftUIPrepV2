@@ -14,7 +14,6 @@ struct SwiftUIPrepV2App: App {
     let persistenceController = PersistenceController.shared
     @StateObject private var themeManager = ThemeManager()
     
-    // Create CoreDataRepository and TestViewModel
     private var coreDataRepository: CoreDataRepositoryProtocol {
         CoreDataRepository(viewContext: persistenceController.container.viewContext)
     }
@@ -23,7 +22,6 @@ struct SwiftUIPrepV2App: App {
     
     // MARK: - Initialization
     init() {
-        // Register ValueTransformer for converting String arrays in Core Data (e.g., for incorrectAnswers in Question)
         ValueTransformer.setValueTransformer(StringArrayTransformer(), forName: NSValueTransformerName(rawValue: "StringArrayTransformer"))
     }
     
@@ -33,6 +31,7 @@ struct SwiftUIPrepV2App: App {
             MainTabView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(testViewModel)
+                .environmentObject(themeManager)
                 .preferredColorScheme(themeManager.themeMode.colorScheme)
                 // Apply the theme to the window scene on app launch
                 .onAppear {
@@ -40,7 +39,7 @@ struct SwiftUIPrepV2App: App {
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                         themeManager.applyTheme(to: windowScene)
                     }
-                }
+                }// onAppear
         } // WindowGroup
     } // body
-} // App
+} // View

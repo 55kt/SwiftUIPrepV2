@@ -47,7 +47,7 @@ struct ProgressTabView: View {
                                     date: progressResult.date ?? Date(),
                                     medalColor: testViewModel.calculateMedalColor(for: progressResult)
                                 )
-                            }
+                            }// NavigationLink
                             .listRowBackground(Color.clear)
                         } // ForEach
                     } // List
