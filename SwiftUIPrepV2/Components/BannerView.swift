@@ -88,3 +88,7 @@ struct BannerView: View {
         bannerType: .added
     )
 }
+
+// bunce
+// pulse
+// scale
