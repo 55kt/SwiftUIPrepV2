@@ -135,6 +135,16 @@
 		4B89C9382D7DF5D900FB07C6 /* FormRowStaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B89C9372D7DF5D900FB07C6 /* FormRowStaticView.swift */; };
 		4B89C9392D7DF5D900FB07C6 /* FormRowStaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B89C9372D7DF5D900FB07C6 /* FormRowStaticView.swift */; };
 		4B89C93A2D7DF5D900FB07C6 /* FormRowStaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B89C9372D7DF5D900FB07C6 /* FormRowStaticView.swift */; };
+		4B8F7FAC2DB6988600512F5B /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F7FAB2DB6988600512F5B /* LanguageManager.swift */; };
+		4B8F7FAD2DB6988600512F5B /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F7FAB2DB6988600512F5B /* LanguageManager.swift */; };
+		4B8F7FAE2DB6988600512F5B /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F7FAB2DB6988600512F5B /* LanguageManager.swift */; };
+		4B8F7FB12DB69AA000512F5B /* AppSettings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F7FAF2DB69AA000512F5B /* AppSettings+CoreDataClass.swift */; };
+		4B8F7FB22DB69AA000512F5B /* AppSettings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F7FB02DB69AA000512F5B /* AppSettings+CoreDataProperties.swift */; };
+		4B8F7FB32DB69AA000512F5B /* AppSettings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F7FAF2DB69AA000512F5B /* AppSettings+CoreDataClass.swift */; };
+		4B8F7FB42DB69AA000512F5B /* AppSettings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F7FB02DB69AA000512F5B /* AppSettings+CoreDataProperties.swift */; };
+		4B8F7FB72DB6A23700512F5B /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F7FB62DB6A23700512F5B /* AppLanguage.swift */; };
+		4B8F7FB82DB6A23700512F5B /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F7FB62DB6A23700512F5B /* AppLanguage.swift */; };
+		4B8F7FB92DB6A23700512F5B /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F7FB62DB6A23700512F5B /* AppLanguage.swift */; };
 		4B9CCD832D9C528300319A74 /* QuestionResult+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CCD812D9C528300319A74 /* QuestionResult+CoreDataClass.swift */; };
 		4B9CCD842D9C528300319A74 /* QuestionResult+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CCD822D9C528300319A74 /* QuestionResult+CoreDataProperties.swift */; };
 		4B9CCD852D9C528300319A74 /* QuestionResult+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CCD812D9C528300319A74 /* QuestionResult+CoreDataClass.swift */; };
@@ -236,6 +246,10 @@
 		4B89C92F2D7DF31000FB07C6 /* SelectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRowView.swift; sourceTree = "<group>"; };
 		4B89C9332D7DF54500FB07C6 /* FormRowLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRowLink.swift; sourceTree = "<group>"; };
 		4B89C9372D7DF5D900FB07C6 /* FormRowStaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRowStaticView.swift; sourceTree = "<group>"; };
+		4B8F7FAB2DB6988600512F5B /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		4B8F7FAF2DB69AA000512F5B /* AppSettings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppSettings+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4B8F7FB02DB69AA000512F5B /* AppSettings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppSettings+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4B8F7FB62DB6A23700512F5B /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		4B9CCD812D9C528300319A74 /* QuestionResult+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionResult+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4B9CCD822D9C528300319A74 /* QuestionResult+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionResult+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4BB212992DAABF6D0033AFB2 /* FavoriteNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNotificationHandler.swift; sourceTree = "<group>"; };
@@ -325,7 +339,9 @@
 				4B1E445B2D70F96E00AD2B84 /* Models */,
 				4B1E445C2D70F98200AD2B84 /* ViewModels */,
 				4B1E445D2D70F98C00AD2B84 /* Views */,
-				4B1E44632D70FA3700AD2B84 /* Components */,
+				4B8F7FA72DB6972000512F5B /* Managers */,
+				4B8F7FB52DB6A22800512F5B /* Enums */,
+				4B8F7FA82DB6972900512F5B /* Repositories */,
 				4B1E44642D70FA4700AD2B84 /* Utilities */,
 				4B1E44652D70FA5500AD2B84 /* Extensions */,
 				4B1E44662D70FA5F00AD2B84 /* Resources */,
@@ -347,6 +363,8 @@
 				4B0784FA2D9996010003180C /* ProgressResult+CoreDataProperties.swift */,
 				4B9CCD812D9C528300319A74 /* QuestionResult+CoreDataClass.swift */,
 				4B9CCD822D9C528300319A74 /* QuestionResult+CoreDataProperties.swift */,
+				4B8F7FAF2DB69AA000512F5B /* AppSettings+CoreDataClass.swift */,
+				4B8F7FB02DB69AA000512F5B /* AppSettings+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -369,6 +387,7 @@
 				4B1E44602D70F9D100AD2B84 /* Favorites */,
 				4B1E44622D70F9E500AD2B84 /* Settings */,
 				4B1E45662D77942C00AD2B84 /* Details */,
+				4B1E44632D70FA3700AD2B84 /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -452,7 +471,6 @@
 				4B5FB66B2D7F70E8003FF080 /* NavigationGestureFix.swift */,
 				4B13AB452D8DDE04006631F8 /* StringArrayTransformer.swift */,
 				4BB212992DAABF6D0033AFB2 /* FavoriteNotificationHandler.swift */,
-				4B6818B02DAD68A20069CAAC /* CoreDataRepositoryProtocol.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -468,9 +486,8 @@
 		4B1E44662D70FA5F00AD2B84 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4B1E44BA2D70FFA500AD2B84 /* Localizable.xcstrings */,
-				4B1E44BE2D70FFC400AD2B84 /* questions_en.json */,
-				4B1E44C22D70FFD600AD2B84 /* questions_ru.json */,
+				4B8F7FA92DB697CD00512F5B /* Localization */,
+				4B8F7FAA2DB697EE00512F5B /* Data */,
 				4B1E444E2D70F92100AD2B84 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -519,10 +536,51 @@
 			path = Details;
 			sourceTree = "<group>";
 		};
-		4BB64B062DA5A5D100027B2E /* Appearance */ = {
+		4B8F7FA72DB6972000512F5B /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				4BB64B022DA5A0F600027B2E /* ThemeManager.swift */,
+				4B8F7FAB2DB6988600512F5B /* LanguageManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		4B8F7FA82DB6972900512F5B /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				4B6818B02DAD68A20069CAAC /* CoreDataRepositoryProtocol.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		4B8F7FA92DB697CD00512F5B /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				4B1E44BA2D70FFA500AD2B84 /* Localizable.xcstrings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		4B8F7FAA2DB697EE00512F5B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4B1E44BE2D70FFC400AD2B84 /* questions_en.json */,
+				4B1E44C22D70FFD600AD2B84 /* questions_ru.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		4B8F7FB52DB6A22800512F5B /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				4B8F7FB62DB6A23700512F5B /* AppLanguage.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		4BB64B062DA5A5D100027B2E /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
 				4BB64B072DA5A60A00027B2E /* AppearanceSectionView.swift */,
 			);
 			path = Appearance;
@@ -717,8 +775,12 @@
 				4B1E44E72D7102B000AD2B84 /* MainTabViewUITests.swift in Sources */,
 				4B5FB65E2D7E159E003FF080 /* PrivacyAndPolicyView.swift in Sources */,
 				4B6818B12DAD68A20069CAAC /* CoreDataRepositoryProtocol.swift in Sources */,
+				4B8F7FB92DB6A23700512F5B /* AppLanguage.swift in Sources */,
 				4BC881DD2D89ED2100FCAC20 /* FavoritesQuestionsListView.swift in Sources */,
+				4B8F7FB32DB69AA000512F5B /* AppSettings+CoreDataClass.swift in Sources */,
+				4B8F7FB42DB69AA000512F5B /* AppSettings+CoreDataProperties.swift in Sources */,
 				4B0784FD2D9996010003180C /* ProgressResult+CoreDataClass.swift in Sources */,
+				4B8F7FAC2DB6988600512F5B /* LanguageManager.swift in Sources */,
 				4B0784FE2D9996010003180C /* ProgressResult+CoreDataProperties.swift in Sources */,
 				4B1E44DE2D71027B00AD2B84 /* QuestionModelTests.swift in Sources */,
 				4B1E44752D70FCE800AD2B84 /* TestViewModel.swift in Sources */,
@@ -757,6 +819,8 @@
 				4B5FB67F2D84A3ED003FF080 /* ButtonGradients.swift in Sources */,
 				4B1E44DF2D71027B00AD2B84 /* QuestionModelTests.swift in Sources */,
 				4B5FB67C2D84A2AC003FF080 /* AnswerCellButton.swift in Sources */,
+				4B8F7FB12DB69AA000512F5B /* AppSettings+CoreDataClass.swift in Sources */,
+				4B8F7FB22DB69AA000512F5B /* AppSettings+CoreDataProperties.swift in Sources */,
 				4B5FB6612D7F4134003FF080 /* MotionAnimationView.swift in Sources */,
 				4B89C9342D7DF54500FB07C6 /* FormRowLink.swift in Sources */,
 				4B13AB382D8DC851006631F8 /* CodingUserInfoKey+Extension.swift in Sources */,
@@ -764,6 +828,7 @@
 				4B0784FC2D9996010003180C /* ProgressResult+CoreDataClass.swift in Sources */,
 				4BB64B032DA5A0F600027B2E /* ThemeManager.swift in Sources */,
 				4B1E449D2D70FEE700AD2B84 /* SettingsView.swift in Sources */,
+				4B8F7FAE2DB6988600512F5B /* LanguageManager.swift in Sources */,
 				4B1E44DC2D71026500AD2B84 /* TestViewModelTests.swift in Sources */,
 				4B1E44972D70FEB600AD2B84 /* FavoritesView.swift in Sources */,
 				4B1E44852D70FE7900AD2B84 /* ExploreView.swift in Sources */,
@@ -780,6 +845,7 @@
 				4BB2129B2DAABF6D0033AFB2 /* FavoriteNotificationHandler.swift in Sources */,
 				4BE09F702D91E0DF0035FE52 /* SearchResultsView.swift in Sources */,
 				4B5FB6752D84882C003FF080 /* TimeRemainingHolder.swift in Sources */,
+				4B8F7FB82DB6A23700512F5B /* AppLanguage.swift in Sources */,
 				4B1E44E82D7102B000AD2B84 /* MainTabViewUITests.swift in Sources */,
 				4B1E455F2D7773B900AD2B84 /* QuestionDetailView.swift in Sources */,
 				4B5FB6712D81E256003FF080 /* CategoryCard.swift in Sources */,
@@ -828,6 +894,7 @@
 				4B1E45632D77768000AD2B84 /* HeadingView.swift in Sources */,
 				4B5FB66A2D7F4DE3003FF080 /* AnsweredQuestionsListView.swift in Sources */,
 				4B89C9382D7DF5D900FB07C6 /* FormRowStaticView.swift in Sources */,
+				4B8F7FB72DB6A23700512F5B /* AppLanguage.swift in Sources */,
 				4B1E44962D70FEB600AD2B84 /* FavoritesView.swift in Sources */,
 				4BB2129E2DAAC25B0033AFB2 /* BannerView.swift in Sources */,
 				4B1E44E62D7102B000AD2B84 /* MainTabViewUITests.swift in Sources */,
@@ -839,6 +906,7 @@
 				4B5FB6812D84A3ED003FF080 /* ButtonGradients.swift in Sources */,
 				4B5FB66F2D81E256003FF080 /* CategoryCard.swift in Sources */,
 				4B1E44862D70FE7900AD2B84 /* ExploreView.swift in Sources */,
+				4B8F7FAD2DB6988600512F5B /* LanguageManager.swift in Sources */,
 				4B1E44832D70FE5B00AD2B84 /* MainTabView.swift in Sources */,
 				4B1E44A32D70FEF400AD2B84 /* LanguageSelectionView.swift in Sources */,
 				4B1E44E02D71027B00AD2B84 /* QuestionModelTests.swift in Sources */,

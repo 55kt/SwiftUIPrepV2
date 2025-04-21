@@ -9,34 +9,46 @@ import SwiftUI
 
 struct LanguageSelectionView: View {
     // MARK: - Properties
-    @State private var isLoading: Bool = false
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var languageManager: LanguageManager
+    @State private var isLoading: Bool = false
     
     // MARK: - Body
     var body: some View {
         ZStack {
             List {
                 Section(header: Text(LocalizedStringKey("INTERFACE LANGUAGE"))) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("English")
-                            .font(.headline)
-                        Text("English")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }// VStack
-                    .padding(.vertical, 6)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(
-                        HStack {
-                            Spacer()
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.accentColor)
-                        }// HStack
-                            .padding(.trailing, 8)
-                    )// background
-                    .contentShape(Rectangle())
-                }// Section
-            }// List
+                    ForEach(AppLanguage.allCases) { language in
+                        Button(action: {
+                            guard languageManager.currentLanguage != language.rawValue else { return }
+                            isLoading = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                languageManager.setLanguage(language.rawValue)
+                                isLoading = false
+                            }
+                        }) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(language.englishName)
+                                        .font(.headline)
+                                    Text(language.nativeName)
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                } // VStack
+                                Spacer()
+                                if languageManager.currentLanguage == language.rawValue {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.accentColor)
+                                }
+                            } // HStack
+                            .padding(.vertical, 6)
+                            .opacity(isLoading && languageManager.currentLanguage != language.rawValue ? 0.7 : 1.0)
+                        } // Button
+                        .buttonStyle(.plain)
+                        .disabled(isLoading && languageManager.currentLanguage != language.rawValue)
+                    } // ForEach
+                } // Section
+            } // List
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -47,17 +59,27 @@ struct LanguageSelectionView: View {
                             .font(.title2)
                             .bold()
                     }
-                }// ToolbarItem
-            }// .toolbar
+                } // ToolbarItem
+            } // toolbar
             .enableNavigationGesture()
             .listStyle(InsetGroupedListStyle())
             .navigationBarTitleDisplayMode(.inline)
             .disabled(isLoading)
-        }// ZStack
-    }// Body
-}// View
+            
+            if isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaleEffect(2.0)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.gray.opacity(0.2))
+                    .ignoresSafeArea()
+            }
+        } // ZStack
+    } // body
+} // View
 
 // MARK: - Preview
 #Preview {
     LanguageSelectionView()
+        .environmentObject(LanguageManager(viewContext: PersistenceController.preview.container.viewContext))
 }

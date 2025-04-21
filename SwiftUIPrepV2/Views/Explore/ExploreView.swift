@@ -99,7 +99,8 @@ struct ExploreView: View {
                 } // navigationDestination
             } // GeometryReader
         } // NavigationStack
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "Search for some question")        .foregroundStyle(.primary)
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "Search for some question")        
+        .foregroundStyle(.primary)
     } // body
 } // View
 
