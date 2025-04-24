@@ -145,6 +145,9 @@
 		4B8F7FB72DB6A23700512F5B /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F7FB62DB6A23700512F5B /* AppLanguage.swift */; };
 		4B8F7FB82DB6A23700512F5B /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F7FB62DB6A23700512F5B /* AppLanguage.swift */; };
 		4B8F7FB92DB6A23700512F5B /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F7FB62DB6A23700512F5B /* AppLanguage.swift */; };
+		4B8F804A2DBABDAC00512F5B /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B8F80492DBABDAC00512F5B /* sample.json */; };
+		4B8F804B2DBABDAC00512F5B /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B8F80492DBABDAC00512F5B /* sample.json */; };
+		4B8F804C2DBABDAC00512F5B /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B8F80492DBABDAC00512F5B /* sample.json */; };
 		4B9CCD832D9C528300319A74 /* QuestionResult+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CCD812D9C528300319A74 /* QuestionResult+CoreDataClass.swift */; };
 		4B9CCD842D9C528300319A74 /* QuestionResult+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CCD822D9C528300319A74 /* QuestionResult+CoreDataProperties.swift */; };
 		4B9CCD852D9C528300319A74 /* QuestionResult+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CCD812D9C528300319A74 /* QuestionResult+CoreDataClass.swift */; };
@@ -250,6 +253,7 @@
 		4B8F7FAF2DB69AA000512F5B /* AppSettings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppSettings+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4B8F7FB02DB69AA000512F5B /* AppSettings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppSettings+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4B8F7FB62DB6A23700512F5B /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
+		4B8F80492DBABDAC00512F5B /* sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
 		4B9CCD812D9C528300319A74 /* QuestionResult+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionResult+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4B9CCD822D9C528300319A74 /* QuestionResult+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionResult+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4BB212992DAABF6D0033AFB2 /* FavoriteNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNotificationHandler.swift; sourceTree = "<group>"; };
@@ -566,6 +570,7 @@
 			children = (
 				4B1E44BE2D70FFC400AD2B84 /* questions_en.json */,
 				4B1E44C22D70FFD600AD2B84 /* questions_ru.json */,
+				4B8F80492DBABDAC00512F5B /* sample.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -715,6 +720,7 @@
 				4B1E454B2D74296D00AD2B84 /* Launch Screen.storyboard in Resources */,
 				4B1E44592D70F92100AD2B84 /* Preview Assets.xcassets in Resources */,
 				4B1E445A2D70F92100AD2B84 /* Assets.xcassets in Resources */,
+				4B8F804B2DBABDAC00512F5B /* sample.json in Resources */,
 				4B1E44C02D70FFC400AD2B84 /* questions_en.json in Resources */,
 				4B1E44C32D70FFD600AD2B84 /* questions_ru.json in Resources */,
 				4B1E44BD2D70FFA500AD2B84 /* Localizable.xcstrings in Resources */,
@@ -726,6 +732,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B1E44C52D70FFD600AD2B84 /* questions_ru.json in Resources */,
+				4B8F804C2DBABDAC00512F5B /* sample.json in Resources */,
 				4B1E44BF2D70FFC400AD2B84 /* questions_en.json in Resources */,
 				4B1E44BC2D70FFA500AD2B84 /* Localizable.xcstrings in Resources */,
 			);
@@ -736,6 +743,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B1E44C42D70FFD600AD2B84 /* questions_ru.json in Resources */,
+				4B8F804A2DBABDAC00512F5B /* sample.json in Resources */,
 				4B1E44C12D70FFC400AD2B84 /* questions_en.json in Resources */,
 				4B1E44BB2D70FFA500AD2B84 /* Localizable.xcstrings in Resources */,
 			);
